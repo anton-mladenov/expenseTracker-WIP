@@ -17,9 +17,15 @@ type User {
 
 extend type Mutation {
     createNewUser(name: String, age: Int): User
+    
     signUp(
         name: String
         email: String
+        password: String
+    ): Token
+
+    signIn(
+        login: String
         password: String
     ): Token
 }

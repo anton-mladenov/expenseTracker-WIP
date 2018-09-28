@@ -1,6 +1,7 @@
 import { request } from "superagent"
 import { baseUrl } from "../constants"
 import jwt from "jsonwebtoken"
+import { AuthenticationError, UserInputError } from "apollo-server"
 
 let createToken = async (user, secret, expiresIn) => {
     const { id, email, name } = user
@@ -43,6 +44,22 @@ export default {
             })
 
             return { token: createToken(user, secret, "30m") }
+        },
+        signIn: async (parent, { login, password }, { models, secret }) => {
+            const user = await models.User.findByLogin(login)
+            
+            if (!user) {
+                throw new UserInputError("Login details do NOT match any user")
+            }
+
+            const validated = await user.validatePass(password)
+
+            if (!validated) {
+                throw new AuthenticationError("Wrong password, try again.")
+            }
+
+            return { token: createToken(user, secret, "30m") }
+
         }
     }
 }
