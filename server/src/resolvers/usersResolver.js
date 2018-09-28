@@ -2,10 +2,12 @@ import { request } from "superagent"
 import { baseUrl } from "../constants"
 import jwt from "jsonwebtoken"
 import { AuthenticationError, UserInputError } from "apollo-server"
+import { combineResolvers } from "graphql-resolvers"
+import { isAdmin } from "./authorization"
 
 let createToken = async (user, secret, expiresIn) => {
-    const { id, email, name } = user
-    return await jwt.sign({ id, email, name }, secret, { expiresIn })
+    const { id, email, name, role } = user
+    return await jwt.sign({ id, email, name, role }, secret, { expiresIn })
 }
 
 export default {
@@ -60,7 +62,16 @@ export default {
 
             return { token: createToken(user, secret, "30m") }
 
-        }
+        },
+        deleteUser: combineResolvers(
+            isAdmin,
+            async (parent, { id }, { models }) => {
+                console.log(" ___ LOGGING FROM: deleteUser resolver func")
+                return await models.User.destroy({
+                    where: { id }
+                })
+            }
+        )
     }
 }
 

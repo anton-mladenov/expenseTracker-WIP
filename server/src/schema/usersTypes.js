@@ -12,6 +12,7 @@ type User {
     id: ID
     name: String!
     email: String
+    role: String
     messages: [Message]
 }
 
@@ -28,6 +29,8 @@ extend type Mutation {
         login: String
         password: String
     ): Token
+
+    deleteUser(id: ID): Boolean
 }
 
 type Token {

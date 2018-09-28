@@ -11,6 +11,9 @@ const user = (sequelize, DataTypes) => {
         },
         password: {
             type: DataTypes.STRING
+        },
+        role: {
+            type: DataTypes.STRING
         }
     })
 
@@ -30,7 +33,7 @@ const user = (sequelize, DataTypes) => {
         if (!user) {
             user = await User.findOne({
                 where: {
-                    name: login
+                    email: login
                 }
             })
         }
