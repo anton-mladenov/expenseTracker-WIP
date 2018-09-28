@@ -11,12 +11,21 @@ extend type Query {
 type User {
     id: ID
     name: String!
-    age: Int
+    email: String
     messages: [Message]
 }
 
 extend type Mutation {
     createNewUser(name: String, age: Int): User
+    signUp(
+        name: String
+        email: String
+        password: String
+    ): Token
+}
+
+type Token {
+    token: String
 }
 
 `

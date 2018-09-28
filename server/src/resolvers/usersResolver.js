@@ -1,5 +1,11 @@
 import { request } from "superagent"
 import { baseUrl } from "../constants"
+import jwt from "jsonwebtoken"
+
+let createToken = async (user, secret, expiresIn) => {
+    const { id, email, name } = user
+    return await jwt.sign({ id, email, name }, secret, { expiresIn })
+}
 
 export default {
     Query: {
@@ -28,6 +34,15 @@ export default {
                 name, 
                 age
             })
+        },
+        signUp: async (parent, { name, email, password }, { models, secret }) => {
+            const user = await models.User.create({
+                name,
+                email,
+                password
+            })
+
+            return { token: createToken(user, secret, "30m") }
         }
     }
 }

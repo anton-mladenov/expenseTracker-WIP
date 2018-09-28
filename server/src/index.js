@@ -19,7 +19,8 @@ const server = new ApolloServer({
     resolvers,
     context: async () => ({
         models,
-        me: await models.User.findByLogin("Anton The Developer")
+        me: await models.User.findByLogin("Anton The Developer"),
+        secret: process.env.SECRET
     }),
 })
 
@@ -42,6 +43,8 @@ let createNewUser = async () => {
     return await models.User.create(
     {
         name: "Anton The Developer",
+        email: "anton@anton.com",
+        password: "tonka",
         messages: [{
             text: "Rocking GrapQL lika a true rock star!!!"
         }]
