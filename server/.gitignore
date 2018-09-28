@@ -1,0 +1,9 @@
+node_modules
+.babelrc
+.env
+
+
+// gotina komanda za triene na veche push-nati failove, koito veche sa izklucheni ot .gitignore
+// git rm -r --cached .
+// git add -A
+// git commit -am 'Removing ignored files'
