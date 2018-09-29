@@ -6,8 +6,11 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { createStackNavigator } from "react-navigation"
+import HomeScreen from "./src/components/HomeScreen"
+import DetailsScreen from "./src/components/DetailsScreen"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,15 +21,20 @@ const instructions = Platform.select({
 
 type Props = {};
 
+const RootStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailsScreen
+  },
+  {
+    initialRouteName: "Home"
+  }
+)
+
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Text> HEY WHAT'S UUUUUPPPPPP </Text>
-      </View>
+      <RootStack />
     );
   }
 }

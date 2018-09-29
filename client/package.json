@@ -8,8 +8,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "axios": "^0.18.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
+    "react-navigation": "^2.17.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
     "watchman": "^1.0.0"
   },
   "devDependencies": {
