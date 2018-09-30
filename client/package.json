@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "redux-devtool": "remotedev",
+    "postinstall": "rndebugger-open"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
@@ -19,10 +21,15 @@
     "watchman": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "babel-core": "^6.26.3",
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.47.0",
-    "react-test-renderer": "16.5.0"
+    "prop-types": "^15.6.2",
+    "react-native-debugger-open": "^0.3.17",
+    "react-test-renderer": "16.5.0",
+    "remotedev-server": "^0.2.5"
   },
   "jest": {
     "preset": "react-native"
