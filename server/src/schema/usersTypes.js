@@ -13,7 +13,7 @@ type User {
     name: String!
     email: String
     role: String
-    messages: [Message]
+    categories: [Category]
 }
 
 extend type Mutation {

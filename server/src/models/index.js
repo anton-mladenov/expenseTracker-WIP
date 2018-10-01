@@ -12,7 +12,8 @@ const sequelize = new Sequelize(
 
 const models = {
     User: sequelize.import("./users"),
-    Message: sequelize.import("./messages")
+    Category: sequelize.import("./categories"),
+    Expenses: sequelize.import("./expenses")
 }
 
 Object.keys(models).forEach(key => {

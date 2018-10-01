@@ -62,29 +62,51 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(
 )
 
 let createNewUser = async () => {
+
+    await models.Category.create(
+        {
+            name: "Groceries",
+        }
+    )
+
+    await models.Category.create(
+        {
+            name: "Commute",
+        }
+    )
+
+    await models.Category.create(
+        {
+            name: "Free Time",
+        }
+    )
+
     await models.User.create(
     {
         name: "Anton The Developer",
         email: "anton@anton.com",
         password: "tonka",
-        messages: [{
-            text: "Rocking GrapQL lika a true rock star!!!"
-        }],
+        // messages: [{
+        //     text: "Rocking GrapQL lika a true rock star!!!"
+        // }],
         role: "ADMIN"
     },
-    {
-        include: [models.Message]
-    })
+    // {
+    //     include: [models.Message]
+    // }
+    )
+
     await models.User.create(
         {
             name: "Mr. Awesome DEV",
             email: "dev@dev.com",
             password: "devdevdevdev",
-            messages: [{
-                text: "Doing back- and front- like a true pornstar"
-            }],
+            // messages: [{
+            //     text: "Doing back- and front- like a true pornstar"
+            // }],
         },
-        {
-            include: [models.Message]
-        })
+        // {
+        //     include: [models.Message]
+        // }
+        )
 }

@@ -18,10 +18,12 @@ const user = (sequelize, DataTypes) => {
     })
 
     User.associate = (models) => {
-        User.hasMany(models.Message, {
-            onDelete: "CASCADE"
-        })    
-    }
+        User.belongsToMany(models.Category, {
+            through: "CategoryUsers",
+            as: "categories",
+            foreignKey: "userId"
+        });
+    };
 
     User.findByLogin = async (login) => {
         let user = await User.findOne({

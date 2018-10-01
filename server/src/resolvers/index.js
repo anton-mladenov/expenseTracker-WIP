@@ -1,4 +1,4 @@
-import messagesResolver from "./messagesResolver"
+import categoriesResolver from "./categoriesResolver"
 import usersResolver from "./usersResolver"
 
-export default [messagesResolver, usersResolver]
+export default [categoriesResolver, usersResolver]

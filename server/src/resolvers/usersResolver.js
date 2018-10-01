@@ -22,15 +22,15 @@ export default {
             return await models.User.findById(me.id)
         },
     },
-    User: {
-        messages: async (user, args, { models }) => {
-            return await models.User.findAll({
-                where: {
-                    userId: user.id
-                }
-            })
-        } 
-    },
+    // User: {
+    //     messages: async (user, args, { models }) => {
+    //         return await models.User.findAll({
+    //             where: {
+    //                 userId: user.id
+    //             }
+    //         })
+    //     } 
+    // },
     Mutation: {
         createNewUser: async (parent, { name, age }, { models }) => {
             return models.User.create({
