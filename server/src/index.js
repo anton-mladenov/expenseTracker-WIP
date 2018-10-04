@@ -17,7 +17,6 @@ app.use(cors())
 
 const getMe = async (req) => {
     const token = req.headers["x-token"]
-    console.log(" ___ LOGGING FROM: getMe Func + token: ", token)
 
     if (token) {
         try {
@@ -33,8 +32,10 @@ const server = new ApolloServer({
     resolvers,
     context: async ({ req }) => {
 
-        const me = await getMe(req)
-        console.log(" ____ LOGGING FROM: context + me: ", me)
+        // const me = await getMe(req)
+        const me = {
+            id: 1
+        }
 
         return {
             models,
@@ -54,8 +55,9 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(
             createNewUser()
         }
         app.listen(port, () => {
+            
             console.log()
-            console.log(`🚀 Server ready at ${server.graphqlPath} and ${process.env.SOME_SECRET_VARIABLE}`)
+            console.log(`    🚀🚀🚀 Server ready at ${server.graphqlPath} and ${process.env.SOME_SECRET_VARIABLE} 🚀🚀🚀  `)
             console.log()
         })
     }

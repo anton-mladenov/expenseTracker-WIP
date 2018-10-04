@@ -13,11 +13,13 @@ export default {
     },
     Mutation: {
         createCategory: combineResolvers(
-            isAuthenticated,
+            // isAuthenticated,
             async (parent, { name }, { me, models }, info) => {
                 return await models.Category.create({
                     name,
-                    userId: me.id
+                })
+                .then(cat => {
+                    cat.addUser(me.id)
                 })
             }
         ),
@@ -29,10 +31,10 @@ export default {
             }
         )
     },
-    // Category: {
-    //     user: async (message, args, { models }) => {
-    //         return await models.Category.findById(category.userId)
-    //     }
-    // },
+    Category: {
+        user: async (category, args, { models }) => {
+            return await models.Category.findById(category.userId)
+        }
+    },
 }
 

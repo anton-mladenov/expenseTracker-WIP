@@ -4,7 +4,9 @@ import bcrypt from "bcrypt"
 const user = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            singular: 'user',
+            plural: 'users',
         },
         email: {
             type: DataTypes.STRING
@@ -19,11 +21,15 @@ const user = (sequelize, DataTypes) => {
 
     User.associate = (models) => {
         User.belongsToMany(models.Category, {
-            through: "CategoryUsers",
             as: "categories",
-            foreignKey: "userId"
+            through: "CategoryUsers",
+            foreignKey: "userId", 
+            otherKey: "categoryId"
         });
     };
+
+    // models.User.belongsToMany(models.Category, 
+    // { as: "Categories", through: "user_category", foreignKey: "userId", otherKey: "categoryId"})
 
     User.findByLogin = async (login) => {
         let user = await User.findOne({

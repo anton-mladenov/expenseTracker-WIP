@@ -1,5 +1,4 @@
-import { request } from "superagent"
-import { baseUrl } from "../constants"
+
 import jwt from "jsonwebtoken"
 import { AuthenticationError, UserInputError } from "apollo-server"
 import { combineResolvers } from "graphql-resolvers"
@@ -22,15 +21,26 @@ export default {
             return await models.User.findById(me.id)
         },
     },
-    // User: {
-    //     messages: async (user, args, { models }) => {
-    //         return await models.User.findAll({
-    //             where: {
-    //                 userId: user.id
-    //             }
-    //         })
-    //     } 
-    // },
+    User: {
+        categories: async (user, args, { models }) => {
+            console.log("___ MODELS: ", models)
+            return await models.User
+                .find({
+                    include: [{
+                        model: models.Category,
+                        as: 'categories',
+                        attributes: ['id', 'name'],
+                        through: { 
+                            attributes: ["userId", "categoryId"],
+                        },
+                    }],
+                    },
+                        { raw: true },
+                    )
+                .then( (abc) => abc.getCategories() )
+
+        } 
+    },
     Mutation: {
         createNewUser: async (parent, { name, age }, { models }) => {
             return models.User.create({
@@ -66,7 +76,7 @@ export default {
         deleteUser: combineResolvers(
             isAdmin,
             async (parent, { id }, { models }) => {
-                console.log(" ___ LOGGING FROM: deleteUser resolver func")
+                // console.log(" ___ LOGGING FROM: deleteUser resolver func")
                 return await models.User.destroy({
                     where: { id }
                 })

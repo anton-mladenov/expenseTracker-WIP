@@ -11,6 +11,7 @@ type Category {
     id: ID
     name: String
     amount: Int
+    user: User
 }
 
 extend type Mutation {
