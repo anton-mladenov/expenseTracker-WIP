@@ -22,7 +22,19 @@ export default {
                     categoryId
                 })
             }
+        ),
+        deleteExpense: combineResolvers(
+            // authentication resolver here
+            async (parent, { id }, { models }) => {
+                return await models.Expense.destroy({ where: { id } })
+            }
         )
     },
-    
+
+    Expense: {
+        category: async (parent, { categoryId }, { models }) => {
+            return await models.Category.findById(parent.id)
+        }
+    }
+
 }

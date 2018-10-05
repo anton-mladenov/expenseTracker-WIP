@@ -17,7 +17,7 @@ extend type Query {
 extend type Mutation {
     createExpense(name: String, amount: Int, categoryId: Int): Expense
     #updateExpense(name: String, amount: Int): Expense
-    #deleteExpense(id: ID): Boolean
+    deleteExpense(id: ID): Boolean
 }
 
 `
