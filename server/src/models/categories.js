@@ -4,8 +4,8 @@ const category = (sequelize, DataTypes) => {
     const Category = sequelize.define("category", {
         name: {
             type: DataTypes.STRING,
-            singular: 'category',
-            plural: 'categories',
+            // singular: 'category',
+            // plural: 'categories',
         },
         amount: {
             type: DataTypes.INTEGER

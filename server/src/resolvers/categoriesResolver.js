@@ -33,12 +33,31 @@ export default {
         )
     },
     Category: {
-        user: async (category, args, { models }) => {
-            return await models.Category.findById(category.userId)
+
+        user: async (parent, args, { me, models }) => {
+            return await models.User
+                .findById(me.id)
+            // .findAll({
+                // where: { id: me.id },
+                // include: [{
+                //     model: models.User,
+                //     as: "users",
+                    // through: {
+                    //     attributes: ["id", "name", "userId"],
+                    //     where: { userId: me.id }
+                    // },
+                // }],
+            // })
+            // .then( cat => {
+            //     console.log({ cat })
+            //     return cat.getUsers() 
+            // })
         },  
+
         expenses: async (parent, args, { models }) => {
             return await models.Expense.findAll({ where: { categoryId: parent.id }})
         }
+
     },
 }
 

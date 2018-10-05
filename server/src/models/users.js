@@ -5,8 +5,8 @@ const user = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
         name: {
             type: DataTypes.STRING,
-            singular: 'user',
-            plural: 'users',
+            // singular: 'user',
+            // plural: 'users',
         },
         email: {
             type: DataTypes.STRING
