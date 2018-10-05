@@ -20,6 +20,7 @@ export default {
                 })
                 .then(cat => {
                     cat.addUser(me.id)
+                    return cat
                 })
             }
         ),
@@ -34,6 +35,9 @@ export default {
     Category: {
         user: async (category, args, { models }) => {
             return await models.Category.findById(category.userId)
+        },  
+        expenses: async (parent, args, { models }) => {
+            return await models.Expense.findAll({ where: { categoryId: parent.id }})
         }
     },
 }

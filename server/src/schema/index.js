@@ -2,6 +2,7 @@ import { gql } from "apollo-server-express"
 
 import userTypes from "./usersTypes"
 import categoryTypes from "./categoryTypes"
+import expensesTypes from "./expensesTypes"
 
 const linkSchema = gql`
 
@@ -18,4 +19,4 @@ type Subscriptions {
 }
 `
 
-export default [ linkSchema, userTypes, categoryTypes ]
+export default [ linkSchema, userTypes, categoryTypes, expensesTypes ]

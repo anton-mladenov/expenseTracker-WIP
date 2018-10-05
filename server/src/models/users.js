@@ -28,9 +28,6 @@ const user = (sequelize, DataTypes) => {
         });
     };
 
-    // models.User.belongsToMany(models.Category, 
-    // { as: "Categories", through: "user_category", foreignKey: "userId", otherKey: "categoryId"})
-
     User.findByLogin = async (login) => {
         let user = await User.findOne({
             where: {

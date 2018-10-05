@@ -2,9 +2,9 @@
 const expenses = (sequelize, DataTypes) => {
 
     const Expenses = sequelize.define("Expenses", {
-        category: {
-            type: DataTypes.INTEGER
-        },
+        // category: {
+        //     type: DataTypes.INTEGER
+        // },
         name: {
             type: DataTypes.STRING
         },
@@ -12,6 +12,13 @@ const expenses = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
     })
+
+    // Expenses.associate = (models) => {
+    //     Expenses.belongsTo(models.Category, {
+    //         foreignKey: "categoryId",
+    //         targetKey: "expenseId"
+    //     })
+    // };
 
     return Expenses
 }

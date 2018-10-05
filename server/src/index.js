@@ -47,13 +47,13 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app })
 
-let eraseDatabaseOnSync = true
+let eraseDatabaseOnSync = false
 
 sequelize.sync({ force: eraseDatabaseOnSync }).then(
     async () => {
-        if (eraseDatabaseOnSync) {
-            createNewUser()
-        }
+
+        createNewUser()
+        
         app.listen(port, () => {
             
             console.log()
@@ -65,23 +65,23 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(
 
 let createNewUser = async () => {
 
-    await models.Category.create(
-        {
-            name: "Groceries",
-        }
-    )
+    // await models.Category.create(
+    //     {
+    //         name: "Groceries",
+    //     }
+    // )
 
-    await models.Category.create(
-        {
-            name: "Commute",
-        }
-    )
+    // await models.Category.create(
+    //     {
+    //         name: "Commute",
+    //     }
+    // )
 
-    await models.Category.create(
-        {
-            name: "Free Time",
-        }
-    )
+    // await models.Category.create(
+    //     {
+    //         name: "Free Time",
+    //     }
+    // )
 
     await models.User.create(
     {

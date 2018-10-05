@@ -13,16 +13,20 @@ const category = (sequelize, DataTypes) => {
     })
 
     Category.associate = (models) => {
+        
         Category.belongsToMany(models.User, {
             as: "users",
             through: "CategoryUsers",
             foreignKey: "categoryId", 
             otherKey: "userId"
-        });
+        })
+
+        Category.hasMany(models.Expense, { as: "Expenses"})
     };
 
-    // models.Category.belongsToMany(models.User, 
-    // { as: "Users", through: "user_category", foreignKey: "categoryId", otherKey: "userId"})
+    // Category.associate = (models) => {
+    //     Category.hasMany(models.Expense)
+    // };
     
     return Category;
 }

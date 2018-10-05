@@ -23,20 +23,13 @@ export default {
     },
     User: {
         categories: async (user, args, { models }) => {
-            console.log("___ MODELS: ", models)
             return await models.User
                 .find({
                     include: [{
                         model: models.Category,
                         as: 'categories',
-                        attributes: ['id', 'name'],
-                        through: { 
-                            attributes: ["userId", "categoryId"],
-                        },
-                    }],
-                    },
-                        { raw: true },
-                    )
+                    }]
+                })
                 .then( (abc) => abc.getCategories() )
 
         } 

@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
 const models = {
     User: sequelize.import("./users"),
     Category: sequelize.import("./categories"),
-    // Expenses: sequelize.import("./expenses")
+    Expense: sequelize.import("./expenses")
 }
 
 Object.keys(models).forEach(key => {
@@ -21,11 +21,6 @@ Object.keys(models).forEach(key => {
         models[key].associate(models)
     }
 })
-
-// db.role.belongsToMany(db.user, { through: 'user_roles', foreignKey: 'roleId', otherKey: 'userId'});
-
-// models.User.belongsToMany(models.Category, { as: "Categories", through: "user_category", foreignKey: "userId", otherKey: "categoryId"})
-// models.Category.belongsToMany(models.User, { as: "Users", through: "user_category", foreignKey: "categoryId", otherKey: "userId"})
 
 export { sequelize }
 
