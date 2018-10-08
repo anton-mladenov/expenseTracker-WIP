@@ -16,13 +16,3 @@ const enhancer = compose(
 const store = createStore(reducer, enhancer);
 
 export default store
-
-
-
-// import { composeWithDevTools } from 'redux-devtools-extension' // use for react-native-debugger
-
-// if (__DEV__) {
-//     store = createStore(rootReducer, composeWithDevTools(...enhancers))
-//     } else {
-//        store = createStore(rootReducer, compose(...enhancers))
-//     }

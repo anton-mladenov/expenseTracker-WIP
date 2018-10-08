@@ -1,5 +1,5 @@
-import testReducer from "./testReducer"
+import categories from "./categories"
 
 export default {
-    testReducer
+    categories
 }

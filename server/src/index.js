@@ -7,12 +7,14 @@ import typeDefs from "./schema/index"
 import resolvers from "./resolvers/index"
 import models, { sequelize } from "./models/index"
 import jwt from "jsonwebtoken"
+import bodyParser from "body-parser"
 
 const app = express()
 const port = 4000
 
 app.use(cors())
-// app.use // nqkyv bodyparser
+app.options('*', cors());
+app.use(bodyParser.json())
 // app.use // nqkuv router
 
 const getMe = async (req) => {
@@ -53,9 +55,13 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(
     async () => {
 
         createNewUser()
-        
+        app.all('/*', function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            next();
+        });
         app.listen(port, () => {
-            
+
             console.log()
             console.log(`    🚀🚀🚀 Server ready at ${server.graphqlPath} and ${process.env.SOME_SECRET_VARIABLE} 🚀🚀🚀  `)
             console.log()
@@ -65,37 +71,13 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(
 
 let createNewUser = async () => {
 
-    // await models.Category.create(
-    //     {
-    //         name: "Groceries",
-    //     }
-    // )
-
-    // await models.Category.create(
-    //     {
-    //         name: "Commute",
-    //     }
-    // )
-
-    // await models.Category.create(
-    //     {
-    //         name: "Free Time",
-    //     }
-    // )
-
     await models.User.create(
-    {
-        name: "Anton The Developer",
-        email: "anton@anton.com",
-        password: "tonka",
-        // messages: [{
-        //     text: "Rocking GrapQL lika a true rock star!!!"
-        // }],
-        role: "ADMIN"
-    },
-    // {
-    //     include: [models.Message]
-    // }
+        {
+            name: "Anton The Developer",
+            email: "anton@anton.com",
+            password: "tonka",
+            role: "ADMIN"
+        },
     )
 
     await models.User.create(
@@ -103,12 +85,6 @@ let createNewUser = async () => {
             name: "Mr. Awesome DEV",
             email: "dev@dev.com",
             password: "devdevdevdev",
-            // messages: [{
-            //     text: "Doing back- and front- like a true pornstar"
-            // }],
         },
-        // {
-        //     include: [models.Message]
-        // }
-        )
+    )
 }
