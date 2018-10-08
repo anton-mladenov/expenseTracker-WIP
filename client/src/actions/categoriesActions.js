@@ -1,13 +1,6 @@
 
 import { baseUrl } from "../lib/lib"
-import { createApolloFetch } from "apollo-fetch"
 import axios from "axios"
-
-// CREATE APOLLO FETCH INSTANCE
-const fetch = createApolloFetch({
-    uri: baseUrl
-})
-
 
 // CREATE A NEW CATEGORY
 export const CREATE_CATEGORY = "CREATE_CATEGORY"
@@ -34,7 +27,7 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
         }
     })
         .then((result) => {
-            console.log({ result })
+            console.log(result.data)
         })
 }
 

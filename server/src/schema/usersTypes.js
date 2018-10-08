@@ -13,12 +13,9 @@ type User {
 extend type Query {
     user(id: ID!): User
     allUsers: [User]
-    me: User
 }
 
 extend type Mutation {
-    
-    createNewUser(name: String, age: Int): User
     
     signUp(
         name: String

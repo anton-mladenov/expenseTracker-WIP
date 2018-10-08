@@ -17,9 +17,6 @@ export default {
         allUsers: async (parent, args, { models }) => {
             return await models.User.findAll()
         },
-        me: async (parent, args, { me, models }) => {
-            return await models.User.findById(me.id)
-        },
     },
     User: {
         categories: async (user, args, { models }) => {
@@ -30,17 +27,12 @@ export default {
                         as: 'categories',
                     }]
                 })
-                .then( (abc) => abc.getCategories() )
+                .then((abc) => abc.getCategories())
 
-        } 
+        }
     },
     Mutation: {
-        createNewUser: async (parent, { name, age }, { models }) => {
-            return models.User.create({
-                name, 
-                age
-            })
-        },
+
         signUp: async (parent, { name, email, password }, { models, secret }) => {
             const user = await models.User.create({
                 name,
@@ -50,9 +42,10 @@ export default {
 
             return { token: createToken(user, secret, "30m") }
         },
+        
         signIn: async (parent, { login, password }, { models, secret }) => {
             const user = await models.User.findByLogin(login)
-            
+
             if (!user) {
                 throw new UserInputError("Login details do NOT match any user")
             }
@@ -69,7 +62,6 @@ export default {
         deleteUser: combineResolvers(
             isAdmin,
             async (parent, { id }, { models }) => {
-                // console.log(" ___ LOGGING FROM: deleteUser resolver func")
                 return await models.User.destroy({
                     where: { id }
                 })

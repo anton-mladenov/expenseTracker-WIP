@@ -1,4 +1,4 @@
-import { CREATE_CATEGORY } from "../actions/categories"
+import { CREATE_CATEGORY } from "../actions/categoriesActions"
 
 const initialState = {}
 

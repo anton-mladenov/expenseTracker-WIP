@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, TextInput } from "react-native"
+import { View, Button, TextInput } from "react-native"
 
 export default class CategoriesForm extends Component {
 
@@ -7,7 +7,7 @@ export default class CategoriesForm extends Component {
         text: ""
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = () => {
         return this.props.onSubmit(this.state)
     }
 

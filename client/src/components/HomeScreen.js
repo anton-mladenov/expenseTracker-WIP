@@ -11,7 +11,13 @@ export default class HomeScreen extends Component {
 
                 <Button
                     title="EXPENSE CATEGORIES"
-                    onPress={ () => this.props.navigation.navigate("Categories") } />
+                    onPress={ () => this.props.navigation.navigate("Categories") }
+                />
+
+                <Button
+                    title="SIGN UP"
+                    onPress={ () => this.props.navigation.navigate("SignUp") }
+                />
 
             </View>
         )

@@ -1,5 +1,7 @@
-import categories from "./categories"
+import categories from "./categoriesReducer"
+import signUpReducer from "./signUpReducer"
 
 export default {
-    categories
+    categories,
+    signUpReducer
 }
