@@ -14,8 +14,6 @@ let initialState = null
 
 export default (state = initialState, { type, payload }) => {
 
-    console.log(" __ FROM CURRENT USER REDUCER: ", { payload })
-
     switch (type) {
 
         case SIGN_IN_SUCCESS:
