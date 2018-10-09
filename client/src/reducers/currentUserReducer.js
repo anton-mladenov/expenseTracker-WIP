@@ -1,23 +1,31 @@
 import { storageKey, getStorageFunc } from "../lib/lib"
+import { LOGOUT, SIGN_IN_SUCCESS } from "../actions/usersActions"
 
-const initialState = null
+let initialState = null
 
-try {
-    const jwt = getStorageFunc(storageKey)
-    if (jwt) {
-        initialState = { jwt }
-    }
-} catch (error) {
-    console.log("There was error getting the JWT token from the AsyncStorage ", error)
-}
+// try {
+//     const jwt = getStorageFunc(storageKey)
+//     if (jwt) {
+//         initialState = { jwt }
+//     }
+// } catch (error) {
+//     console.log("There was error getting the JWT token from the AsyncStorage ", error)
+// }
 
 export default (state = initialState, { type, payload }) => {
 
+    console.log(" __ FROM CURRENT USER REDUCER: ", { payload })
+
     switch (type) {
 
+        case SIGN_IN_SUCCESS:
+            return payload
 
+        case LOGOUT:
+            return null
 
         default:
             return state
     }
 }
+

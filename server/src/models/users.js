@@ -23,7 +23,7 @@ const user = (sequelize, DataTypes) => {
         User.belongsToMany(models.Category, {
             as: "categories",
             through: "CategoryUsers",
-            foreignKey: "userId", 
+            foreignKey: "userId",
             otherKey: "categoryId"
         });
     };
@@ -52,12 +52,12 @@ const user = (sequelize, DataTypes) => {
         }
     )
 
-    User.prototype.hashedPass = async function() {
+    User.prototype.hashedPass = async function () {
         const saltRounds = 10;
         return await bcrypt.hash(this.password, saltRounds);
     }
 
-    User.prototype.validatePass = async function(password) {
+    User.prototype.validatePass = async function (password) {
         return await bcrypt.compare(password, this.password);
     }
 

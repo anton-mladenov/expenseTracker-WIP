@@ -34,10 +34,10 @@ const server = new ApolloServer({
     resolvers,
     context: async ({ req }) => {
 
-        // const me = await getMe(req)
-        const me = {
-            id: 1
-        }
+        const me = await getMe(req)
+        // const me = {
+        //     id: 1
+        // }
 
         return {
             models,
@@ -55,7 +55,7 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(
     async () => {
 
         createNewUser()
-        
+
         app.listen(port, () => {
 
             console.log()

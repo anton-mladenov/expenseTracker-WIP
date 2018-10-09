@@ -7,9 +7,6 @@ import { newSignUp } from "../../actions/usersActions"
 class SignUp extends Component {
 
     handleSubmit = (data) => {
-        const { name, email, password } = data
-        console.log("__ DATA from Sign Up: ", data)
-        console.log("__ name, email, pass from Sign Up: ", { name }, { email }, { password })
         this.props.newSignUp(data)
     }
 

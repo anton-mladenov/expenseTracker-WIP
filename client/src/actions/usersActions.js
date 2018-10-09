@@ -1,6 +1,6 @@
 import axios from "axios"
 import { baseUrl, storageKey, setStorageFunc, getStorageFunc } from "../lib/lib"
-import { AsyncStorage } from "react-native"
+
 
 // SIGN UP 
 
@@ -36,7 +36,6 @@ export const newSignUp = (payload) => (dispatch) => {
         const token = result.data.data.signUp.token
         if (token) {
             setStorageFunc(storageKey, token)
-            console.log("getStorageFunc: ", await getStorageFunc(storageKey))
             return dispatch(signUpSuccess())
         } else {
             return dispatch(signUpFailure(_))
@@ -45,3 +44,57 @@ export const newSignUp = (payload) => (dispatch) => {
         return dispatch(signUpFailure(error))
     })
 }
+
+
+// SIGN IN
+
+export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS"
+export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE"
+
+const signInSuccess = (data) => ({
+    type: SIGN_IN_SUCCESS,
+    payload: data
+})
+
+const signInFailure = (error) => ({
+    type: SIGN_IN_FAILURE,
+    payload: error || "Sign Ip Error"
+})
+
+export const newSignIn = (data) => (dispatch) => {
+    const { email, password } = data
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+            mutation {
+                signIn(login: "${email}", password: "${password}") {
+                    token
+                }
+            }
+            `
+        }
+    }).then(async (result) => {
+        const token = result.data.data.signIn.token
+        if (token) {
+            setStorageFunc(storageKey, token)
+            return dispatch(signInSuccess(token))
+        } else {
+            return dispatch(signInFailure(_))
+        }
+    }).catch((error) => {
+        return dispatch(signInFailure(error))
+    })
+}
+
+
+// SIGN OUT 
+
+export const LOGOUT = "LOGOUT"
+
+export const logout = () => ({
+    type: LOGOUT
+})
+

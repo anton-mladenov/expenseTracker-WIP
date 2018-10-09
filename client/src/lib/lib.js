@@ -2,7 +2,9 @@ import { AsyncStorage } from "react-native"
 
 
 // the default URL of the server
-export const baseUrl = "http://192.168.1.67:4000/graphql"
+// export const baseUrl = "http://192.168.1.67:4000/graphql"
+export const baseUrl = "http://192.168.10.156:4000/graphql"
+
 
 // storageKey
 export const storageKey = "mobileDeviceSuperSecretStorageKeyDamn"
