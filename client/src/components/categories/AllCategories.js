@@ -2,42 +2,51 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from "react-native"
 import { connect } from "react-redux"
 import { getAllCategories } from "../../actions/categoriesActions"
+import CategoryDetails from "./CategoryDetails"
 
 class AllCategories extends Component {
+
+    state = {
+        showFlatList: true,
+        showDetails: false,
+        categoryId: null
+    }
 
     componentDidMount() {
         this.props.getAllCategories()
     }
 
-    doNothing = () => {
-        return "hahaha"
+    showCategoryDetails = (id) => {
+        const idInt = parseInt(id, 10)
+        console.log("state cat id: ", this.state.categoryId, this.state.showDetails, { idInt })
+        return this.setState({
+            showDetails: !this.state.showDetails,
+            showFlatList: !this.state.showFlatList,
+            categoryId: idInt,
+        })
     }
 
     render() {
 
         const { allCategories } = this.props
+        console.log("state cat id: ", this.state.categoryId, this.state.showDetails)
 
         return (
             <View>
 
-                <FlatList
-                    data={ allCategories }
-                    // renderItem={ ({ item }) => <Text> { item.name } </Text> }
-                    renderItem={ ({ item }) => <Button title={ item.name } onPress={ this.doNothing } /> }
-                />
+                {
+                    this.state.showFlatList &&
+                    <FlatList
+                        data={ allCategories }
+                        renderItem={ ({ item }) => <Button title={ item.name } onPress={ () => this.showCategoryDetails(item.id) } /> }
+                    />
+                }
 
-                {/* {
-                    allCategories.map((category) => {
-                        // console.log("Success from inside the function!")
-                        // return 
-                        return (
-                            <View key={ category.id }>
-                                <Text> { category.name } </Text>
-                                <Text> { category.amount ? category.amount : null } </Text>
-                            </View>
-                        )
-                    })
-                } */}
+                {
+                    this.state.showDetails &&
+                    <CategoryDetails categoryId={ this.state.categoryId } />
+                }
+
             </View>
         )
     }

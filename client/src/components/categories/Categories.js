@@ -17,7 +17,8 @@ class Categories extends Component {
     showAddForm = () => {
         this.setState({
             showForm: !this.state.showForm,
-            showAddButton: !this.state.showAddButton
+            showAddButton: !this.state.showAddButton,
+            showAllButton: !this.state.showAllButton,
         })
     }
 
@@ -38,26 +39,28 @@ class Categories extends Component {
             <View>
 
                 <Text> EXPENSE CATEGORIES </Text>
-
-                { this.state.showAddButton &&
+                <Text> { } </Text>
+                {
+                    this.state.showAddButton &&
                     <Button
                         title="Add A New Category"
                         onPress={ this.showAddForm }
                     />
                 }
-
-                { this.state.showAllButton &&
+                <Text> { } </Text>
+                {
+                    this.state.showAllButton &&
                     <Button
                         title="All Categories"
                         onPress={ this.showAllForm }
                     />
                 }
-
+                <Text> { } </Text>
                 {
                     this.state.showForm &&
                     <CategoriesForm onSubmit={ this.handleSubmit } />
                 }
-
+                <Text> { } </Text>
                 {
                     this.state.showAllCategories &&
                     <AllCategories />
