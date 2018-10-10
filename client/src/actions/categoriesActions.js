@@ -7,23 +7,23 @@ import { logout } from "./usersActions"
 export const CREATE_CATEGORY = "CREATE_CATEGORY"
 
 const createCategory = (category) => ({
-	type: CREATE_CATEGORY,
-	payload: category
+    type: CREATE_CATEGORY,
+    payload: category
 })
 
 export const createNewCategory = (newCategory) => (dispatch, getState) => {
 
-	// const state = getState()
-	// if (!state.currentUserReducer) return logout()
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
 
-	// const jwt = state.currentUserReducer.jwt
-	// if (jwtDecodeToExpDate(jwt)) return logout()
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
 
-	axios({
-		url: baseUrl,
-		method: 'post',
-		data: {
-			query: `
+    axios({
+        url: baseUrl,
+        method: 'post',
+        data: {
+            query: `
             mutation {
                 createCategory(name: "${newCategory}") {
                     id
@@ -31,14 +31,14 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
                 }
               }
             `
-		}
-	}).then((result) => {
-		console.log("heeye: ", result.data.data.createCategory)
-		dispatch(createCategory(result.data.data.createCategory))
-	}).catch((error) => {
-		console.log("There was an error when creating the new category" + error)
-		return "There was an error when creating the new category" + error
-	})
+        }
+    }).then((result) => {
+        console.log("heeye: ", result.data.data.createCategory)
+        dispatch(createCategory(result.data.data.createCategory))
+    }).catch((error) => {
+        console.log("There was an error when creating the new category" + error)
+        return "There was an error when creating the new category" + error
+    })
 }
 
 
@@ -47,23 +47,23 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 
 const allCategories = (data) => ({
-	type: GET_ALL_CATEGORIES,
-	payload: data
+    type: GET_ALL_CATEGORIES,
+    payload: data
 })
 
 export const getAllCategories = () => (dispatch, getState) => {
 
-	// const state = getState()
-	// if (!state.currentUserReducer) return logout()
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
 
-	// const jwt = state.currentUserReducer.jwt
-	// if (jwtDecodeToExpDate(jwt)) return logout()
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
 
-	axios({
-		url: baseUrl,
-		method: "post",
-		data: {
-			query: `
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
             query {
                 categories{
                     id
@@ -81,14 +81,14 @@ export const getAllCategories = () => (dispatch, getState) => {
 				}
             }
             `
-		}
-	}).then((result) => {
-		console.log(" RESULT DATA: ", result.data.data.categories)
-		dispatch(allCategories(result.data.data.categories))
-	}).catch((error) => {
-		console.log("There was an error when getting all categories " + error)
-		return "There was an error when getting all categories " + error
-	})
+        }
+    }).then((result) => {
+        console.log(" RESULT DATA: ", result.data.data.categories)
+        dispatch(allCategories(result.data.data.categories))
+    }).catch((error) => {
+        console.log("There was an error when getting all categories " + error)
+        return "There was an error when getting all categories " + error
+    })
 }
 
 
@@ -97,24 +97,24 @@ export const getAllCategories = () => (dispatch, getState) => {
 export const GET_A_CATEGORY = "GET_A_CATEGORY"
 
 const getCategory = (data) => ({
-	type: GET_A_CATEGORY,
-	payload: data
+    type: GET_A_CATEGORY,
+    payload: data
 })
 
 export const getOneCategory = (data) => (dispatch, getState) => {
 
-	console.log("DATA FROM ACTIONS: ", typeof data, data)
-	// const state = getState()
-	// if (!state.currentUserReducer) return logout()
+    console.log("DATA FROM ACTIONS: ", typeof data, data)
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
 
-	// const jwt = state.currentUserReducer.jwt
-	// if (jwtDecodeToExpDate(jwt)) return logout()
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
 
-	axios({
-		url: baseUrl,
-		method: "post",
-		data: {
-			query: `
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
 			query {
 				category(id: ${data}) {
 					id
@@ -123,14 +123,15 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 				}
 			}
 			`
-		}
-	}).then((result) => {
-		console.log(result.data.data.category)
-		dispatch(getCategory(result.data.data.category))
-	}).catch((error) => {
-		console.log("There was an error when getting all categories" + error)
-		return "There was an error when getting all categories" + error
-	})
+        }
+    })
+    // .then((result) => {      // da polzvam li vuobshte DELETE action? 
+    //     console.log(result.data.data.category)
+    //     dispatch(getCategory(result.data.data.category))
+    // }).catch((error) => {
+    //     console.log("There was an error when getting all categories" + error)
+    //     return "There was an error when getting all categories" + error
+    // })
 }
 
 // DELETE A CATEGORY
@@ -138,34 +139,35 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 export const DELETE_A_CATEGORY = "DELETE_A_CATEGORY"
 
 const deleteCategory = (data) => ({
-	type: DELETE_A_CATEGORY,
-	payload: data
+    type: DELETE_A_CATEGORY,
+    payload: data
 })
 
 export const deleteOneCategory = (data) => (dispatch, getState) => {
 
-	// const state = getState()
-	// if (!state.currentUserReducer) return logout()
+    console.log(" ____ data: ", data)
 
-	// const jwt = state.currentUserReducer.jwt
-	// if (jwtDecodeToExpDate(jwt)) return logout()
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
 
-	// axios({
-	// 	url: baseUrl,
-	// 	method: "post",
-	// 	data: {
-	// 		query: `
-	// 		mutation {
-	// 			deleteCategory(id: ${data})
-	// 		}
-	// 		`
-	// 	}
-	// }).then((category) => {
-	// 	console.log(category.data.data.deleteCategory)
-	// 	console.log(category.data.data)
-	// dispatch(deleteCategory(category.data.data.deleteCategory))
-	// }).catch((error) => {
-	// 	console.log("There was an error when trying to delete a category" + error)
-	// 	return "There was an error when trying to delete a category" + error
-	// })
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+			mutation {
+				deleteCategory(id: ${data})
+			}
+			`
+        }
+    }).then((category) => {
+        console.log("category.data.data.deleteCategory", category.data.data.deleteCategory)
+        dispatch(deleteCategory(data))
+    }).catch((error) => {
+        console.log("There was an error when trying to delete a category " + error)
+        return "There was an error when trying to delete a category " + error
+    })
 }
