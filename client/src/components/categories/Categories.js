@@ -3,16 +3,29 @@ import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import CategoriesForm from "./CategoriesForm"
 import { createNewCategory } from "../../actions/categoriesActions"
+import AllCategories from "./AllCategories"
 
 class Categories extends Component {
 
     state = {
-        showForm: false
+        showForm: false,
+        showAddButton: true,
+        showAllButton: true,
+        showAllCategories: false
     }
 
-    showForm = () => {
+    showAddForm = () => {
         this.setState({
-            showForm: !this.state.showForm
+            showForm: !this.state.showForm,
+            showAddButton: !this.state.showAddButton
+        })
+    }
+
+    showAllForm = () => {
+        this.setState({
+            showAddButton: !this.state.showAddButton,
+            showAllButton: !this.state.showAllButton,
+            showAllCategories: !this.state.showAllCategories
         })
     }
 
@@ -26,14 +39,28 @@ class Categories extends Component {
 
                 <Text> EXPENSE CATEGORIES </Text>
 
-                <Button
-                    title="Add A New Category"
-                    onPress={ this.showForm }
-                />
+                { this.state.showAddButton &&
+                    <Button
+                        title="Add A New Category"
+                        onPress={ this.showAddForm }
+                    />
+                }
+
+                { this.state.showAllButton &&
+                    <Button
+                        title="All Categories"
+                        onPress={ this.showAllForm }
+                    />
+                }
 
                 {
                     this.state.showForm &&
                     <CategoriesForm onSubmit={ this.handleSubmit } />
+                }
+
+                {
+                    this.state.showAllCategories &&
+                    <AllCategories />
                 }
 
             </View>

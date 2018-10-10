@@ -5,14 +5,14 @@ import { combineResolvers } from "graphql-resolvers"
 export default {
 
     Query: {
-        
+
         category: async (parent, { id }, { models }) => {
             return await models.Category.findById(id)
         },
 
         categories: async (parent, args, { models }, info) => {
             return await models.Category.findAll()
-        } 
+        }
 
     },
     Mutation: {
@@ -23,18 +23,18 @@ export default {
                 return await models.Category.create({
                     name,
                 })
-                .then(cat => {
-                    cat.addUser(me.id)
-                    return cat
-                })
+                    .then(cat => {
+                        cat.addUser(me.id)
+                        return cat
+                    })
             }
         ),
 
         deleteCategory: combineResolvers(
-            isAuthenticated,
-            isMessageOwner,
+            // isAuthenticated,
+            // isMessageOwner,
             async (parent, { id }, { models }) => {
-                return await models.Category.destroy({ where: { id }})
+                return await models.Category.destroy({ where: { id } })
             }
         )
 
@@ -43,10 +43,10 @@ export default {
 
         user: async (parent, args, { me, models }) => {
             return await models.User.findById(me.id)
-        },  
+        },
 
         expenses: async (parent, args, { models }) => {
-            return await models.Expense.findAll({ where: { categoryId: parent.id }})
+            return await models.Expense.findAll({ where: { categoryId: parent.id } })
         }
 
     },
