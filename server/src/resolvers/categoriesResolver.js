@@ -30,6 +30,21 @@ export default {
             }
         ),
 
+        updateCategory: combineResolvers(
+            // isAuthenticated,
+            // isMessageOwner,
+            async (parent, { id, name }, { models }) => {
+                return await models.Category
+                    .findById(id)
+                    .then((category) => {
+                        category.update({
+                            name: name
+                        })
+                        return category
+                    })
+            }
+        ),
+
         deleteCategory: combineResolvers(
             // isAuthenticated,
             // isMessageOwner,
