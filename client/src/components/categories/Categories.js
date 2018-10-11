@@ -11,7 +11,7 @@ class Categories extends Component {
         showForm: false,
         showAddButton: true,
         showAllButton: true,
-        showAllCategories: false
+        showAllCategories: false,
     }
 
     showAddForm = () => {
@@ -55,6 +55,7 @@ class Categories extends Component {
                         onPress={ this.showAllForm }
                     />
                 }
+
                 <Text> { } </Text>
                 {
                     this.state.showForm &&

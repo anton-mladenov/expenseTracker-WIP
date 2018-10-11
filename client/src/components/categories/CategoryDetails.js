@@ -1,18 +1,20 @@
 import React, { Component } from "react"
 import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
-import { getOneCategory, deleteOneCategory, updateOneCategory } from "../../actions/categoriesActions"
+import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
 import CategoriesForm from "./CategoriesForm"
+import Expenses from "../expenses/Expenses"
 
 class CategoryDetails extends Component {
 
     state = {
-        toggleEdit: false
+        toggleEdit: false,
+        showExpenseForm: false,
     }
 
     componentDidMount() {
-        console.log(" componentDidMount id: ", this.props.categoryId)
         this.props.getOneCategory(this.props.categoryId)
+        this.props.getAllCategories()
     }
 
     toggleEdit = () => {
@@ -22,13 +24,19 @@ class CategoryDetails extends Component {
     }
 
     editCategory = (data) => {
-        console.log(" JUST A TEST From  from UPDATE!: ", this.props.categoryId, this.props.oneCategory.name, this.props.oneCategory)
         this.props.updateOneCategory(this.props.categoryId, data.name)
+    }
+
+    showAddExpenseForm = () => {
+        this.setState({
+            showExpenseForm: !this.state.showExpenseForm
+        })
     }
 
     render() {
 
         const { oneCategory } = this.props
+        console.log("CATEGORY ID: ", oneCategory.id, oneCategory)
 
         return (
             <View>
@@ -54,6 +62,18 @@ class CategoryDetails extends Component {
                     />
                 }
 
+                {
+                    <Button
+                        title="Add A New Expense To This Category"
+                        onPress={ this.showAddExpenseForm }
+                    />
+                }
+
+                {
+                    this.state.showExpenseForm &&
+                    <Expenses categoryId={ this.props.categoryId } />
+                }
+
             </View>
         )
     }
@@ -62,10 +82,12 @@ class CategoryDetails extends Component {
 const mapStateToProps = (state) => {
     return {
         oneCategory: state.categories
-        // .find((category) => {
-        //     parseInt(category.id, 10) === this.state.categoryId
-        // })
     }
 }
 
-export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory })(CategoryDetails)
+export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories })(CategoryDetails)
+
+
+
+
+

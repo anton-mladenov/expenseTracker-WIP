@@ -33,7 +33,6 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log("heeye: ", result.data.data.createCategory)
         dispatch(createCategory(result.data.data.createCategory))
     }).catch((error) => {
         console.log("There was an error when creating the new category " + error)
@@ -83,7 +82,6 @@ export const getAllCategories = () => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log(" RESULT DATA: ", result.data.data.categories)
         dispatch(allCategories(result.data.data.categories))
     }).catch((error) => {
         console.log("There was an error when getting all categories " + error)
@@ -102,8 +100,6 @@ const getCategory = (data) => ({
 })
 
 export const getOneCategory = (data) => (dispatch, getState) => {
-
-    console.log("DATA FROM ACTIONS: ", typeof data, data)
 
     // const state = getState()
     // if (!state.currentUserReducer) return logout()
@@ -147,7 +143,7 @@ const updateCategory = (data) => ({
 
 export const updateOneCategory = (id, name) => (dispatch, getState) => {
 
-    console.log(" id, name from updateOneCategory: ", id, name)
+
 
     // const state = getState()
     // if (!state.currentUserReducer) return logout()
@@ -176,7 +172,6 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log(" result: ", result.data.data.updateCategory)
         dispatch(updateCategory(result.data.data.updateCategory))
     }).catch((error) => {
         console.log("There was an error when trying to update a category " + error)
@@ -212,7 +207,6 @@ export const deleteOneCategory = (data) => (dispatch, getState) => {
 			`
         }
     }).then((category) => {
-        console.log("category.data.data.deleteCategory", category.data.data.deleteCategory)
         dispatch(deleteCategory(data))
     }).catch((error) => {
         console.log("There was an error when trying to delete a category " + error)

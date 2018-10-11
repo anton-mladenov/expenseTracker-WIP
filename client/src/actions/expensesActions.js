@@ -26,14 +26,29 @@ export const getOneExpense = (data) => (dispatch, getState) => {
         method: "post",
         data: {
             query: `
-            
+            query { 
+                expense(id: ${data.id}, categoryId: ${data.categoryId}){
+                    id
+                    name
+                        amount
+                    category {
+                        name
+                        amount
+                    }
+                    user {
+                        id
+                        name
+                    }
+                }
+            }
             `
         }
     }).then((result) => {
-        console.log("result.data", result.data)
+        console.log("result.data", result.data.data.expense)
+        dispatch(getExpense(result.data.data.expense))
     }).catch((error) => {
-        console.log("There was an error when creating the new expense " + error)
-        return "There was an error when creating the new expense " + error
+        console.log("There was an error when getting the new expense " + error)
+        return "There was an error when getting the new expense " + error
     })
 }
 
@@ -58,6 +73,38 @@ const createExpense = (data) => ({
     payload: data
 })
 
+export const createNewExpense = (data) => (dispatch, getState) => {
+
+    console.log(" from action creators - data: ", data)
+
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
+
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+            mutation {
+                createExpense(name: "${data.name}", amount: ${data.amount}, categoryId: ${data.categoryId}) {
+                    id
+                    name
+                    amount
+                }
+              }
+            `
+        }
+    }).then((result) => {
+        console.log("result.data", result.data.data.createExpense)
+        dispatch(createExpense(result.data.data.createExpense))
+    }).catch((error) => {
+        console.log("There was an error when creating the new expense " + error)
+        return "There was an error when creating the new expense " + error
+    })
+}
 
 
 // EDIT ONE EXPENSE
