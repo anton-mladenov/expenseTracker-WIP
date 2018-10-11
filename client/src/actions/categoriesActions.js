@@ -104,6 +104,7 @@ const getCategory = (data) => ({
 export const getOneCategory = (data) => (dispatch, getState) => {
 
     console.log("DATA FROM ACTIONS: ", typeof data, data)
+
     // const state = getState()
     // if (!state.currentUserReducer) return logout()
 
