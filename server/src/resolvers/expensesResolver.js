@@ -17,7 +17,7 @@ export default {
                 })
         },
 
-        allExpenses: async (parent, { categoryId }, { models }) => {
+        allExpenses: async (parent, args, { models }) => {
             return await models.Expense
                 .findAll()
         }
@@ -59,17 +59,23 @@ export default {
 
         updateExpense: combineResolvers(
             // authentication resolver here
-            async (parent, { id, name, amount }, { me, models }) => {
+            async (parent, { id, categoryId, name, amount }, { me, models }) => {
+
                 const update = { name, amount }
-                const idInt = parseInt(id, 10)
+
                 return await models.Expense
-                    .findById(idInt)
-                    .then(expense => {
-                        if (expense.id !== idInt) {
-                            return "No expense found with this ID"
-                        } else {
-                            return expense.update(update)
-                        }
+                    .findById(id)
+                    .then(async (expense) => {
+
+                        return await models.Category
+                            .findById(categoryId)
+                            .then((category) => {
+                                category.amount -= expense.dataValues.amount
+                                category.amount += amount
+                                category.save()
+
+                                return expense.update(update)
+                            })
                     })
             }
         ),
