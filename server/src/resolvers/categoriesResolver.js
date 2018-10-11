@@ -7,11 +7,13 @@ export default {
     Query: {
 
         category: async (parent, { id }, { models }) => {
-            return await models.Category.findById(id)
+            return await models.Category
+                .findById(id)
         },
 
         categories: async (parent, args, { models }, info) => {
-            return await models.Category.findAll()
+            return await models.Category
+                .findAll()
         }
 
     },
@@ -20,10 +22,10 @@ export default {
         createCategory: combineResolvers(
             // isAuthenticated,
             async (parent, { name }, { me, models }, info) => {
-                return await models.Category.create({
-                    name,
-                })
-                    .then(cat => {
+                return await models.Category
+                    .create({
+                        name,
+                    }).then(cat => {
                         cat.addUser(me.id)
                         return cat
                     })
@@ -49,7 +51,8 @@ export default {
             // isAuthenticated,
             // isMessageOwner,
             async (parent, { id }, { models }) => {
-                return await models.Category.destroy({ where: { id } })
+                return await models.Category
+                    .destroy({ where: { id } })
             }
         )
 
@@ -57,11 +60,13 @@ export default {
     Category: {
 
         user: async (parent, args, { me, models }) => {
-            return await models.User.findById(me.id)
+            return await models.User
+                .findById(me.id)
         },
 
         expenses: async (parent, args, { models }) => {
-            return await models.Expense.findAll({ where: { categoryId: parent.id } })
+            return await models.Expense
+                .findAll({ where: { categoryId: parent.id } })
         }
 
     },

@@ -5,8 +5,6 @@ const user = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
         name: {
             type: DataTypes.STRING,
-            // singular: 'user',
-            // plural: 'users',
         },
         email: {
             type: DataTypes.STRING
@@ -26,6 +24,10 @@ const user = (sequelize, DataTypes) => {
             foreignKey: "userId",
             otherKey: "categoryId"
         });
+
+        User.hasMany(models.Expense, {
+            foreignKey: "userId",
+        })
     };
 
     User.findByLogin = async (login) => {

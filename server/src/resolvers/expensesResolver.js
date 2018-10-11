@@ -5,10 +5,12 @@ export default {
 
     Query: {
         expense: async (parent, { id }, { models }) => {
-            return await models.Expense.findById(id)
+            return await models.Expense
+                .findById(id)
         },
         allExpenses: async (parent, args, { models }) => {
-            return await models.Expense.findAll()
+            return await models.Expense
+                .findAll()
         }
     },
 
@@ -17,11 +19,29 @@ export default {
         createExpense: combineResolvers(
             // authentication resolver here
             async (parent, { name, amount, categoryId }, { me, models }) => {
-                return await models.Expense.create({
-                    name, 
-                    amount, 
-                    categoryId
-                })
+                // first, find category. second, create expense. third, assign expense to category.
+                // then, find user and assign it to the expense. finally, return the expense. 
+                return await models.Category
+                    .findById(categoryId)
+                    .then(async (category) => {
+
+                        return await models.Expense
+                            .create({
+                                name,
+                                amount,
+                            })
+                            .then(async (expense) => {
+                                category.addExpenses(expense)
+
+                                await models.User
+                                    .findById(me.id)
+                                    .then((user) => {
+                                        user.addExpenses(expense)
+                                    })
+
+                                return expense
+                            })
+                    })
             }
         ),
 
@@ -45,7 +65,8 @@ export default {
         deleteExpense: combineResolvers(
             // authentication resolver here
             async (parent, { id }, { models }) => {
-                return await models.Expense.destroy({ where: { id } })
+                return await models.Expense
+                    .destroy({ where: { id } })
             }
         )
 
@@ -53,7 +74,8 @@ export default {
 
     Expense: {
         category: async (parent, { categoryId }, { models }) => {
-            return await models.Category.findById(parent.id)
+            return await models.Category
+                .findById(parent.id)
         }
     }
 

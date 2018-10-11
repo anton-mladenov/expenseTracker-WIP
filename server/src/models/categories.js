@@ -1,11 +1,9 @@
 
 const category = (sequelize, DataTypes) => {
-    
+
     const Category = sequelize.define("category", {
         name: {
             type: DataTypes.STRING,
-            // singular: 'category',
-            // plural: 'categories',
         },
         amount: {
             type: DataTypes.INTEGER
@@ -13,21 +11,19 @@ const category = (sequelize, DataTypes) => {
     })
 
     Category.associate = (models) => {
-        
+
         Category.belongsToMany(models.User, {
             as: "users",
             through: "CategoryUsers",
-            foreignKey: "categoryId", 
+            foreignKey: "categoryId",
             otherKey: "userId"
         })
 
-        Category.hasMany(models.Expense, { as: "Expenses"})
+        Category.hasMany(models.Expense, {
+            foreignKey: "categoryId",
+        })
     };
 
-    // Category.associate = (models) => {
-    //     Category.hasMany(models.Expense)
-    // };
-    
     return Category;
 }
 
