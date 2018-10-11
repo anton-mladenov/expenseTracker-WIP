@@ -1,4 +1,5 @@
 import { combineResolvers } from "graphql-resolvers"
+import expensesTypes from "../schema/expensesTypes";
 // imports here from the authentication file
 
 export default {
@@ -82,9 +83,21 @@ export default {
 
         deleteExpense: combineResolvers(
             // authentication resolver here
-            async (parent, { id }, { models }) => {
+            async (parent, { id, categoryId }, { models }) => {
                 return await models.Expense
-                    .destroy({ where: { id } })
+                    .findById(id)
+                    .then(async (expense) => {
+                        return await models.Category
+                            .findById(categoryId)
+                            .then(async (category) => {
+                                // here subtracting the expense's amount from its category total amount, before deleting the expense
+                                category.amount -= expense.dataValues.amount
+                                category.save()
+
+                                return await models.Expense
+                                    .destroy({ where: { id } })
+                            })
+                    })
             }
         )
 
