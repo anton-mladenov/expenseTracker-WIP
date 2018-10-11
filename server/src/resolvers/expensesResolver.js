@@ -4,11 +4,20 @@ import { combineResolvers } from "graphql-resolvers"
 export default {
 
     Query: {
-        expense: async (parent, { id }, { models }) => {
+        expense: async (parent, { id, categoryId }, { me, models }) => {
             return await models.Expense
                 .findById(id)
+                .then(async (expense) => {
+                    return await models.Category
+                        .findById(categoryId)
+                        .then((category) => {
+                            category.getExpenses()
+                            return expense
+                        })
+                })
         },
-        allExpenses: async (parent, args, { models }) => {
+
+        allExpenses: async (parent, { categoryId }, { models }) => {
             return await models.Expense
                 .findAll()
         }
@@ -33,13 +42,16 @@ export default {
                             .then(async (expense) => {
                                 category.addExpenses(expense)
 
-                                await models.User
+                                // increment category's amount and save it
+                                category.amount += amount
+                                category.save()
+
+                                return await models.User
                                     .findById(me.id)
                                     .then((user) => {
                                         user.addExpenses(expense)
+                                        return expense
                                     })
-
-                                return expense
                             })
                     })
             }
@@ -73,9 +85,13 @@ export default {
     },
 
     Expense: {
-        category: async (parent, { categoryId }, { models }) => {
+        category: async (parent, args, { models }) => {
             return await models.Category
-                .findById(parent.id)
+                .findById(parent.dataValues.categoryId)
+        },
+        user: async (parent, args, { models }) => {
+            return await models.User
+                .findById(parent.dataValues.userId)
         }
     }
 

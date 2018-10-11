@@ -7,11 +7,12 @@ type Expense {
     name: String
     amount: Int
     category: Category
+    user: User
 }
 
 extend type Query {
-    expense(id: ID): Expense
-    allExpenses: [Expense]
+    expense(id: ID, categoryId: ID): Expense
+    allExpenses(categoryId: ID): [Expense]
 }
 
 extend type Mutation {
