@@ -36,8 +36,8 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
         console.log("heeye: ", result.data.data.createCategory)
         dispatch(createCategory(result.data.data.createCategory))
     }).catch((error) => {
-        console.log("There was an error when creating the new category" + error)
-        return "There was an error when creating the new category" + error
+        console.log("There was an error when creating the new category " + error)
+        return "There was an error when creating the new category " + error
     })
 }
 
@@ -130,9 +130,58 @@ export const getOneCategory = (data) => (dispatch, getState) => {
     //     console.log(result.data.data.category)
     //     dispatch(getCategory(result.data.data.category))
     // }).catch((error) => {
-    //     console.log("There was an error when getting all categories" + error)
-    //     return "There was an error when getting all categories" + error
+    //     console.log("There was an error when getting all categories " + error)
+    //     return "There was an error when getting all categories " + error
     // })
+}
+
+
+// UPDATE A CATEGORY 
+
+export const UPDATE_A_CATEGORY = "UPDATE_A_CATEGORY"
+
+const updateCategory = (data) => ({
+    type: UPDATE_A_CATEGORY,
+    payload: data
+})
+
+export const updateOneCategory = (id, name) => (dispatch, getState) => {
+
+    console.log(" id, name from updateOneCategory: ", id, name)
+
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
+
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+            mutation {
+                updateCategory(id: ${id}, name: "${name}"){
+                    id
+                    name
+                    user {
+                        id
+                        name
+                    }
+                    expenses {
+                        name
+                    }
+                }
+              }
+            `
+        }
+    }).then((result) => {
+        console.log(" result: ", result.data.data.updateCategory)
+        dispatch(updateCategory(result.data.data.updateCategory))
+    }).catch((error) => {
+        console.log("There was an error when trying to update a category " + error)
+        return "There was an error when trying to update a category " + error
+    })
 }
 
 // DELETE A CATEGORY
@@ -145,8 +194,6 @@ const deleteCategory = (data) => ({
 })
 
 export const deleteOneCategory = (data) => (dispatch, getState) => {
-
-    console.log(" ____ data: ", data)
 
     // const state = getState()
     // if (!state.currentUserReducer) return logout()

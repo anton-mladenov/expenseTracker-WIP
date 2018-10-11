@@ -18,18 +18,19 @@ class AllCategories extends Component {
 
     showCategoryDetails = (id) => {
         const idInt = parseInt(id, 10)
-        console.log("state cat id: ", this.state.categoryId, this.state.showDetails, { idInt })
+        console.log("state cat id in showCategoryDetails: ", this.state.categoryId, this.state.showDetails, { idInt })
         return this.setState({
+            categoryId: idInt,
             showDetails: !this.state.showDetails,
             showFlatList: !this.state.showFlatList,
-            categoryId: idInt,
         })
     }
 
     render() {
 
         const { allCategories } = this.props
-        console.log("state cat id: ", this.state.categoryId, this.state.showDetails)
+        console.log("state cat id in RENDER: ", this.state.categoryId, this.state.showDetails)
+        const id = this.state.categoryId
 
         return (
             <View>
@@ -44,7 +45,7 @@ class AllCategories extends Component {
 
                 {
                     this.state.showDetails &&
-                    <CategoryDetails categoryId={ this.state.categoryId } />
+                    <CategoryDetails categoryId={ id } />
                 }
 
             </View>
@@ -57,3 +58,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, { getAllCategories })(AllCategories)
+
