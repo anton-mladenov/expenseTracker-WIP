@@ -5,6 +5,7 @@ import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories 
 import CategoriesForm from "./CategoriesForm"
 import ExpensesForm from "../expenses/ExpensesForm"
 import Expenses from "../expenses/Expenses"
+import { createNewExpense } from "../../actions/expensesActions"
 
 
 class CategoryDetails extends Component {
@@ -32,6 +33,16 @@ class CategoryDetails extends Component {
         this.setState({
             showExpenseForm: !this.state.showExpenseForm
         })
+    }
+
+    handleSubmit = (data) => {
+        const { name, amount } = data
+        const fullData = {
+            name,
+            amount,
+            categoryId: this.props.categoryId
+        }
+        this.props.createNewExpense(fullData)
     }
 
     render() {
@@ -87,7 +98,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories })(CategoryDetails)
+export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories, createNewExpense })(CategoryDetails)
 
 
 

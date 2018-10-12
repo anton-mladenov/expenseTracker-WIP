@@ -1,18 +1,37 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
-import { getOneExpense } from "../../actions/expensesActions"
+import { getOneExpense, editOneExpense } from "../../actions/expensesActions"
+import ExpensesForm from "./ExpensesForm"
 
 class ExpenseDetails extends Component {
 
-    data = {
-        id: this.props.expenseId,
-        categoryId: this.props.category.id
+    state = {
+        edit: false
     }
 
-
     componentDidMount() {
-        this.props.getOneExpense(this.data)
+        data = {
+            id: this.props.expenseId,
+            categoryId: this.props.category.id
+        }
+        this.props.getOneExpense(data)
+    }
+
+    handleEdit = () => {
+        this.setState({
+            edit: !this.state.edit
+        })
+    }
+
+    handleSubmit = (data) => {
+        const newData = {
+            name: data.name,
+            amount: data.amount,
+            expenseId: this.props.expenseId,
+            categoryId: this.props.category.id
+        }
+        this.props.editOneExpense(newData)
     }
 
     render() {
@@ -26,6 +45,16 @@ class ExpenseDetails extends Component {
                 <Text> { oneExpense.amount } </Text>
                 <Text> Added to Category: { category.name } </Text>
 
+                <Button
+                    title="Edit Expense"
+                    onPress={ this.handleEdit }
+                />
+
+                {
+                    this.state.edit &&
+                    <ExpensesForm onSubmit={ this.handleSubmit } initialValues={ oneExpense } />
+                }
+
             </View>
         )
     }
@@ -38,5 +67,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOneExpense })(ExpenseDetails)
+export default connect(mapStateToProps, { getOneExpense, editOneExpense })(ExpenseDetails)
 

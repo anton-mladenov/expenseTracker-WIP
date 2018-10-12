@@ -155,7 +155,45 @@ const editExpense = (data) => ({
     payload: data
 })
 
+export const editOneExpense = (data) => (dispatch, getState) => {
 
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
+
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+            mutation {
+                updateExpense(id: ${data.expenseId}, categoryId: ${data.categoryId}, name: "${data.name}", amount: ${data.amount}) {
+                    name
+                    amount
+                    category {
+                        id
+                        name
+                        amount
+                    }
+                    user{
+                        id
+                        name
+                    }
+                }
+              }
+            `
+        }
+    }).then((result) => {
+        console.log("result.data", result.data.data.updateExpense)
+        dispatch(editExpense(result.data.data.updateExpense))
+    }).catch((error) => {
+        console.log("There was an error when editing the new expense " + error)
+        return "There was an error when editing the new expense " + error
+    })
+
+}
 
 // DELETE ONE EXPENSE
 

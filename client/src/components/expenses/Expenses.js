@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
-import ExpensesForm from "./ExpensesForm"
-import { createNewExpense } from "../../actions/expensesActions"
 import AllExpenses from "./AllExpenses"
 
 class Expenses extends Component {
@@ -24,29 +22,9 @@ class Expenses extends Component {
         })
     }
 
-    handleSubmit = (data) => {
-        const { name, amount } = data
-        const fullData = {
-            name,
-            amount,
-            categoryId: this.props.categoryId
-        }
-        this.props.createNewExpense(fullData)
-    }
-
     render() {
         return (
             <View>
-
-                {/* <Button
-                    title="Add A New Expense"
-                    onPress={ this.showCreateForm }
-                /> */}
-
-                {/* {
-                    this.state.showCreateForm &&
-                    <ExpensesForm onSubmit={ this.handleSubmit } />
-                } */}
 
                 <Button
                     title="See All Expenses"
@@ -64,4 +42,4 @@ class Expenses extends Component {
     }
 }
 
-export default connect(null, { createNewExpense })(Expenses)
+export default connect(null, {})(Expenses)

@@ -56,7 +56,7 @@ class AllExpenses extends Component {
 const mapStateToProps = (state) => {
     return {
         allExpenses: state.expensesReducer,
-        category: state.categories
+        category: state.categories[0]
     }
 }
 
