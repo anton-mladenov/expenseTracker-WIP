@@ -2,6 +2,7 @@
 import { baseUrl, jwtDecodeToExpDate } from "../lib/lib"
 import axios from "axios"
 import { logout } from "./usersActions"
+import { stringToInt } from "../lib/lib"
 
 
 // GET ONE EXPENSE
@@ -62,6 +63,45 @@ const getExpenses = (data) => ({
     payload: data
 })
 
+export const getAllExpenses = () => (dispatch, getState) => {
+
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
+
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+            query {
+                allExpenses {
+                    id
+                    name
+                    amount
+                    category {
+                        name
+                        amount
+                    }
+                    user {
+                        id
+                        name
+                    }
+                }
+            }
+            `
+        }
+    }).then((result) => {
+        console.log("result.data", result.data.data.allExpenses)
+        const intResults = stringToInt(result.data.data.allExpenses)
+        dispatch(getExpenses(intResults))
+    }).catch((error) => {
+        console.log("There was an error when getting all expenses " + error)
+        return "There was an error when getting all expenses " + error
+    })
+}
 
 
 // CREATE NEW EXPENSE 

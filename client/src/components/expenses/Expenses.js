@@ -3,16 +3,24 @@ import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import ExpensesForm from "./ExpensesForm"
 import { createNewExpense } from "../../actions/expensesActions"
+import AllExpenses from "./AllExpenses"
 
 class Expenses extends Component {
 
     state = {
-        showCreateForm: false
+        showCreateForm: false,
+        showAllExpenses: false
     }
 
     showCreateForm = () => {
         this.setState({
             showCreateForm: !this.state.showCreateForm
+        })
+    }
+
+    showAllExpenses = () => {
+        this.setState({
+            showAllExpenses: !this.state.showAllExpenses
         })
     }
 
@@ -40,6 +48,18 @@ class Expenses extends Component {
                     this.state.showCreateForm &&
                     <ExpensesForm onSubmit={ this.handleSubmit } />
                 }
+
+                <Button
+                    title="See All Expenses"
+                    onPress={ this.showAllExpenses }
+                />
+
+                {
+                    this.state.showAllExpenses &&
+                    <AllExpenses />
+                }
+
+
             </View>
         )
     }
