@@ -204,4 +204,31 @@ const deleteExpense = (data) => ({
     payload: data
 })
 
+export const deleteOneExpense = (data) => (dispatch, getState) => {
+
+    // const state = getState()
+    // if (!state.currentUserReducer) return logout()
+
+    // const jwt = state.currentUserReducer.jwt
+    // if (jwtDecodeToExpDate(jwt)) return logout()
+
+    axios({
+        url: baseUrl,
+        method: "post",
+        data: {
+            query: `
+            mutation {
+                deleteExpense(id: ${data.id}, categoryId: ${data.categoryId})
+            }
+            `
+        }
+    })
+    // .then((result) => { // da polzvam li vuobshte DELETE action? 
+    //     dispatch(deleteExpense(data))
+    // }).catch((error) => {
+    //     console.log("There was an error when trying to delete an expense " + error)
+    //     return "There was an error when trying to delete an expense " + error
+    // })
+}
+
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
-import { getOneExpense, editOneExpense } from "../../actions/expensesActions"
+import { getOneExpense, editOneExpense, deleteOneExpense } from "../../actions/expensesActions"
 import ExpensesForm from "./ExpensesForm"
 
 class ExpenseDetails extends Component {
@@ -55,6 +55,11 @@ class ExpenseDetails extends Component {
                     <ExpensesForm onSubmit={ this.handleSubmit } initialValues={ oneExpense } />
                 }
 
+                <Button
+                    title="Delete Expense"
+                    onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
+                />
+
             </View>
         )
     }
@@ -67,5 +72,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOneExpense, editOneExpense })(ExpenseDetails)
+export default connect(mapStateToProps, { getOneExpense, editOneExpense, deleteOneExpense })(ExpenseDetails)
 
