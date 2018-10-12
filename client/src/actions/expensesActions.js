@@ -45,7 +45,6 @@ export const getOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log("result.data", result.data.data.expense)
         dispatch(getExpense(result.data.data.expense))
     }).catch((error) => {
         console.log("There was an error when getting the new expense " + error)

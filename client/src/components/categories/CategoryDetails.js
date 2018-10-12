@@ -3,7 +3,9 @@ import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
 import CategoriesForm from "./CategoriesForm"
+import ExpensesForm from "../expenses/ExpensesForm"
 import Expenses from "../expenses/Expenses"
+
 
 class CategoryDetails extends Component {
 
@@ -14,7 +16,6 @@ class CategoryDetails extends Component {
 
     componentDidMount() {
         this.props.getOneCategory(this.props.categoryId)
-        this.props.getAllCategories()
     }
 
     toggleEdit = () => {
@@ -36,7 +37,6 @@ class CategoryDetails extends Component {
     render() {
 
         const { oneCategory } = this.props
-        console.log("CATEGORY ID: ", oneCategory.id, oneCategory)
 
         return (
             <View>
@@ -71,8 +71,10 @@ class CategoryDetails extends Component {
 
                 {
                     this.state.showExpenseForm &&
-                    <Expenses categoryId={ this.props.categoryId } />
+                    <ExpensesForm onSubmit={ this.handleSubmit } />
                 }
+
+                <Expenses categoryId={ this.props.categoryId } />
 
             </View>
         )

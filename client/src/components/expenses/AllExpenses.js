@@ -2,19 +2,29 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from "react-native"
 import { connect } from "react-redux"
 import { getAllExpenses } from "../../actions/expensesActions"
+import ExpenseDetails from "./ExpenseDetails"
 
 class AllExpenses extends Component {
 
     state = {
         showAllExpenses: true,
-
+        showExpenseDetails: false,
+        expenseId: null,
+        categoryId: null
     }
 
     componentDidMount() {
         this.props.getAllExpenses()
     }
 
-
+    showExpenseDetails = (id) => {
+        this.setState({
+            showAllExpenses: !this.state.showAllExpenses,
+            showExpenseDetails: !this.state.showExpenseDetails,
+            expenseId: id,
+            categoryId: this.props.category.id
+        })
+    }
 
     render() {
 
@@ -28,10 +38,15 @@ class AllExpenses extends Component {
                         data={ allExpenses }
                         renderItem={ ({ item }) => <Button
                             title={ item.name }
-                            onPress={ () => console.log("Nothing!") }
+                            onPress={ () => this.showExpenseDetails(item.id) }
                             keyExtractor={ (item, index) => item.key }
                         /> }
                     />
+                }
+
+                {
+                    this.state.showExpenseDetails &&
+                    <ExpenseDetails expenseId={ this.state.expenseId } />
                 }
             </View>
         )
@@ -40,7 +55,8 @@ class AllExpenses extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        allExpenses: state.expensesReducer
+        allExpenses: state.expensesReducer,
+        category: state.categories
     }
 }
 

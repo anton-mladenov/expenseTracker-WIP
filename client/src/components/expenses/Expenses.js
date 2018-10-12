@@ -31,7 +31,6 @@ class Expenses extends Component {
             amount,
             categoryId: this.props.categoryId
         }
-        console.log("FULL DATA: ", fullData)
         this.props.createNewExpense(fullData)
     }
 
@@ -39,15 +38,15 @@ class Expenses extends Component {
         return (
             <View>
 
-                <Button
+                {/* <Button
                     title="Add A New Expense"
                     onPress={ this.showCreateForm }
-                />
+                /> */}
 
-                {
+                {/* {
                     this.state.showCreateForm &&
                     <ExpensesForm onSubmit={ this.handleSubmit } />
-                }
+                } */}
 
                 <Button
                     title="See All Expenses"

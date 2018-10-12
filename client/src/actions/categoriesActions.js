@@ -121,14 +121,13 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 			}
 			`
         }
+    }).then((result) => {
+        console.log(result.data.data.category)
+        dispatch(getCategory(result.data.data.category))
+    }).catch((error) => {
+        console.log("There was an error when getting all categories " + error)
+        return "There was an error when getting all categories " + error
     })
-    // .then((result) => {      // da polzvam li vuobshte DELETE action? 
-    //     console.log(result.data.data.category)
-    //     dispatch(getCategory(result.data.data.category))
-    // }).catch((error) => {
-    //     console.log("There was an error when getting all categories " + error)
-    //     return "There was an error when getting all categories " + error
-    // })
 }
 
 
@@ -206,10 +205,11 @@ export const deleteOneCategory = (data) => (dispatch, getState) => {
 			}
 			`
         }
-    }).then((category) => {
-        dispatch(deleteCategory(data))
-    }).catch((error) => {
-        console.log("There was an error when trying to delete a category " + error)
-        return "There was an error when trying to delete a category " + error
     })
+    // .then((category) => { // da polzvam li vuobshte DELETE action? 
+    //     dispatch(deleteCategory(data))
+    // }).catch((error) => {
+    //     console.log("There was an error when trying to delete a category " + error)
+    //     return "There was an error when trying to delete a category " + error
+    // })
 }
