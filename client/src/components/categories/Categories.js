@@ -31,7 +31,8 @@ class Categories extends Component {
     }
 
     handleSubmit = (data) => {
-        this.props.createNewCategory(data.text)
+        console.log({ data })
+        this.props.createNewCategory(data.name)
     }
 
     render() {

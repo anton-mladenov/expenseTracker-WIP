@@ -13,14 +13,16 @@ const createCategory = (category) => ({
 
 export const createNewCategory = (newCategory) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    console.log({ newCategory })
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: 'post',
         data: {
             query: `
@@ -33,6 +35,7 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
+        console.log({ result })
         dispatch(createCategory(result.data.data.createCategory))
     }).catch((error) => {
         console.log("There was an error when creating the new category " + error)

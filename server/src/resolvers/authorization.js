@@ -5,23 +5,23 @@ export const isAuthenticated = (parent, args, { me }) => {
     me ? skip : new ForbiddenError("Not authenticated as THE user.")
 }
 
-export const isAdmin = combineResolvers(
-    isAuthenticated,
-    (parent, args, { me: { role }}) => {
+// export const isAdmin = combineResolvers(
+//     isAuthenticated,
+//     (parent, args, { me: { role }}) => {
 
-        if (role === "ADMIN") {
-            return skip
-        }
-
-
-        throw new ForbiddenError("The user does not have ADMIN rights")
+//         if (role === "ADMIN") {
+//             return skip
+//         }
 
 
-        // console.log(" ___ LOGGING FROM: isAdmin Func + role: ", role)
-        // role === "ADMIN" ? skip : new ForbiddenError("The user does not have ADMIN rights")
-        // // role !== "ADMIN" ? new ForbiddenError("The user does not have ADMIN rights") : skip
-    }
-)
+//         throw new ForbiddenError("The user does not have ADMIN rights")
+
+
+//         // console.log(" ___ LOGGING FROM: isAdmin Func + role: ", role)
+//         // role === "ADMIN" ? skip : new ForbiddenError("The user does not have ADMIN rights")
+//         // // role !== "ADMIN" ? new ForbiddenError("The user does not have ADMIN rights") : skip
+//     }
+// )
 
 // export const isAdmin = combineResolvers(
 //     isAuthenticated,

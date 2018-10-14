@@ -1,4 +1,5 @@
 import { AsyncStorage } from "react-native"
+import base64 from "react-native-base64"
 
 
 // the default URL of the server
@@ -46,12 +47,12 @@ function decode(jwt) {
 // this function returns TRUE if token has expired and FALSE it if is still valid
 export const jwtDecodeToExpDate = (jwt) => {
     const [_, payload] = jwt.split(".")
-    const payloadString = new Buffer(payload, "base64").toString()
-    const payloadStrParsed = JSON.parse(payloadString)
+    const replacedPayload = payload.replace('-', '+').replace('_', '/')
+    const payloadString = base64.decode(replacedPayload)
+    const payloadStrParsed = JSON.parse(JSON.stringify(payloadString))
     const trueOrFalse = payloadStrParsed.exp < (Date.now() / 1000) ? true : false
     return trueOrFalse
 }
-
 
 // convert strings to integers
 export const stringToInt = (data) => {

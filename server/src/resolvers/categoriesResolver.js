@@ -6,12 +6,15 @@ export default {
 
     Query: {
 
-        category: async (parent, { id }, { models }) => {
+        category: async (parent, { id }, { me, models }) => {
             return await models.Category
                 .findById(id)
+                .then((category) => {
+                    console.log(category)
+                })
         },
 
-        categories: async (parent, args, { models }, info) => {
+        categories: async (parent, args, { me, models }, info) => {
             return await models.Category
                 .findAll()
         }
@@ -26,6 +29,7 @@ export default {
                     .create({
                         name,
                     }).then(cat => {
+                        console.log({ me })
                         cat.addUser(me.id)
                         return cat
                     })

@@ -12,9 +12,9 @@ const user = (sequelize, DataTypes) => {
         password: {
             type: DataTypes.STRING
         },
-        role: {
-            type: DataTypes.STRING
-        }
+        // role: {
+        //     type: DataTypes.STRING
+        // }
     })
 
     User.associate = (models) => {

@@ -35,6 +35,7 @@
         "metro-react-native-babel-preset": "0.47.0",
         "nodemon": "^1.18.4",
         "prop-types": "^15.6.2",
+        "react-native-base64": "^0.0.2",
         "react-native-debugger-open": "^0.3.17",
         "react-test-renderer": "16.5.0",
         "remotedev-server": "^0.2.5"

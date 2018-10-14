@@ -19,7 +19,6 @@ app.use(bodyParser.json())
 
 const getMe = async (req) => {
     const token = req.headers["x-token"]
-
     if (token) {
         try {
             return await jwt.verify(token, process.env.SECRET)
@@ -34,7 +33,8 @@ const server = new ApolloServer({
     resolvers,
     context: async ({ req }) => {
 
-        const me = await getMe(req) || { id: 1 }
+        const me = await getMe(req)
+        // || { id: 1 }
 
         return {
             models,

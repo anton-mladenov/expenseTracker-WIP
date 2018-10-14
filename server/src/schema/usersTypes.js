@@ -6,7 +6,7 @@ type User {
     id: ID
     name: String!
     email: String
-    role: String
+    #role: Strin
     categories: [Category]
 }
 
@@ -28,7 +28,7 @@ extend type Mutation {
         password: String
     ): Token
 
-    deleteUser(id: ID): Boolean
+    #deleteUser(id: ID): Boolean
 }
 
 type Token {

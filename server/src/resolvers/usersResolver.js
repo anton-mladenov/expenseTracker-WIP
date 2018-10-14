@@ -5,8 +5,8 @@ import { combineResolvers } from "graphql-resolvers"
 import { isAdmin } from "./authorization"
 
 let createToken = async (user, secret, expiresIn) => {
-    const { id, email, name, role } = user
-    return await jwt.sign({ id, email, name, role }, secret, { expiresIn })
+    const { id, email, name } = user
+    return await jwt.sign({ id, email, name }, secret, { expiresIn })
 }
 
 export default {
@@ -42,7 +42,7 @@ export default {
 
             return { token: createToken(user, secret, "30m") }
         },
-        
+
         signIn: async (parent, { login, password }, { models, secret }) => {
             const user = await models.User.findByLogin(login)
 
@@ -59,14 +59,14 @@ export default {
             return { token: createToken(user, secret, "30m") }
 
         },
-        deleteUser: combineResolvers(
-            isAdmin,
-            async (parent, { id }, { models }) => {
-                return await models.User.destroy({
-                    where: { id }
-                })
-            }
-        )
+        // deleteUser: combineResolvers(
+        //     isAdmin,
+        //     async (parent, { id }, { models }) => {
+        //         return await models.User.destroy({
+        //             where: { id }
+        //         })
+        //     }
+        // )
     }
 }
 
