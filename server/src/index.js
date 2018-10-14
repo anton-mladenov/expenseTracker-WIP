@@ -32,7 +32,6 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     context: async ({ req }) => {
-
         const me = await getMe(req)
         // || { id: 1 }
 

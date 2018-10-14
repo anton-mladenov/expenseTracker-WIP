@@ -55,14 +55,15 @@ const allCategories = (data) => ({
 
 export const getAllCategories = () => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
@@ -104,14 +105,14 @@ const getCategory = (data) => ({
 
 export const getOneCategory = (data) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
