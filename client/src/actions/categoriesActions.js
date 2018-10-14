@@ -13,7 +13,6 @@ const createCategory = (category) => ({
 
 export const createNewCategory = (newCategory) => (dispatch, getState) => {
 
-    console.log({ newCategory })
     const state = getState()
     if (!state.currentUserReducer) return logout()
 
@@ -105,6 +104,7 @@ const getCategory = (data) => ({
 
 export const getOneCategory = (data) => (dispatch, getState) => {
 
+    const state = getState()
     if (!state.currentUserReducer) return logout()
 
     const jwt = state.currentUserReducer
@@ -146,16 +146,15 @@ const updateCategory = (data) => ({
 
 export const updateOneCategory = (id, name) => (dispatch, getState) => {
 
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
-
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
@@ -193,14 +192,15 @@ const deleteCategory = (data) => ({
 
 export const deleteOneCategory = (data) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `

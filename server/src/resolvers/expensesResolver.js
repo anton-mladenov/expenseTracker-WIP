@@ -5,22 +5,23 @@ import expensesTypes from "../schema/expensesTypes";
 export default {
 
     Query: {
-        expense: async (parent, { id, categoryId }, { me, models }) => {
+        expense: async (parent, { id }, { models }) => {
             return await models.Expense
                 .findById(id)
-                .then(async (expense) => {
-                    return await models.Category
-                        .findById(categoryId)
-                        .then((category) => {
-                            category.getExpenses()
-                            return expense
-                        })
-                })
         },
 
-        allExpenses: async (parent, args, { models }) => {
+        allExpenses: async (parent, { categoryId }, { models }) => {
             return await models.Expense
                 .findAll()
+                .then(async (expenses) => {
+
+                    return await models.Category
+                        .findById(categoryId)
+                        .then(async (exp) => {
+                            let myExpenses = await exp.getExpenses()
+                            return myExpenses
+                        })
+                })
         }
     },
 

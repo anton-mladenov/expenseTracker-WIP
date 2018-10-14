@@ -16,14 +16,15 @@ const getExpense = (data) => ({
 
 export const getOneExpense = (data) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
@@ -62,21 +63,22 @@ const getExpenses = (data) => ({
     payload: data
 })
 
-export const getAllExpenses = () => (dispatch, getState) => {
+export const getAllExpenses = (data) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
             query {
-                allExpenses {
+                allExpenses(categoryId: ${data}) {
                     id
                     name
                     amount
@@ -93,7 +95,7 @@ export const getAllExpenses = () => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log("result.data", result.data.data.allExpenses)
+        console.log("result.data for all expenses madafaka: ", { result })
         const intResults = stringToInt(result.data.data.allExpenses)
         dispatch(getExpenses(intResults))
     }).catch((error) => {
@@ -114,16 +116,15 @@ const createExpense = (data) => ({
 
 export const createNewExpense = (data) => (dispatch, getState) => {
 
-    console.log(" from action creators - data: ", data)
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
-
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
@@ -157,14 +158,15 @@ const editExpense = (data) => ({
 
 export const editOneExpense = (data) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `
@@ -206,14 +208,15 @@ const deleteExpense = (data) => ({
 
 export const deleteOneExpense = (data) => (dispatch, getState) => {
 
-    // const state = getState()
-    // if (!state.currentUserReducer) return logout()
+    const state = getState()
+    if (!state.currentUserReducer) return logout()
 
-    // const jwt = state.currentUserReducer.jwt
-    // if (jwtDecodeToExpDate(jwt)) return logout()
+    const jwt = state.currentUserReducer
+    if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
         url: baseUrl,
+        headers: { "x-token": `${jwt}` },
         method: "post",
         data: {
             query: `

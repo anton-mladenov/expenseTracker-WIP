@@ -46,7 +46,7 @@ class AllCategories extends Component {
 
                 {
                     this.state.showDetails &&
-                    <CategoryDetails categoryId={ id } />
+                    <CategoryDetails categoryId={ this.state.categoryId } />
                 }
 
             </View>

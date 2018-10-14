@@ -14,7 +14,7 @@ class AllExpenses extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllExpenses()
+        this.props.getAllExpenses(this.props.categoryId)
     }
 
     showExpenseDetails = (id) => {

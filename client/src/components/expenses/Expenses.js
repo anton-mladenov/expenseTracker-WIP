@@ -33,7 +33,7 @@ class Expenses extends Component {
 
                 {
                     this.state.showAllExpenses &&
-                    <AllExpenses />
+                    <AllExpenses categoryId={ this.props.categoryId } />
                 }
 
 

@@ -25,7 +25,7 @@ export default class ExpensesForm extends Component {
                 <TextInput
                     placeholder="...and how much does that cost?"
                     onChangeText={ (amount) => this.setState({ amount: amount }) }
-                    value={ this.state.amount !== undefined ? this.state.amount : initialValues.amount.toString() }
+                    value={ this.state.amount !== undefined ? this.state.amount : initialValues.amount }
                 />
 
                 <Button
