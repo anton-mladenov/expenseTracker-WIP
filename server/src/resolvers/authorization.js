@@ -5,6 +5,14 @@ export const isAuthenticated = (parent, args, { me }) => {
     me ? skip : new ForbiddenError("Not authenticated as THE user.")
 }
 
+// export const isMessageOwner = (parent, { id }, { models, me }) => {
+//     const message = models.Message.findById(id, { raw: true })
+//     if (message.id !== me.id) {
+//         throw new ForbiddenError("Not authenticated as THE owner of the message.")
+//     }
+//     return skip
+// }
+
 // export const isAdmin = combineResolvers(
 //     isAuthenticated,
 //     (parent, args, { me: { role }}) => {
@@ -31,10 +39,4 @@ export const isAuthenticated = (parent, args, { me }) => {
 //         : new ForbiddenError('Not authorized as admin.'),
 //   );
 
-export const isMessageOwner = (parent, { id }, { models, me }) => {
-    const message = models.Message.findById(id, { raw: true })
-    if (message.id !== me.id) {
-        throw new ForbiddenError("Not authenticated as THE user.")
-    }
-    return skip
-}
+

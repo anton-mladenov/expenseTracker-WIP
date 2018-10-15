@@ -6,30 +6,34 @@ export default {
 
     Query: {
 
-        category: async (parent, { id }, { models }) => {
-            return await models.Category
-                .findById(id)
-        },
+        category: combineResolvers(
+            isAuthenticated,
+            async (parent, { id }, { models }) => {
+                return await models.Category
+                    .findById(id)
+            }),
 
-        categories: async (parent, args, { me, models }, info) => {
-            return await models.Category
-                .findAll()
-                .then(async (categories) => {
+        categories: combineResolvers(
+            isAuthenticated,
+            async (parent, args, { me, models }, info) => {
+                return await models.Category
+                    .findAll()
+                    .then(async (categories) => {
 
-                    return await models.User
-                        .findById(me.id)
-                        .then(async (me) => {
-                            let myCategories = await me.getCategories()
-                            return myCategories
-                        })
-                })
-        }
+                        return await models.User
+                            .findById(me.id)
+                            .then(async (me) => {
+                                let myCategories = await me.getCategories()
+                                return myCategories
+                            })
+                    })
+            })
 
     },
     Mutation: {
 
         createCategory: combineResolvers(
-            // isAuthenticated,
+            isAuthenticated,
             async (parent, { name }, { me, models }, info) => {
                 return await models.Category
                     .create({
@@ -42,8 +46,7 @@ export default {
         ),
 
         updateCategory: combineResolvers(
-            // isAuthenticated,
-            // isMessageOwner,
+            isAuthenticated,
             async (parent, { id, name }, { models }) => {
                 return await models.Category
                     .findById(id)
@@ -57,8 +60,7 @@ export default {
         ),
 
         deleteCategory: combineResolvers(
-            // isAuthenticated,
-            // isMessageOwner,
+            isAuthenticated,
             async (parent, { id }, { models }) => {
                 return await models.Category
                     .destroy({ where: { id } })
@@ -68,15 +70,19 @@ export default {
     },
     Category: {
 
-        user: async (parent, args, { me, models }) => {
-            return await models.User
-                .findById(me.id)
-        },
+        user: combineResolvers(
+            isAuthenticated,
+            async (parent, args, { me, models }) => {
+                return await models.User
+                    .findById(me.id)
+            }),
 
-        expenses: async (parent, args, { models }) => {
-            return await models.Expense
-                .findAll({ where: { categoryId: parent.id } })
-        }
+        expenses: combineResolvers(
+            isAuthenticated,
+            async (parent, args, { models }) => {
+                return await models.Expense
+                    .findAll({ where: { categoryId: parent.id } })
+            })
 
     },
 }

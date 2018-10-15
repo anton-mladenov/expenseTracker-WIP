@@ -37,6 +37,7 @@ class AllCategories extends Component {
                     this.state.showFlatList &&
                     <FlatList
                         data={ allCategories }
+                        keyExtractor={ (item, index) => item.id }
                         renderItem={ ({ item }) => <Button
                             title={ item.name }
                             onPress={ () => this.showCategoryDetails(item.id) }

@@ -36,10 +36,10 @@ class AllExpenses extends Component {
                     this.state.showAllExpenses &&
                     <FlatList
                         data={ allExpenses }
+                        keyExtractor={ (item, index) => item.id }
                         renderItem={ ({ item }) => <Button
                             title={ item.name }
                             onPress={ () => this.showExpenseDetails(item.id) }
-                            keyExtractor={ (item, index) => item.key }
                         /> }
                     />
                 }

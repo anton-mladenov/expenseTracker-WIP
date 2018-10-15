@@ -1,34 +1,40 @@
 import { combineResolvers } from "graphql-resolvers"
-import expensesTypes from "../schema/expensesTypes";
-// imports here from the authentication file
+import { isAuthenticated } from "./authorization"
 
 export default {
 
     Query: {
-        expense: async (parent, { id }, { models }) => {
-            return await models.Expense
-                .findById(id)
-        },
+        expense: combineResolvers(
+            isAuthenticated,
+            async (parent, { id }, { models }) => {
+                return await models.Expense
+                    .findById(id)
+            },
+        ),
 
-        allExpenses: async (parent, { categoryId }, { models }) => {
-            return await models.Expense
-                .findAll()
-                .then(async (expenses) => {
 
-                    return await models.Category
-                        .findById(categoryId)
-                        .then(async (exp) => {
-                            let myExpenses = await exp.getExpenses()
-                            return myExpenses
-                        })
-                })
-        }
+        allExpenses: combineResolvers(
+            isAuthenticated,
+            async (parent, { categoryId }, { models }) => {
+                return await models.Expense
+                    .findAll()
+                    .then(async (expenses) => {
+
+                        return await models.Category
+                            .findById(categoryId)
+                            .then(async (exp) => {
+                                let myExpenses = await exp.getExpenses()
+                                return myExpenses
+                            })
+                    })
+            }
+        )
     },
 
     Mutation: {
 
         createExpense: combineResolvers(
-            // authentication resolver here
+            isAuthenticated,
             async (parent, { name, amount, categoryId }, { me, models }) => {
                 // first, find category. second, create expense. third, assign expense to category.
                 // then, find user and assign it to the expense. finally, return the expense. 
@@ -60,7 +66,7 @@ export default {
         ),
 
         updateExpense: combineResolvers(
-            // authentication resolver here
+            isAuthenticated,
             async (parent, { id, categoryId, name, amount }, { me, models }) => {
 
                 const update = { name, amount }
@@ -83,7 +89,7 @@ export default {
         ),
 
         deleteExpense: combineResolvers(
-            // authentication resolver here
+            isAuthenticated,
             async (parent, { id, categoryId }, { models }) => {
                 return await models.Expense
                     .findById(id)
@@ -105,14 +111,18 @@ export default {
     },
 
     Expense: {
-        category: async (parent, args, { models }) => {
-            return await models.Category
-                .findById(parent.dataValues.categoryId)
-        },
-        user: async (parent, args, { models }) => {
-            return await models.User
-                .findById(parent.dataValues.userId)
-        }
+        category: combineResolvers(
+            isAuthenticated,
+            async (parent, args, { models }) => {
+                return await models.Category
+                    .findById(parent.dataValues.categoryId)
+            }),
+        user: combineResolvers(
+            isAuthenticated,
+            async (parent, args, { models }) => {
+                return await models.User
+                    .findById(parent.dataValues.userId)
+            })
     }
 
 }
