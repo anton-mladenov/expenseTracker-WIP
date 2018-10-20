@@ -53,12 +53,8 @@ const RootStack = createStackNavigator(
 
 class App extends Component {
 
-    componentDidMount() { // this code here gets the token from AsyncStorage if there's one and helps the user to log in faster
-
-        // getJWT().then(obj => {
+    componentDidMount = async () => { // this code here gets the token from AsyncStorage if there's one and helps the user to log in faster
         getStorageFunc(storageKey).then(obj => {
-
-            console.log("FIRST: ", obj)
             this.props.setJWT(obj)
         })
     }

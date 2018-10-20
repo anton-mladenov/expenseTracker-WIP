@@ -54,11 +54,9 @@ const allCategories = (data) => ({
 export const getAllCategories = () => (dispatch, getState) => {
 
     const state = getState()
-    console.log("from actions: ", { state })
     if (!state.currentUserReducer) return logout()
 
     const jwt = state.currentUserReducer
-    console.log("from actions: ", jwt)
     if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({

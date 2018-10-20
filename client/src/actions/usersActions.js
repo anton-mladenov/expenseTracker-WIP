@@ -87,7 +87,7 @@ export const newSignIn = (data) => (dispatch) => {
             `
         }
     }).then(async (result) => {
-        const token = result.data.data.signIn.token
+        const token = await result.data.data.signIn.token
         if (token) {
             await setStorageFunc(storageKey, token)
             return dispatch(signInSuccess(token))
