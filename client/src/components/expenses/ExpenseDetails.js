@@ -52,7 +52,7 @@ class ExpenseDetails extends Component {
                     title="Edit Expense"
                     onPress={ this.handleEdit }
                 />
-
+                
                 {
                     this.state.edit &&
                     <ExpensesForm onSubmit={ this.handleSubmit } initialValues={ oneExpense } />
