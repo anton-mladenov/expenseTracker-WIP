@@ -2,6 +2,16 @@ import axios from "axios"
 import { baseUrl, storageKey, setStorageFunc, getStorageFunc } from "../lib/lib"
 
 
+// JWT 
+
+export const SET_JWT = "SET_JWT"
+
+export const setJWT = (obj) => ({
+    type: SET_JWT,
+    payload: obj
+})
+
+
 // SIGN UP 
 
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS"
@@ -35,7 +45,7 @@ export const newSignUp = (payload) => (dispatch) => {
     }).then(async (result) => {
         const token = result.data.data.signUp.token
         if (token) {
-            setStorageFunc(storageKey, token)
+            await setStorageFunc(storageKey, token)
             return dispatch(signUpSuccess())
         } else {
             return dispatch(signUpFailure(_))
@@ -51,7 +61,7 @@ export const newSignUp = (payload) => (dispatch) => {
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS"
 export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE"
 
-const signInSuccess = (data) => ({
+export const signInSuccess = (data) => ({
     type: SIGN_IN_SUCCESS,
     payload: data
 })
@@ -79,7 +89,7 @@ export const newSignIn = (data) => (dispatch) => {
     }).then(async (result) => {
         const token = result.data.data.signIn.token
         if (token) {
-            setStorageFunc(storageKey, token)
+            await setStorageFunc(storageKey, token)
             return dispatch(signInSuccess(token))
         } else {
             return dispatch(signInFailure(_))
@@ -94,7 +104,11 @@ export const newSignIn = (data) => (dispatch) => {
 
 export const LOGOUT = "LOGOUT"
 
-export const logout = () => ({
-    type: LOGOUT
+const logoutType = () => ({
+    type: SIGN_IN_SUCCESS,
 })
+
+export const logout = () => (dispatch) => {
+    dispatch(logoutType())
+}
 

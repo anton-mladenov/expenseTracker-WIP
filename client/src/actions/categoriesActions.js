@@ -34,7 +34,6 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log({ result })
         dispatch(createCategory(result.data.data.createCategory))
     }).catch((error) => {
         console.log("There was an error when creating the new category " + error)
@@ -55,9 +54,11 @@ const allCategories = (data) => ({
 export const getAllCategories = () => (dispatch, getState) => {
 
     const state = getState()
+    console.log("from actions: ", { state })
     if (!state.currentUserReducer) return logout()
 
     const jwt = state.currentUserReducer
+    console.log("from actions: ", jwt)
     if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({
@@ -66,22 +67,22 @@ export const getAllCategories = () => (dispatch, getState) => {
         method: "post",
         data: {
             query: `
-            query {
-                categories{
-                    id
-					name
-					amount
-					user {
-						id
-						name
-					}
-					expenses {
-						id
-						name
-						amount
-					}
-				}
-            }
+                query {
+                    categories{
+                        id
+                        name
+                        amount
+                        user {
+                            id
+                            name
+                        }
+                        expenses {
+                            id
+                            name
+                            amount
+                        }
+                    }
+                }
             `
         }
     }).then((result) => {
@@ -126,11 +127,10 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 			`
         }
     }).then((result) => {
-        console.log(result.data.data.category)
         dispatch(getCategory(result.data.data.category))
     }).catch((error) => {
-        console.log("There was an error when getting all categories " + error)
-        return "There was an error when getting all categories " + error
+        console.log("There was an error when getting one category " + error)
+        return "There was an error when getting one category " + error
     })
 }
 

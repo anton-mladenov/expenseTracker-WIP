@@ -3,10 +3,12 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "nodemon node_modules/react-native/local-cli/cli.js start",
+        "start": "nodemon node_modules/react-native/local-cli/cli.js start && react-native run-ios",
         "test": "jest",
         "redux-devtool": "remotedev",
-        "postinstall": "rndebugger-open"
+        "postinstall": "rndebugger-open",
+        "android": "react-native run-android",
+        "ios": "react-native run-ios"
     },
     "dependencies": {
         "@babel/runtime": "^7.1.2",

@@ -10,8 +10,8 @@ export default class SignUpForm extends Component {
     }
 
     handleSubmit = () => {
-        // console.log(" ___ state from Sign Up: ", this.state, this.state.name)
         this.props.onSubmit(this.state)
+        // this.props.navigation.navigate("Dashboard")
     }
 
     render() {

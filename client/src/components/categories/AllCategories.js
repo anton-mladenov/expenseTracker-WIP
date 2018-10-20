@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from "react-native"
 import { connect } from "react-redux"
-import { getAllCategories } from "../../actions/categoriesActions"
+import { getAllCategories, createNewCategory } from "../../actions/categoriesActions"
 import CategoryDetails from "./CategoryDetails"
+import CategoriesForm from "./CategoriesForm"
+
 
 class AllCategories extends Component {
 
     state = {
         showFlatList: true,
         showDetails: false,
-        categoryId: null
+        categoryId: null,
+        showAddButton: true,
+        showForm: false
     }
 
     componentDidMount() {
-        this.props.getAllCategories()
+        const { currentUser, navigation } = this.props
+        !currentUser && navigation.navigate("WelcomeScreen")
+        currentUser && this.props.getAllCategories()
     }
 
     showCategoryDetails = (id) => {
@@ -25,29 +31,59 @@ class AllCategories extends Component {
         })
     }
 
+    showAddForm = () => {
+        this.setState({
+            showForm: !this.state.showForm,
+            showAddButton: !this.state.showAddButton,
+            showFlatList: !this.state.showFlatList
+        })
+    }
+
+    handleSubmit = (data) => {
+        this.props.createNewCategory(data.name)
+    }
+
     render() {
 
-        const { allCategories } = this.props
+        const { allCategories, navigation, currentUser } = this.props
+        const { navigate } = this.props.navigation
         const id = this.state.categoryId
 
         return (
             <View>
 
                 {
-                    this.state.showFlatList &&
-                    <FlatList
-                        data={ allCategories }
-                        keyExtractor={ (item, index) => item.id }
-                        renderItem={ ({ item }) => <Button
-                            title={ item.name }
-                            onPress={ () => this.showCategoryDetails(item.id) }
-                        /> }
+                    !currentUser && <Text> Loading ... </Text>
+                }
+
+                {
+                    (this.state.showAddButton && currentUser) &&
+                    <Button
+                        title="Add A New Category"
+                        onPress={ this.showAddForm }
                     />
                 }
 
                 {
-                    this.state.showDetails &&
-                    <CategoryDetails categoryId={ this.state.categoryId } />
+                    this.state.showForm &&
+                    <CategoriesForm onSubmit={ this.handleSubmit } />
+                }
+
+                <Text> </Text>
+
+                {
+                    (this.state.showFlatList && currentUser) &&
+                    <FlatList
+                        data={ allCategories }
+                        keyExtractor={ (item, index) => item.id.toString() }
+                        renderItem={ ({ item }) => <Button
+                            title={ item.name }
+                            onPress={ () => navigate("CategoryDetails", {
+                                categoryId: item.id
+                            })
+                            }
+                        /> }
+                    />
                 }
 
             </View>
@@ -56,8 +92,9 @@ class AllCategories extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    allCategories: state.categories
+    allCategories: state.categories,
+    currentUser: state.currentUserReducer !== null,
 })
 
-export default connect(mapStateToProps, { getAllCategories })(AllCategories)
+export default connect(mapStateToProps, { getAllCategories, createNewCategory })(AllCategories)
 

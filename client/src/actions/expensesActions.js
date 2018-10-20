@@ -46,10 +46,12 @@ export const getOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
+        let amount = result.data.data.expense.amount.toString()
+        result.data.data.expense.amount = amount
         dispatch(getExpense(result.data.data.expense))
     }).catch((error) => {
-        console.log("There was an error when getting the new expense " + error)
-        return "There was an error when getting the new expense " + error
+        console.log("There was an error when getting one expense " + error)
+        return "There was an error when getting one expense " + error
     })
 }
 
@@ -95,7 +97,6 @@ export const getAllExpenses = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log("result.data for all expenses madafaka: ", { result })
         const intResults = stringToInt(result.data.data.allExpenses)
         dispatch(getExpenses(intResults))
     }).catch((error) => {
@@ -138,7 +139,6 @@ export const createNewExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log("result.data", result.data.data.createExpense)
         dispatch(createExpense(result.data.data.createExpense))
     }).catch((error) => {
         console.log("There was an error when creating the new expense " + error)
@@ -188,7 +188,6 @@ export const editOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log("result.data", result.data.data.updateExpense)
         dispatch(editExpense(result.data.data.updateExpense))
     }).catch((error) => {
         console.log("There was an error when editing the new expense " + error)

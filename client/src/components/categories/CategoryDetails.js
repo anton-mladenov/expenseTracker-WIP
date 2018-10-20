@@ -6,6 +6,7 @@ import CategoriesForm from "./CategoriesForm"
 import ExpensesForm from "../expenses/ExpensesForm"
 import Expenses from "../expenses/Expenses"
 import { createNewExpense } from "../../actions/expensesActions"
+import AllExpenses from "../expenses/AllExpenses"
 
 
 class CategoryDetails extends Component {
@@ -13,10 +14,13 @@ class CategoryDetails extends Component {
     state = {
         toggleEdit: false,
         showExpenseForm: false,
+        buttonsShow: true
     }
 
     componentDidMount() {
-        this.props.getOneCategory(this.props.categoryId)
+        const { navigation } = this.props
+        const itemId = navigation.getParam('categoryId', 'NO-ID')
+        this.props.getOneCategory(itemId)
     }
 
     toggleEdit = () => {
@@ -31,23 +35,31 @@ class CategoryDetails extends Component {
 
     showAddExpenseForm = () => {
         this.setState({
-            showExpenseForm: !this.state.showExpenseForm
+            showExpenseForm: !this.state.showExpenseForm,
+            buttonsShow: !this.state.buttonsShow
         })
     }
 
     handleSubmit = (data) => {
+        const { navigation } = this.props
+        const itemId = navigation.getParam('categoryId', 'NO-ID')
         const { name, amount } = data
         const fullData = {
             name,
             amount,
-            categoryId: this.props.categoryId
+            categoryId: itemId
         }
         this.props.createNewExpense(fullData)
+        this.setState({
+            buttonsShow: !this.state.buttonsShow,
+            showExpenseForm: !this.state.showExpenseForm
+        })
     }
 
     render() {
 
-        const { oneCategory } = this.props
+        const { oneCategory, navigation } = this.props
+        const itemId = navigation.getParam('categoryId', 'NO-ID')
 
         return (
             <View>
@@ -55,15 +67,21 @@ class CategoryDetails extends Component {
                 <Text> { oneCategory.name } </Text>
                 <Text> { oneCategory.amount } </Text>
 
-                <Button
-                    title="Delete This Category"
-                    onPress={ () => this.props.deleteOneCategory(this.props.categoryId) }
-                />
+                {
+                    this.state.buttonsShow &&
+                    <Button
+                        title="Delete This Category"
+                        onPress={ () => this.props.deleteOneCategory(this.props.categoryId) }
+                    />
+                }
 
-                <Button
-                    title="Edit This Category"
-                    onPress={ this.toggleEdit }
-                />
+                {
+                    this.state.buttonsShow &&
+                    <Button
+                        title="Edit This Category"
+                        onPress={ this.toggleEdit }
+                    />
+                }
 
                 {
                     this.state.toggleEdit &&
@@ -74,6 +92,7 @@ class CategoryDetails extends Component {
                 }
 
                 {
+                    this.state.buttonsShow &&
                     <Button
                         title="Add A New Expense To This Category"
                         onPress={ this.showAddExpenseForm }
@@ -85,7 +104,12 @@ class CategoryDetails extends Component {
                     <ExpensesForm onSubmit={ this.handleSubmit } />
                 }
 
-                <Expenses categoryId={ this.props.categoryId } />
+                <Text> </Text>
+
+                {
+                    this.state.buttonsShow &&
+                    <AllExpenses categoryId={ itemId } />
+                }
 
             </View>
         )

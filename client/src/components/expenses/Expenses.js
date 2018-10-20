@@ -23,23 +23,21 @@ class Expenses extends Component {
     }
 
     render() {
+
+        const { category } = this.props
+
         return (
             <View>
 
-                <Button
-                    title="See All Expenses"
-                    onPress={ this.showAllExpenses }
-                />
-
-                {
-                    this.state.showAllExpenses &&
-                    <AllExpenses categoryId={ this.props.categoryId } />
-                }
-
+                <AllExpenses categoryId={ category.id } />
 
             </View>
         )
     }
 }
 
-export default connect(null, {})(Expenses)
+const mapStateToProps = (state) => ({
+    category: state.categories,
+})
+
+export default connect(mapStateToProps, {})(Expenses)

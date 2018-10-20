@@ -3,7 +3,7 @@ import base64 from "react-native-base64"
 
 
 // the default URL of the server
-export const baseUrl = "http://192.168.1.67:4000/graphql"
+export const baseUrl = "http://192.168.1.74:4000/graphql"
 
 
 // storageKey
@@ -20,7 +20,7 @@ export const setStorageFunc = async (key, item) => {
 
 export const getStorageFunc = async (key) => {
     try {
-        const item = AsyncStorage.getItem(key)
+        const item = await AsyncStorage.getItem(key)
         if (item) {
             return item
         } else {
@@ -31,6 +31,21 @@ export const getStorageFunc = async (key) => {
     }
 }
 
+
+// Sending JWT to Current User Reducer
+
+export const getJWT = async () => {
+    try {
+        const jwt = await getStorageFunc(storageKey)
+
+        if (jwt) {
+            console.log("SECOND: ", jwt)
+            return jwt
+        }
+    } catch (error) {
+        console.log("There was error getting the JWT token from the AsyncStorage ", error)
+    }
+}
 
 // JWT DECODING - NEED EXPIRATION DATE ONLY
 
@@ -44,8 +59,8 @@ function decode(jwt) {
         payload: JSON.parse(payloadStr)
     };
 }
-// this function returns TRUE if token has expired and FALSE it if is still valid
-export const jwtDecodeToExpDate = (jwt) => {
+
+export const jwtDecodeToExpDate = (jwt) => { // this function returns TRUE if token has expired and FALSE it if is still valid
     const [_, payload] = jwt.split(".")
     const replacedPayload = payload.replace('-', '+').replace('_', '/')
     const payloadString = base64.decode(replacedPayload)
@@ -72,3 +87,4 @@ export const stringToInt = (data) => {
     }
     return data
 }
+

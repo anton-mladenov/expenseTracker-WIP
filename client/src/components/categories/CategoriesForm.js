@@ -6,7 +6,7 @@ export default class CategoriesForm extends Component {
     state = {}
 
     handleSubmit = () => {
-        return this.props.onSubmit(this.state)
+        this.props.onSubmit(this.state)
     }
 
     render() {

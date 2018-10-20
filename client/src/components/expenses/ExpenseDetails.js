@@ -11,8 +11,10 @@ class ExpenseDetails extends Component {
     }
 
     componentDidMount() {
+        const expenseId = this.props.navigation.getParam("expenseId")
         data = {
-            id: this.props.expenseId,
+            // id: this.props.expenseId,
+            id: expenseId,
             categoryId: this.props.category.id
         }
         this.props.getOneExpense(data)
@@ -25,10 +27,11 @@ class ExpenseDetails extends Component {
     }
 
     handleSubmit = (data) => {
+        const expenseId = this.props.navigation.getParam("expenseId")
         const newData = {
             name: data.name,
             amount: data.amount,
-            expenseId: this.props.expenseId,
+            expenseId: expenseId,
             categoryId: this.props.category.id
         }
         this.props.editOneExpense(newData)
@@ -66,8 +69,9 @@ class ExpenseDetails extends Component {
 }
 
 const mapStateToProps = (state) => {
+
     return {
-        oneExpense: state.expensesReducer,
+        oneExpense: state.expensesReducer[0],
         category: state.categories[0]
     }
 }

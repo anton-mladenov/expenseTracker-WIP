@@ -1,26 +1,58 @@
 import React, { Component } from 'react'
-import { View, Text } from "react-native"
+import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import SignUpForm from "./SignUpForm"
 import { newSignUp } from "../../actions/usersActions"
+import Dashboard from "../Dashboard"
 
 class SignUp extends Component {
+
+    state = {
+        showDashboard: false
+    }
 
     handleSubmit = (data) => {
         this.props.newSignUp(data)
     }
 
     render() {
+
+        const { signUpSuccess } = this.props
+
         return (
             <View>
+                {
+                    !signUpSuccess &&
+                    <Text> Create Your Account </Text>
+                }
 
-                <Text> Create Your Account </Text>
+                {
+                    !signUpSuccess &&
+                    <SignUpForm onSubmit={ this.handleSubmit } />
+                }
 
-                <SignUpForm onSubmit={ this.handleSubmit } />
+                {
+                    signUpSuccess &&
+                    <Text> Awesome! You have an account now. You now can log in. </Text>
+                }
+
+                {
+                    signUpSuccess &&
+                    <Button
+                        title="Go To Login Page"
+                        onPress={ () => this.props.navigation.navigate("WelcomeScreen") }
+                    />
+                }
 
             </View>
         )
     }
 }
 
-export default connect(null, { newSignUp })(SignUp)
+const mapStateToProps = (state) => {
+    return {
+        signUpSuccess: state.signUpReducer.success === true
+    }
+}
+
+export default connect(mapStateToProps, { newSignUp })(SignUp)

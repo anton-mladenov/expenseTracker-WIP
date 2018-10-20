@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from "react-native"
 import { connect } from "react-redux"
-import AllCategories from "./categories/AllCategories"
+import { AsyncStorage } from "react-native"
 
-class HomeScreen extends Component {
 
+class WelcomeScreen extends Component {
+
+
+    componentDidUpdate() {
+        const { currentUser, navigation } = this.props
+        currentUser && navigation.navigate("AllCategories")
+    }
 
     render() {
 
@@ -13,31 +19,21 @@ class HomeScreen extends Component {
         return (
             <View style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
 
-                <Text> HOME SCREEN </Text>
-                <Text> </Text>
+                <Text> Welcome to </Text>
+                <Text> MoneyOut </Text>
+                <Text> Open your third eye for money management </Text>
 
                 {
-                    // (currentUser || signUpSuccess) &&
-                    <Button
-                        title="EXPENSE CATEGORIES"
-                        onPress={ () => this.props.navigation.navigate("Categories") }
-                    />
-                    // <AllCategories />
-                }
-
-                {/* <AllCategories /> */ }
-
-                {
-                    (!currentUser || !signUpSuccess) &&
-
+                    !currentUser &&
                     <Button
                         title="SIGN UP"
                         onPress={ () => this.props.navigation.navigate("SignUp") }
                     />
                 }
+
                 <Text> </Text>
                 {
-                    (!currentUser || !signUpSuccess) &&
+                    !currentUser &&
                     <Button
                         title="SIGN IN"
                         onPress={ () => this.props.navigation.navigate("SignIn") }
@@ -56,4 +52,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(HomeScreen)
+export default connect(mapStateToProps, {})(WelcomeScreen)

@@ -8,18 +8,15 @@ import AllCategories from "./AllCategories"
 class Categories extends Component {
 
     state = {
-        showForm: false,
         showAddButton: true,
         showAllButton: true,
+        showForm: false,
         showAllCategories: false,
     }
 
-    showAddForm = () => {
-        this.setState({
-            showForm: !this.state.showForm,
-            showAddButton: !this.state.showAddButton,
-            showAllButton: !this.state.showAllButton,
-        })
+    componentDidMount() {
+        const { currentUser, navigation } = this.props
+        !currentUser && navigation.navigate("WelcomeScreen")
     }
 
     showAllForm = () => {
@@ -30,38 +27,26 @@ class Categories extends Component {
         })
     }
 
-    handleSubmit = (data) => {
-        console.log({ data })
-        this.props.createNewCategory(data.name)
-    }
-
     render() {
+
+        const { currentUser, navigation } = this.props
+
         return (
             <View>
 
-                <Text> EXPENSE CATEGORIES </Text>
+                <Text> { } </Text>
+
                 <Text> { } </Text>
                 {
-                    this.state.showAddButton &&
-                    <Button
-                        title="Add A New Category"
-                        onPress={ this.showAddForm }
-                    />
-                }
-                <Text> { } </Text>
-                {
-                    this.state.showAllButton &&
+                    (this.state.showAllButton && currentUser) &&
                     <Button
                         title="All Categories"
-                        onPress={ this.showAllForm }
+                        onPress={ () => navigation.navigate('AllCategories') }
                     />
                 }
 
                 <Text> { } </Text>
-                {
-                    this.state.showForm &&
-                    <CategoriesForm onSubmit={ this.handleSubmit } />
-                }
+
                 <Text> { } </Text>
                 {
                     this.state.showAllCategories &&
@@ -73,4 +58,10 @@ class Categories extends Component {
     }
 }
 
-export default connect(null, { createNewCategory })(Categories)
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.currentUserReducer !== null,
+    }
+}
+
+export default connect(mapStateToProps, { createNewCategory })(Categories)

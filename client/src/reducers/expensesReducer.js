@@ -13,7 +13,7 @@ export default (state = initialValue, { type, payload }) => {
             return payload
 
         case GET_ONE_EXPENSE:
-            return payload
+            return [payload]
 
         case EDIT_ONE_EXPENSE:
             return payload

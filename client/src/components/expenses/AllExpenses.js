@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList } from "react-native"
 import { connect } from "react-redux"
 import { getAllExpenses } from "../../actions/expensesActions"
-import ExpenseDetails from "./ExpenseDetails"
+import ExpenseDetails from "./ExpenseDetails";
+import { withNavigation } from "react-navigation"
 
 class AllExpenses extends Component {
 
@@ -14,7 +15,8 @@ class AllExpenses extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllExpenses(this.props.categoryId)
+        const { categoryId } = this.props
+        this.props.getAllExpenses(categoryId)
     }
 
     showExpenseDetails = (id) => {
@@ -28,26 +30,31 @@ class AllExpenses extends Component {
 
     render() {
 
-        const { allExpenses } = this.props
+        const { allExpenses, currentUser } = this.props
 
         return (
             <View>
                 {
-                    this.state.showAllExpenses &&
+                    (this.state.showAllExpenses && currentUser) &&
                     <FlatList
                         data={ allExpenses }
-                        keyExtractor={ (item, index) => item.id }
+                        keyExtractor={ (item, index) => item.id.toString() }
                         renderItem={ ({ item }) => <Button
                             title={ item.name }
-                            onPress={ () => this.showExpenseDetails(item.id) }
+                            onPress={ () => this.props.navigation.navigate("ExpenseDetails", {
+                                expenseId: item.id
+                            })
+                                // this.showExpenseDetails(item.id) 
+                            }
                         /> }
                     />
                 }
 
-                {
+                {/* {
                     this.state.showExpenseDetails &&
                     <ExpenseDetails expenseId={ this.state.expenseId } />
-                }
+                } */}
+
             </View>
         )
     }
@@ -56,8 +63,11 @@ class AllExpenses extends Component {
 const mapStateToProps = (state) => {
     return {
         allExpenses: state.expensesReducer,
-        category: state.categories[0]
+        category: state.categories[0],
+        currentUser: state.currentUserReducer !== null,
     }
 }
 
-export default connect(mapStateToProps, { getAllExpenses })(AllExpenses)
+const wrapNavigation = withNavigation(AllExpenses)
+
+export default connect(mapStateToProps, { getAllExpenses })(wrapNavigation)
