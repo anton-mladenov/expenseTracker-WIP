@@ -189,11 +189,12 @@ const deleteCategory = (data) => ({
 })
 
 export const deleteOneCategory = (data) => (dispatch, getState) => {
-
+    console.log({data})
     const state = getState()
     if (!state.currentUserReducer) return logout()
 
     const jwt = state.currentUserReducer
+    console.log({jwt})
     if (jwtDecodeToExpDate(jwt)) return logout()
 
     axios({

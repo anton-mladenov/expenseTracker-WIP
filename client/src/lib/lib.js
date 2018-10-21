@@ -21,8 +21,10 @@ export const setStorageFunc = async (key, item) => {
 export const getStorageFunc = async (key) => {
     try {
         const item = await AsyncStorage.getItem(key)
+        console.log("item (should be promise maybe ...????): ", item, typeof item)
         if (item) {
-            return item
+            console.log("actual 'item': ", item, typeof item)
+            return await item
         } else {
             return "Couldn't find item in AsyncStorage based on the key given ... #SAD"
         }

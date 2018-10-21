@@ -5,16 +5,23 @@ const user = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
         name: {
             type: DataTypes.STRING,
+            validate: {
+                isAlpha: true,
+                len: [2, 35]
+            }
         },
         email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            validate: {
+                isEmail: true,
+            }
         },
         password: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            validate: {
+                len: [8, 35]
+            }
         },
-        // role: {
-        //     type: DataTypes.STRING
-        // }
     })
 
     User.associate = (models) => {

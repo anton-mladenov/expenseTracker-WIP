@@ -105,7 +105,7 @@ export const newSignIn = (data) => (dispatch) => {
 export const LOGOUT = "LOGOUT"
 
 const logoutType = () => ({
-    type: SIGN_IN_SUCCESS,
+    type: LOGOUT,
 })
 
 export const logout = () => (dispatch) => {

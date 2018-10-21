@@ -4,9 +4,15 @@ const category = (sequelize, DataTypes) => {
     const Category = sequelize.define("category", {
         name: {
             type: DataTypes.STRING,
+            allowNull: false,
         },
         amount: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+            validate: {
+                isNumeric: true,
+            }
         },
     })
 

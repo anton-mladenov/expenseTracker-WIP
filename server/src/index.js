@@ -19,7 +19,6 @@ const getMe = async (req) => {
     const token = req.headers["x-token"]
     if (token) {
         try {
-            // console.log({ token })
             return await jwt.verify(token, process.env.SECRET)
         } catch (error) {
             throw new AuthenticationError("Your session has expired")
@@ -33,7 +32,6 @@ const server = new ApolloServer({
     context: async ({ req }) => {
         const me = await getMe(req)
         // || { id: 1 }
-        // console.log({ me })
 
         return {
             models,

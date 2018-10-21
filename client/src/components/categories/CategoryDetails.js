@@ -30,7 +30,9 @@ class CategoryDetails extends Component {
     }
 
     editCategory = (data) => {
-        this.props.updateOneCategory(this.props.categoryId, data.name)
+        const { navigation } = this.props
+        const itemId = navigation.getParam('categoryId', 'NO-ID')
+        this.props.updateOneCategory(itemId, data.name)
     }
 
     showAddExpenseForm = () => {
@@ -60,6 +62,7 @@ class CategoryDetails extends Component {
 
         const { oneCategory, navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
+        console.log({itemId})
 
         return (
             <View>
@@ -71,7 +74,7 @@ class CategoryDetails extends Component {
                     this.state.buttonsShow &&
                     <Button
                         title="Delete This Category"
-                        onPress={ () => this.props.deleteOneCategory(this.props.categoryId) }
+                        onPress={ () => this.props.deleteOneCategory(itemId) }
                     />
                 }
 
