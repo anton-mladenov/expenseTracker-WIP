@@ -1,5 +1,5 @@
 import axios from "axios"
-import { baseUrl, storageKey, setStorageFunc, getStorageFunc } from "../lib/lib"
+import { baseUrl, storageKey, setStorageFunc } from "../lib/lib"
 
 
 // JWT 
@@ -104,7 +104,7 @@ export const newSignIn = (data) => (dispatch) => {
 
 export const LOGOUT = "LOGOUT"
 
-const logoutType = () => ({
+export const logoutType = () => ({
     type: LOGOUT,
 })
 

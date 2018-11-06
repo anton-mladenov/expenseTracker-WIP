@@ -1,7 +1,7 @@
 
-import { baseUrl, jwtDecodeToExpDate } from "../lib/lib"
+import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc } from "../lib/lib"
 import axios from "axios"
-import { logout } from "./usersActions"
+import { logout, logoutType } from "./usersActions"
 
 // CREATE A NEW CATEGORY
 export const CREATE_CATEGORY = "CREATE_CATEGORY"
@@ -14,10 +14,10 @@ const createCategory = (category) => ({
 export const createNewCategory = (newCategory) => (dispatch, getState) => {
 
     const state = getState()
-    if (!state.currentUserReducer) return logout()
+    if (!state.currentUserReducer) return dispatch(logoutType())
 
     const jwt = state.currentUserReducer
-    if (jwtDecodeToExpDate(jwt)) return logout()
+    if (jwtDecodeToExpDate(jwt)) return dispatch(logoutType())
 
     axios({
         url: baseUrl,
@@ -54,10 +54,10 @@ const allCategories = (data) => ({
 export const getAllCategories = () => (dispatch, getState) => {
 
     const state = getState()
-    if (!state.currentUserReducer) return logout()
+    if (!state.currentUserReducer) return removeStorageFunc(storageKey)
 
     const jwt = state.currentUserReducer
-    if (jwtDecodeToExpDate(jwt)) return logout()
+    if (jwtDecodeToExpDate(jwt)) return removeStorageFunc(storageKey)
 
     axios({
         url: baseUrl,
@@ -104,10 +104,10 @@ const getCategory = (data) => ({
 export const getOneCategory = (data) => (dispatch, getState) => {
 
     const state = getState()
-    if (!state.currentUserReducer) return logout()
+    if (!state.currentUserReducer) return dispatch(logoutType())
 
     const jwt = state.currentUserReducer
-    if (jwtDecodeToExpDate(jwt)) return logout()
+    if (jwtDecodeToExpDate(jwt)) return dispatch(logoutType())
 
     axios({
         url: baseUrl,
@@ -145,10 +145,10 @@ const updateCategory = (data) => ({
 export const updateOneCategory = (id, name) => (dispatch, getState) => {
 
     const state = getState()
-    if (!state.currentUserReducer) return logout()
+    if (!state.currentUserReducer) return dispatch(logoutType())
 
     const jwt = state.currentUserReducer
-    if (jwtDecodeToExpDate(jwt)) return logout()
+    if (jwtDecodeToExpDate(jwt)) return dispatch(logoutType())
 
     axios({
         url: baseUrl,
@@ -191,11 +191,11 @@ const deleteCategory = (data) => ({
 export const deleteOneCategory = (data) => (dispatch, getState) => {
     console.log({data})
     const state = getState()
-    if (!state.currentUserReducer) return logout()
+    if (!state.currentUserReducer) return dispatch(logoutType())
 
     const jwt = state.currentUserReducer
     console.log({jwt})
-    if (jwtDecodeToExpDate(jwt)) return logout()
+    if (jwtDecodeToExpDate(jwt)) return dispatch(logoutType())
 
     axios({
         url: baseUrl,
