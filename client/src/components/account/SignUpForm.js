@@ -30,6 +30,7 @@ export default class SignUpForm extends Component {
 
                 <TextInput
                     placeholder="type your password now"
+                    secureTextEntry={true}
                     onChangeText={ (password) => this.setState({ password }) }
                 />
 

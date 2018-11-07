@@ -22,6 +22,7 @@ export default class SignInForm extends Component {
 
                 <TextInput
                     placeholder="... and your password, please"
+                    secureTextEntry={true}
                     onChangeText={ (password) => this.setState({ password }) }
                 />
 
