@@ -16,6 +16,7 @@ export default {
         allExpenses: combineResolvers(
             isAuthenticated,
             async (parent, { categoryId }, { models }) => {
+                console.log("TESTING! :D ")
                 return await models.Expense
                     .findAll()
                     .then(async (expenses) => {

@@ -98,6 +98,7 @@ export const getAllExpenses = (data) => (dispatch, getState) => {
         }
     }).then((result) => {
         const intResults = stringToInt(result.data.data.allExpenses)
+        console.log(intResults)
         dispatch(getExpenses(intResults))
     }).catch((error) => {
         console.log("There was an error when getting all expenses " + error)

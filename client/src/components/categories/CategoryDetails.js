@@ -62,7 +62,6 @@ class CategoryDetails extends Component {
 
         const { oneCategory, navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
-        console.log({itemId})
 
         return (
             <ScrollView>

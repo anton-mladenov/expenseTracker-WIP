@@ -15,35 +15,109 @@ import ExpenseDetails from "./src/components/expenses/ExpenseDetails"
 import Expenses from "./src/components/expenses/Expenses"
 import ExpensesForm from "./src/components/expenses/ExpensesForm"
 import Categories from "./src/components/categories/Categories"
+import BackButton from "./src/components/BackButton"
 import { setJWT, signInSuccess } from "./src/actions/usersActions"
+import { getAllCategories } from "./src/actions/categoriesActions"
 import { getJWT, getStorageFunc, storageKey } from "./src/lib/lib"
 import { connect } from "react-redux"
+import { Button } from "react-native"
 
 
 const RootStack = createStackNavigator(
     {
-        SignIn: SignIn,
-        SignUp: SignUp,
-        WelcomeScreen: WelcomeScreen,
-        Dashboard: Dashboard,
-        AllCategories: AllCategories,
-        CategoryDetails: CategoryDetails,
-        SignInForm: SignInForm,
-        SignUpForm: SignUpForm,
-        CategoryForm: CategoryForm,
-        AllExpenses: AllExpenses,
-        ExpenseDetails: ExpenseDetails,
-        Expenses: Expenses,
-        ExpensesForm: ExpensesForm,
-        Categories: Categories
+        SignIn: {
+            screen: SignIn,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        SignUp: {
+            screen: SignUp,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        WelcomeScreen: {
+            screen: WelcomeScreen,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        Dashboard: {
+            screen: Dashboard,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        AllCategories: {
+            screen: AllCategories,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        CategoryDetails: {
+            screen: CategoryDetails,
+            navigationOptions: () => ({
+                headerLeft:
+                    () => <BackButton category={"AllCategories"} />,
+            })
+        },
+        SignInForm: {
+            screen: SignInForm,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        SignUpForm: {
+            screen: SignUpForm,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        CategoryForm: {
+            screen: CategoryForm,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        AllExpenses: {
+            screen: AllExpenses,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        ExpenseDetails: {
+            screen: ExpenseDetails,
+            navigationOptions: () => ({
+                headerLeft:
+                    () => <BackButton category={"AllExpenses"} />,
+            })
+        },
+        Expenses: {
+            screen: Expenses,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        ExpensesForm: {
+            screen: ExpensesForm,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
+        Categories: {
+            screen: Categories,
+            navigationOptions: {
+                headerLeft: null,
+            }
+        },
     },
     {
         initialRouteName: "WelcomeScreen",
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#f4511e',
+                backgroundColor: '#f2531e',
             },
-            // headerTintColor: '#fff',
             headerTitleStyle: {
                 fontWeight: 'bold',
             },
@@ -53,7 +127,8 @@ const RootStack = createStackNavigator(
 
 class App extends Component {
 
-    componentDidMount = async () => { // this code here gets the token from AsyncStorage if there's one and helps the user to log in faster
+    // this code here gets the token from AsyncStorage if there's one and helps the user to log in faster
+    componentDidMount = async () => { 
         getStorageFunc(storageKey).then(obj => {
             this.props.setJWT(obj)
         })
@@ -66,4 +141,4 @@ class App extends Component {
     }
 }
 
-export default connect(null, { setJWT, signInSuccess, getStorageFunc })(App)
+export default connect(null, { setJWT, signInSuccess, getStorageFunc, getAllCategories })(App)
