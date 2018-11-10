@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, Button } from "react-native"
+import { ScrollView, TextInput, Button } from "react-native"
 
 export default class SignInForm extends Component {
 
@@ -14,7 +14,7 @@ export default class SignInForm extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <TextInput
                     placeholder="email ..."
                     onChangeText={ (email) => this.setState({ email }) }
@@ -31,7 +31,7 @@ export default class SignInForm extends Component {
                     onPress={ this.handleSubmit }
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 }

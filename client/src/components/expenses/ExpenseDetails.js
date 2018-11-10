@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import { getOneExpense, editOneExpense, deleteOneExpense } from "../../actions/expensesActions"
 import ExpensesForm from "./ExpensesForm"
@@ -42,7 +42,7 @@ class ExpenseDetails extends Component {
         const { oneExpense, category } = this.props
 
         return (
-            <View>
+            <ScrollView>
 
                 <Text> { oneExpense.name } </Text>
                 <Text> { oneExpense.amount } </Text>
@@ -63,13 +63,12 @@ class ExpenseDetails extends Component {
                     onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-
     return {
         oneExpense: state.expensesReducer[0],
         category: state.categories[0]

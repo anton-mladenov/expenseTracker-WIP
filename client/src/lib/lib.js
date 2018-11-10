@@ -4,7 +4,7 @@ import { logout, logoutType } from "../actions/usersActions"
 
 
 // the default URL of the server
-export const baseUrl = "http://192.168.1.74:4000/graphql"
+export const baseUrl = "http://192.168.1.71:4000/graphql"
 
 
 // storageKey

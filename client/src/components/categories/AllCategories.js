@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, FlatList } from "react-native"
+import { ScrollView, Text, Button, FlatList } from "react-native"
 import { connect } from "react-redux"
 import { getAllCategories, createNewCategory } from "../../actions/categoriesActions"
 import CategoryDetails from "./CategoryDetails"
@@ -41,6 +41,11 @@ class AllCategories extends Component {
 
     handleSubmit = (data) => {
         this.props.createNewCategory(data.name)
+        this.setState({
+            showForm: !this.state.showForm,
+            showAddButton: !this.state.showAddButton,
+            showFlatList: !this.state.showFlatList
+        })
     }
 
     render() {
@@ -50,7 +55,7 @@ class AllCategories extends Component {
         const id = this.state.categoryId
 
         return (
-            <View>
+            <ScrollView>
 
                 {
                     !currentUser && <Text> Loading ... </Text>
@@ -86,7 +91,7 @@ class AllCategories extends Component {
                     />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

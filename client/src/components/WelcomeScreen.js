@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import { AsyncStorage } from "react-native"
 
@@ -17,7 +17,7 @@ class WelcomeScreen extends Component {
         const { currentUser, signUpSuccess } = this.props
 
         return (
-            <View style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+            <ScrollView>
 
                 <Text> Welcome to </Text>
                 <Text> MoneyOut </Text>
@@ -40,7 +40,7 @@ class WelcomeScreen extends Component {
                     />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

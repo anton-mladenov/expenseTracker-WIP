@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import Categories from "./categories/Categories"
 import ExpensesForm from "./expenses/ExpensesForm"
@@ -11,7 +11,7 @@ class Dashboard extends Component {
         const { currentUser, signUpSuccess } = this.props
 
         return (
-            <View style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+            <ScrollView style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
 
                 <Text> Dashboard </Text>
                 {
@@ -32,7 +32,7 @@ class Dashboard extends Component {
                     />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

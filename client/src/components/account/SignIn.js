@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import SignInForm from "./SignInForm"
 import { newSignIn } from "../../actions/usersActions"
@@ -17,7 +17,7 @@ class SignIn extends Component {
         const { currentUser } = this.props
 
         return (
-            <View>
+            <ScrollView>
 
                 {
                     !currentUser &&
@@ -29,7 +29,7 @@ class SignIn extends Component {
                     <SignInForm onSubmit={ this.handleSubmit } />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

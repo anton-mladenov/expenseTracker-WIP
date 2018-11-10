@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, Button } from "react-native"
+import { ScrollView, TextInput, Button } from "react-native"
 
 export default class SignUpForm extends Component {
 
@@ -16,7 +16,7 @@ export default class SignUpForm extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
 
                 <TextInput
                     placeholder="write your name here"
@@ -39,7 +39,7 @@ export default class SignUpForm extends Component {
                     onPress={ this.handleSubmit }
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 }

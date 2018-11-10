@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import CategoriesForm from "./CategoriesForm"
 import { createNewCategory } from "../../actions/categoriesActions"
@@ -32,7 +32,7 @@ class Categories extends Component {
         const { currentUser, navigation } = this.props
 
         return (
-            <View>
+            <ScrollView>
 
                 <Text> { } </Text>
 
@@ -53,7 +53,7 @@ class Categories extends Component {
                     <AllCategories />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Button, TextInput } from "react-native"
+import { ScrollView, Button, TextInput } from "react-native"
 
 export default class ExpensesForm extends Component {
 
@@ -14,7 +14,7 @@ export default class ExpensesForm extends Component {
         const initialValues = this.props.initialValues || {}
 
         return (
-            <View>
+            <ScrollView>
 
                 <TextInput
                     placeholder="so... what did you buy?"
@@ -33,7 +33,7 @@ export default class ExpensesForm extends Component {
                     onPress={ this.handleSubmit }
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 }

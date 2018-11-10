@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Button, TextInput } from "react-native"
+import { ScrollView, Button, TextInput } from "react-native"
+import { withNavigation } from "react-navigation"
 
-export default class CategoriesForm extends Component {
+class CategoriesForm extends Component {
 
     state = {}
 
@@ -14,7 +15,7 @@ export default class CategoriesForm extends Component {
         const initialValues = this.props.initialValues || {}
 
         return (
-            <View>
+            <ScrollView>
 
                 <TextInput
                     placeholder="Give A Name To Your New Category."
@@ -27,7 +28,11 @@ export default class CategoriesForm extends Component {
                     onPress={ this.handleSubmit }
                 />
 
-            </View>
+            </ScrollView>
         )
     }
 }
+
+const categoriesFormWithNav = withNavigation(CategoriesForm)
+
+export default categoriesFormWithNav

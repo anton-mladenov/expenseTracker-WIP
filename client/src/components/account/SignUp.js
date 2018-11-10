@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import SignUpForm from "./SignUpForm"
 import { newSignUp } from "../../actions/usersActions"
@@ -20,7 +20,7 @@ class SignUp extends Component {
         const { signUpSuccess } = this.props
 
         return (
-            <View>
+            <ScrollView>
                 {
                     !signUpSuccess &&
                     <Text> Create Your Account </Text>
@@ -44,7 +44,7 @@ class SignUp extends Component {
                     />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

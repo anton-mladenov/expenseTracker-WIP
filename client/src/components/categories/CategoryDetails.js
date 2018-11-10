@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
 import CategoriesForm from "./CategoriesForm"
@@ -65,7 +65,7 @@ class CategoryDetails extends Component {
         console.log({itemId})
 
         return (
-            <View>
+            <ScrollView>
 
                 <Text> { oneCategory.name } </Text>
                 <Text> { oneCategory.amount } </Text>
@@ -114,7 +114,7 @@ class CategoryDetails extends Component {
                     <AllExpenses categoryId={ itemId } />
                 }
 
-            </View>
+            </ScrollView>
         )
     }
 }

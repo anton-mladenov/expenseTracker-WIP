@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from "react-native"
+import { ScrollView, Text, Button } from "react-native"
 import { connect } from "react-redux"
 import AllExpenses from "./AllExpenses"
 
@@ -27,11 +27,11 @@ class Expenses extends Component {
         const { category } = this.props
 
         return (
-            <View>
+            <ScrollView>
 
                 <AllExpenses categoryId={ category.id } />
 
-            </View>
+            </ScrollView>
         )
     }
 }

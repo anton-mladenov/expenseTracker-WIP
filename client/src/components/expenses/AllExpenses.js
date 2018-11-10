@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, FlatList } from "react-native"
+import { ScrollView, Text, Button, FlatList } from "react-native"
 import { connect } from "react-redux"
 import { getAllExpenses } from "../../actions/expensesActions"
 import ExpenseDetails from "./ExpenseDetails";
@@ -33,7 +33,7 @@ class AllExpenses extends Component {
         const { allExpenses, currentUser } = this.props
 
         return (
-            <View>
+            <ScrollView>
                 {
                     (this.state.showAllExpenses && currentUser) &&
                     <FlatList
@@ -55,7 +55,7 @@ class AllExpenses extends Component {
                     <ExpenseDetails expenseId={ this.state.expenseId } />
                 } */}
 
-            </View>
+            </ScrollView>
         )
     }
 }
