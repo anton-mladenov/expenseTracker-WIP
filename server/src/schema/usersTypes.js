@@ -34,6 +34,5 @@ extend type Mutation {
 type Token {
     token: String
 }
-
 `
 

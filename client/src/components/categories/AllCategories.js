@@ -4,7 +4,21 @@ import { connect } from "react-redux"
 import { getAllCategories, createNewCategory } from "../../actions/categoriesActions"
 import CategoryDetails from "./CategoryDetails"
 import CategoriesForm from "./CategoriesForm"
+import PureChart from 'react-native-pure-chart';
 
+const pickColor = () => {
+    const availableColors = ["#120309", "#2e0f15", "#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
+    const theChosenOne = Math.floor(Math.random() * availableColors.length)
+    return availableColors[theChosenOne]
+}
+
+class pieChart {
+    constructor(value, label) {
+        this.value = value
+        this.label = label
+        this.color = pickColor()
+    }
+}
 
 class AllCategories extends Component {
 
@@ -50,10 +64,14 @@ class AllCategories extends Component {
 
     render() {
 
-        const { allCategories, navigation, currentUser } = this.props
+        const { allCategories, currentUser } = this.props
         const { navigate } = this.props.navigation
         const id = this.state.categoryId
 
+        const totalCategoryAmount = allCategories.map((cat) => cat.amount).reduce((acc, cur) => { return acc + cur }, 0)
+
+        const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, pickColor()))
+        
         return (
             <ScrollView>
 
@@ -74,7 +92,10 @@ class AllCategories extends Component {
                     <CategoriesForm onSubmit={ this.handleSubmit } />
                 }
 
-                <Text> </Text>
+                {
+                    allCategories.length !== 0 &&
+                    <PureChart data={categoriesToDisplay} type='pie' />
+                }
 
                 {
                     (this.state.showFlatList && currentUser) &&
@@ -102,4 +123,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, { getAllCategories, createNewCategory })(AllCategories)
-

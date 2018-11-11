@@ -19,11 +19,11 @@ export default {
                 return await models.Category
                     .findAll()
                     .then(async (categories) => {
-
                         return await models.User
                             .findById(me.id)
                             .then(async (me) => {
                                 let myCategories = await me.getCategories()
+                                console.log({myCategories})
                                 return myCategories
                             })
                     })
