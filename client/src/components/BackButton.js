@@ -20,7 +20,7 @@ class BackButton extends Component {
                         {
                             category === "AllCategories" ? this.props.getAllCategories() : console.log("looking for expenses, not categories")
                             category === "AllExpenses" ? this.props.getAllExpenses(catId) : console.log("looking for categories, not expenses")
-                            this.props.navigation.navigate(category)
+                            this.props.navigation.goBack()
                         }
                     }
                 />

@@ -36,6 +36,12 @@ class AllCategories extends Component {
         currentUser && this.props.getAllCategories()
     }
 
+    // componentDidUpdate() {
+    //     const { currentUser, navigation } = this.props
+    //     !currentUser && navigation.navigate("WelcomeScreen")
+    //     currentUser && this.props.getAllCategories()
+    // }
+
     showCategoryDetails = (id) => {
         const idInt = parseInt(id, 10)
         return this.setState({
@@ -68,7 +74,8 @@ class AllCategories extends Component {
         const { navigate } = this.props.navigation
         const id = this.state.categoryId
 
-        const totalCategoryAmount = allCategories.map((cat) => cat.amount).reduce((acc, cur) => { return acc + cur }, 0)
+        // // estimating total expense for all categories
+        // const totalCategoryAmount = allCategories.map((cat) => cat.amount).reduce((acc, cur) => { return acc + cur }, 0)
 
         const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, pickColor()))
         
@@ -76,7 +83,7 @@ class AllCategories extends Component {
             <ScrollView>
 
                 {
-                    !currentUser && <Text> Loading ... </Text>
+                    !allCategories && <Text> Loading ... </Text>
                 }
 
                 {

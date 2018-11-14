@@ -3,7 +3,8 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "nodemon node_modules/react-native/local-cli/cli.js start",
+        "start": "react-native start",
+        "go": "nodemon node_modules/react-native/local-cli/cli.js start",
         "test": "jest",
         "redux-devtool": "remotedev",
         "postinstall": "rndebugger-open",

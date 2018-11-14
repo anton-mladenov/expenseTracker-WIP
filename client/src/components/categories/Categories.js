@@ -34,9 +34,6 @@ class Categories extends Component {
         return (
             <ScrollView>
 
-                <Text> { } </Text>
-
-                <Text> { } </Text>
                 {
                     (this.state.showAllButton && currentUser) &&
                     <Button

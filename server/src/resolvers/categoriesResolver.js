@@ -23,7 +23,6 @@ export default {
                             .findById(me.id)
                             .then(async (me) => {
                                 let myCategories = await me.getCategories()
-                                console.log({myCategories})
                                 return myCategories
                             })
                     })
