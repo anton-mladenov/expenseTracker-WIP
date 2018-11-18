@@ -98,7 +98,7 @@ export const getAllExpenses = (data) => (dispatch, getState) => {
         }
     }).then((result) => {
         const intResults = stringToInt(result.data.data.allExpenses)
-        console.log(intResults)
+        console.log({intResults})
         dispatch(getExpenses(intResults))
     }).catch((error) => {
         console.log("There was an error when getting all expenses " + error)
@@ -140,7 +140,9 @@ export const createNewExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        dispatch(createExpense(result.data.data.createExpense))
+        const intResults = stringToInt(result.data.data.createExpense)
+        console.log({intResults})
+        dispatch(createExpense(intResults))
     }).catch((error) => {
         console.log("There was an error when creating the new expense " + error)
         return "There was an error when creating the new expense " + error
@@ -189,7 +191,9 @@ export const editOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        dispatch(editExpense(result.data.data.updateExpense))
+        const intResults = stringToInt(result.data.data.updateExpense)
+        console.log({intResults})
+        dispatch(editExpense(intResults))
     }).catch((error) => {
         console.log("There was an error when editing the new expense " + error)
         return "There was an error when editing the new expense " + error
@@ -226,12 +230,13 @@ export const deleteOneExpense = (data) => (dispatch, getState) => {
             `
         }
     })
-    // .then((result) => { // da polzvam li vuobshte DELETE action? 
-    //     dispatch(deleteExpense(data))
-    // }).catch((error) => {
-    //     console.log("There was an error when trying to delete an expense " + error)
-    //     return "There was an error when trying to delete an expense " + error
-    // })
+    .then((result) => {
+        console.log({result})                            // da polzvam li vuobshte DELETE action?
+        dispatch(deleteExpense(data))
+    }).catch((error) => {
+        console.log("There was an error when trying to delete an expense " + error)
+        return "There was an error when trying to delete an expense " + error
+    })
 }
 
 

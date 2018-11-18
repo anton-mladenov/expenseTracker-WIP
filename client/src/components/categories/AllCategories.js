@@ -26,7 +26,7 @@ class AllCategories extends Component {
         showFlatList: true,
         showDetails: false,
         categoryId: null,
-        showAddButton: true,
+        showAddButton: true, 
         showForm: false
     }
 
@@ -35,12 +35,6 @@ class AllCategories extends Component {
         !currentUser && navigation.navigate("WelcomeScreen")
         currentUser && this.props.getAllCategories()
     }
-
-    // componentDidUpdate() {
-    //     const { currentUser, navigation } = this.props
-    //     !currentUser && navigation.navigate("WelcomeScreen")
-    //     currentUser && this.props.getAllCategories()
-    // }
 
     showCategoryDetails = (id) => {
         const idInt = parseInt(id, 10)

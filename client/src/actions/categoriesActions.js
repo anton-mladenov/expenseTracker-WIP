@@ -1,7 +1,9 @@
 import { AsyncStorage } from "react-native"
-import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc } from "../lib/lib"
+import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc, stringToInt } from "../lib/lib"
 import axios from "axios"
 import { logoutType } from "./usersActions"
+import NavigationService from "../../NavigationService"
+
 
 // CREATE A NEW CATEGORY
 export const CREATE_CATEGORY = "CREATE_CATEGORY"
@@ -34,7 +36,9 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        dispatch(createCategory(result.data.data.createCategory))
+        const intResults = stringToInt(result.data.data.createCategory)
+        console.log({intResults})
+        dispatch(createCategory(intResults))
     }).catch((error) => {
         console.log("There was an error when creating the new category " + error)
         return "There was an error when creating the new category " + error
@@ -58,10 +62,10 @@ export const getAllCategories = () => (dispatch, getState) => {
     const jwt = state.currentUserReducer
     if (jwtDecodeToExpDate(jwt)) {        
         console.log("jwtDecodeToExpDate: ", jwtDecodeToExpDate(jwt))
-        // removeStorageFunc()
         removeStorageFunc(storageKey)
         dispatch(logoutType())
-        return;
+        NavigationService.navigate('WelcomeScreen')
+        // return;
     } 
 
     axios({
@@ -89,7 +93,9 @@ export const getAllCategories = () => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        dispatch(allCategories(result.data.data.categories))
+        const intResults = stringToInt(result.data.data.categories)
+        console.log({intResults})
+        dispatch(allCategories(intResults))
     }).catch((error) => {
         console.log("There was an error when getting all categories " + error)
         return error
@@ -130,7 +136,9 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 			`
         }
     }).then((result) => {
-        dispatch(getCategory(result.data.data.category))
+        const intResults = stringToInt(result.data.data.category)
+        console.log({intResults})
+        dispatch(getCategory(intResults))
     }).catch((error) => {
         console.log("There was an error when getting one category " + error)
         return "There was an error when getting one category " + error
@@ -177,7 +185,9 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        dispatch(updateCategory(result.data.data.updateCategory))
+        const intResults = stringToInt(result.data.data.updateCategory)
+        console.log({intResults})
+        dispatch(updateCategory(intResults))
     }).catch((error) => {
         console.log("There was an error when trying to update a category " + error)
         return "There was an error when trying to update a category " + error
@@ -214,10 +224,11 @@ export const deleteOneCategory = (data) => (dispatch, getState) => {
 			`
         }
     })
-    // .then((category) => { // da polzvam li vuobshte DELETE action? 
-    //     dispatch(deleteCategory(data))
-    // }).catch((error) => {
-    //     console.log("There was an error when trying to delete a category " + error)
-    //     return "There was an error when trying to delete a category " + error
-    // })
+    .then((category) => {
+        console.log({category})                           // da polzvam li vuobshte DELETE action?
+        dispatch(deleteCategory(data))
+    }).catch((error) => {
+        console.log("There was an error when trying to delete a category " + error)
+        return "There was an error when trying to delete a category " + error
+    })
 }
