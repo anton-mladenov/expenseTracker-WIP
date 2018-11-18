@@ -138,13 +138,13 @@ class App extends Component {
 
     render() {
         return (
-            // <RootStack />
+            <RootStack />
 
-            <RootStack
-                ref={navigatorRef => {
-                    NavigationService.setTopLevelNavigator(navigatorRef);
-                }}
-            />
+            // <RootStack
+            //     ref={navigatorRef => {
+            //         NavigationService.setTopLevelNavigator(navigatorRef);
+            //     }}
+            // />
         )
     }
 }

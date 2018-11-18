@@ -70,23 +70,19 @@ export const jwtDecodeToExpDate = (jwt) => {
 
 // convert strings to integers
 export const stringToInt = (data) => {
-    if (Array.isArray(data)) {
-        console.log(" ___ data from stringToInt func - data < 1: ", data)
-        if (data.length > 1) {
-            console.log(" ___ data from stringToInt func - data > 1: ", data)
-            const newData = data.map((item) => {
-                if (item.id && typeof item.id === "string") {
-                    const id = parseInt(item.id, 10)
-                    item.id = id
-                }
-                if (item.amount && typeof item.amount === "string") {
-                    const amount = parseInt(item.amount, 10)
-                    item.amount = amount
-                }
-                return item
-            })
-            return newData
-        }
+    if (typeof data === "object") {
+        const newData = data.map((item) => {
+            if (item.id && typeof item.id === "string") {
+                const id = parseInt(item.id, 10)
+                item.id = id
+            }
+            if (item.amount && typeof item.amount === "string") {
+                const amount = parseInt(item.amount, 10)
+                item.amount = amount
+            }
+            return item
+        })
+        return newData
     }
     return data
 }

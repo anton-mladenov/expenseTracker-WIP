@@ -65,7 +65,6 @@ export const getAllCategories = () => (dispatch, getState) => {
         removeStorageFunc(storageKey)
         dispatch(logoutType())
         NavigationService.navigate('WelcomeScreen')
-        // return;
     } 
 
     axios({
@@ -136,9 +135,9 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 			`
         }
     }).then((result) => {
-        const intResults = stringToInt(result.data.data.category)
-        console.log({intResults})
-        dispatch(getCategory(intResults))
+        let id = parseInt(result.data.data.category.id, 10)
+        result.data.data.category.id = id
+        dispatch(getCategory(result.data.data.category))
     }).catch((error) => {
         console.log("There was an error when getting one category " + error)
         return "There was an error when getting one category " + error

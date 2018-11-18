@@ -56,7 +56,7 @@ export default {
                 throw new AuthenticationError("Wrong password, try again.")
             }
 
-            return { token: createToken(user, secret, "1m") }
+            return { token: createToken(user, secret, "90m") }
 
         },
         // deleteUser: combineResolvers(

@@ -29,6 +29,7 @@ export default {
             })
 
     },
+    
     Mutation: {
 
         createCategory: combineResolvers(
