@@ -1,18 +1,29 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux"
 import ReduxThunk from "redux-thunk"
 import reducers from "./src/reducers/index"
+import { persistStore, persistReducer } from "redux-persist"
+import { AsyncStorage } from "react-native"
+import storage from 'redux-persist/lib/storage'
+
+const persistConfig = {
+    timeout: 0,
+    key: "root",
+    storage,
+    whitelist: ["currentUserReducer"],
+    blacklist: ["categories", "expensesReducer", "signUpReducer", "loginReducer"]
+}
 
 const reducer = combineReducers(reducers)
 
-// const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose // this SHOULD be working but it's not :D
+const persistedReducer = persistReducer(persistConfig, reducer)
 
-const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f // this SHOULDN'T be working but is :D :D 
+const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f
 
 const enhancer = compose(
     applyMiddleware(ReduxThunk),
     devTools,
 )
 
-const store = createStore(reducer, enhancer);
+export const store = createStore(persistedReducer, enhancer);
 
-export default store
+export const persistor = persistStore(store)

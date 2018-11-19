@@ -11,7 +11,7 @@ const pickColor = () => {
     const theChosenOne = Math.floor(Math.random() * availableColors.length)
     return availableColors[theChosenOne]
 }
-
+ 
 class pieChart {
     constructor(value, label) {
         this.value = value

@@ -115,7 +115,7 @@ const RootStack = createStackNavigator(
         },
     },
     {
-        initialRouteName: "WelcomeScreen",
+        initialRouteName: "AllCategories",
         navigationOptions: {
             headerStyle: {
                 backgroundColor: '#f2531e',
