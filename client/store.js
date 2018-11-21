@@ -4,9 +4,7 @@ import reducers from "./src/reducers/index"
 
 const reducer = combineReducers(reducers)
 
-// const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose // this SHOULD be working but it's not :D
-
-const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f // this SHOULDN'T be working but is :D :D 
+const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f 
 
 const enhancer = compose(
     applyMiddleware(ReduxThunk),

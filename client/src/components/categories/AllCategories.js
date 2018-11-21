@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Button, FlatList } from "react-native"
+import { ScrollView, Text, FlatList, StyleSheet } from "react-native"
 import { connect } from "react-redux"
 import { getAllCategories, createNewCategory } from "../../actions/categoriesActions"
 import CategoryDetails from "./CategoryDetails"
 import CategoriesForm from "./CategoriesForm"
 import PureChart from 'react-native-pure-chart';
+import { Button, FAB, IconButton } from 'react-native-paper';
 
 const pickColor = () => {
     const availableColors = ["#120309", "#2e0f15", "#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
@@ -83,8 +84,20 @@ class AllCategories extends Component {
                 {
                     (this.state.showAddButton && currentUser) &&
                     <Button
-                        title="Add A New Category"
-                        onPress={ this.showAddForm }
+                        color="purple"
+                        mode="contained"
+                        onPress={() => this.showAddForm}
+                        style={{padding: 5, marginHorizontal: 60, marginVertical: 25}}
+                    > Add A New Category </Button>
+                }
+
+                {
+                    (this.state.showAddButton && currentUser) &&
+                    <FAB
+                        style={styles.fab}
+                        small={false}
+                        icon="add"
+                        onPress={this.showAddForm}                        
                     />
                 }
 
@@ -95,7 +108,11 @@ class AllCategories extends Component {
 
                 {
                     allCategories.length !== 0 &&
-                    <PureChart data={categoriesToDisplay} type='pie' />
+                    <PureChart
+                        data={categoriesToDisplay}
+                        type='pie'
+                        // style={{ paddingTop: 3, marginHorizontal: 60, marginVertical: 5, justify }}
+                    />
                 }
 
                 {
@@ -103,13 +120,17 @@ class AllCategories extends Component {
                     <FlatList
                         data={ allCategories }
                         keyExtractor={ (item, index) => item.id.toString() }
-                        renderItem={ ({ item }) => <Button
-                            title={ item.name }
-                            onPress={ () => navigate("CategoryDetails", {
-                                categoryId: item.id
-                            })
-                            }
-                        /> }
+                        renderItem={({ item }) =>
+                            <Button
+                                color="black"
+                                mode="text"
+                                onPress={ () => navigate("CategoryDetails", {
+                                    categoryId: item.id
+                                })}
+                                style={{paddingTop: 3, marginHorizontal: 60, marginVertical: 5}}
+                            >
+                                {item.name}
+                            </Button>}
                     />
                 }
 
@@ -123,4 +144,14 @@ const mapStateToProps = (state) => ({
     currentUser: state.currentUserReducer !== null,
 })
 
+const styles = StyleSheet.create({
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+        
+    },
+})
+  
 export default connect(mapStateToProps, { getAllCategories, createNewCategory })(AllCategories)

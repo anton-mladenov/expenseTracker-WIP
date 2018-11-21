@@ -21,8 +21,6 @@ import { getAllCategories } from "./src/actions/categoriesActions"
 import { getJWT, getStorageFunc, storageKey } from "./src/lib/lib"
 import { connect } from "react-redux"
 import { Button } from "react-native"
-import NavigationService from './NavigationService';
-
 
 
 const RootStack = createStackNavigator(
@@ -116,14 +114,14 @@ const RootStack = createStackNavigator(
     },
     {
         initialRouteName: "WelcomeScreen",
-        navigationOptions: {
-            headerStyle: {
-                backgroundColor: '#f2531e',
-            },
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        },
+        // navigationOptions: {
+        //     headerStyle: {
+        //         backgroundColor: '#f2531e',
+        //     },
+        //     headerTitleStyle: {
+        //         fontWeight: 'bold',
+        //     },
+        // },
     }
 )
 
@@ -139,12 +137,6 @@ class App extends Component {
     render() {
         return (
             <RootStack />
-
-            // <RootStack
-            //     ref={navigatorRef => {
-            //         NavigationService.setTopLevelNavigator(navigatorRef);
-            //     }}
-            // />
         )
     }
 }

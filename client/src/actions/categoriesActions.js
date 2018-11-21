@@ -2,7 +2,6 @@ import { AsyncStorage } from "react-native"
 import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc, stringToInt } from "../lib/lib"
 import axios from "axios"
 import { logoutType } from "./usersActions"
-import NavigationService from "../../NavigationService"
 
 
 // CREATE A NEW CATEGORY
@@ -64,7 +63,6 @@ export const getAllCategories = () => (dispatch, getState) => {
         console.log("jwtDecodeToExpDate: ", jwtDecodeToExpDate(jwt))
         removeStorageFunc(storageKey)
         dispatch(logoutType())
-        NavigationService.navigate('WelcomeScreen')
     } 
 
     axios({
@@ -93,7 +91,6 @@ export const getAllCategories = () => (dispatch, getState) => {
         }
     }).then((result) => {
         const intResults = stringToInt(result.data.data.categories)
-        console.log({intResults})
         dispatch(allCategories(intResults))
     }).catch((error) => {
         console.log("There was an error when getting all categories " + error)
