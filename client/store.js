@@ -11,6 +11,4 @@ const enhancer = compose(
     devTools,
 )
 
-const store = createStore(reducer, enhancer);
-
-export default store
+export const store = createStore(reducer, enhancer);
