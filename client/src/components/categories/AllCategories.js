@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, FlatList, StyleSheet } from "react-native"
+import { ScrollView, Text, FlatList, StyleSheet, View } from "react-native"
 import { connect } from "react-redux"
 import { getAllCategories, createNewCategory } from "../../actions/categoriesActions"
 import CategoryDetails from "./CategoryDetails"
@@ -87,7 +87,10 @@ class AllCategories extends Component {
                         color="purple"
                         mode="contained"
                         onPress={() => this.showAddForm}
-                        style={{padding: 5, marginHorizontal: 60, marginVertical: 25}}
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center' }}
                     > Add A New Category </Button>
                 }
 
@@ -108,11 +111,17 @@ class AllCategories extends Component {
 
                 {
                     allCategories.length !== 0 &&
-                    <PureChart
-                        data={categoriesToDisplay}
-                        type='pie'
-                        // style={{ paddingTop: 3, marginHorizontal: 60, marginVertical: 5, justify }}
-                    />
+                    <View
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center' }}
+                    >
+                        <PureChart
+                            data={categoriesToDisplay}
+                            type='pie'
+                        />
+                    </View>
                 }
 
                 {

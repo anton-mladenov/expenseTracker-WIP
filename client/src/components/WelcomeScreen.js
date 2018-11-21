@@ -32,7 +32,10 @@ class WelcomeScreen extends Component {
                         color="purple"
                         mode="contained"
                         onPress={ () => this.props.navigation.navigate("SignUp") }
-                        style={{ paddingTop: 3, marginHorizontal: 60, marginVertical: 5 }}
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center' }}
                     >
                     Sign Up
                     </Button>
@@ -45,7 +48,10 @@ class WelcomeScreen extends Component {
                         color="green"
                         mode="contained"
                         onPress={ () => this.props.navigation.navigate("SignIn") }
-                        style={{ paddingTop: 3, marginHorizontal: 60, marginVertical: 5 }}
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center' }}
                     >
                     Sign In
                     </Button>
