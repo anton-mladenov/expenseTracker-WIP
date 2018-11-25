@@ -74,6 +74,13 @@ class CategoryDetails extends Component {
                     this.state.buttonsShow &&
                     <Button
                         onPress={ () => this.props.deleteOneCategory(itemId) }
+                        mode="contained"
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center',
+                            marginHorizontal: 70,
+                            marginVertical: 5, }}
                     >
                     Delete Category
                     </Button>
@@ -83,6 +90,13 @@ class CategoryDetails extends Component {
                     this.state.buttonsShow &&
                     <Button
                         onPress={ this.toggleEdit }
+                        mode="contained"
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center',
+                            marginHorizontal: 70,
+                            marginVertical: 5, }}
                     >
                     Edit Category
                     </Button>
@@ -100,6 +114,13 @@ class CategoryDetails extends Component {
                     this.state.buttonsShow &&
                     <Button
                         onPress={ this.showAddExpenseForm }
+                        mode="contained"
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center',
+                            marginHorizontal: 70,
+                            marginVertical: 5, }}
                     >
                     Add New Expense
                     </Button>

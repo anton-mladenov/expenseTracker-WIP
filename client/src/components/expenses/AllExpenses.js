@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Button, FlatList } from "react-native"
+import { ScrollView, Text, FlatList, View } from "react-native"
 import { connect } from "react-redux"
 import { getAllExpenses } from "../../actions/expensesActions"
 import ExpenseDetails from "./ExpenseDetails";
 import { withNavigation } from "react-navigation"
+import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
 
 class AllExpenses extends Component {
 
@@ -34,19 +35,40 @@ class AllExpenses extends Component {
 
         return (
             <ScrollView>
+                
+                {
+                    allExpenses.length > 0 && 
+                    <View style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginBottom: 10 }} 
+                    >
+                        <Title> All Expenses </Title>
+                    </View>
+                }
+
                 {
                     (this.state.showAllExpenses && currentUser) &&
                     <FlatList
                         data={ allExpenses }
                         keyExtractor={ (item, index) => item.id.toString() }
-                        renderItem={ ({ item }) => <Button
-                            title={ item.name }
+                        renderItem={ ({ item }) => 
+                        <Button
                             onPress={ () => this.props.navigation.navigate("ExpenseDetails", {
                                 expenseId: item.id
-                            })
-                                // this.showExpenseDetails(item.id) 
-                            }
-                        /> }
+                            })}
+                            mode="outlined"
+                            style={{ flex:1,
+                                flexDirection:'row',
+                                alignItems:'center',
+                                justifyContent:'center',
+                                marginHorizontal: 70,
+                                marginVertical: 5, }}
+                        >
+                        {item.name}
+                        </Button>
+                    }
                     />
                 }
 
