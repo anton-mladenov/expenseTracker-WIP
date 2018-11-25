@@ -139,6 +139,7 @@ class AllCategories extends Component {
                                 style={{paddingTop: 3, marginHorizontal: 60, marginVertical: 5}}
                             >
                                 {item.name}
+                                {item.id}
                             </Button>}
                     />
                 }
