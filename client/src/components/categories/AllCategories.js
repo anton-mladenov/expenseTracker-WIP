@@ -154,7 +154,9 @@ class AllCategories extends Component {
                                 >
                                     <Title 
                                         style={{ color: "orange" }} 
-                                    > {item.name} </Title>
+                                    > 
+                                        {item.name} 
+                                    </Title>
                                 </Card.Content>
                             </Card>
                         </View>

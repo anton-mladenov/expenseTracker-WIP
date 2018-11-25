@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { ScrollView, Text, Button } from "react-native"
+import { ScrollView, Text } from "react-native"
 import { connect } from "react-redux"
 import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
 import CategoriesForm from "./CategoriesForm"
@@ -7,6 +7,7 @@ import ExpensesForm from "../expenses/ExpensesForm"
 import Expenses from "../expenses/Expenses"
 import { createNewExpense } from "../../actions/expensesActions"
 import AllExpenses from "../expenses/AllExpenses"
+import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
 
 
 class CategoryDetails extends Component {
@@ -72,17 +73,19 @@ class CategoryDetails extends Component {
                 {
                     this.state.buttonsShow &&
                     <Button
-                        title="Delete This Category"
                         onPress={ () => this.props.deleteOneCategory(itemId) }
-                    />
+                    >
+                    Delete Category
+                    </Button>
                 }
 
                 {
                     this.state.buttonsShow &&
                     <Button
-                        title="Edit This Category"
                         onPress={ this.toggleEdit }
-                    />
+                    >
+                    Edit Category
+                    </Button>
                 }
 
                 {
@@ -96,9 +99,10 @@ class CategoryDetails extends Component {
                 {
                     this.state.buttonsShow &&
                     <Button
-                        title="Add A New Expense To This Category"
                         onPress={ this.showAddExpenseForm }
-                    />
+                    >
+                    Add New Expense
+                    </Button>
                 }
 
                 {
