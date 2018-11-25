@@ -43,8 +43,6 @@ class Categories extends Component {
                 }
 
                 <Text> { } </Text>
-
-                <Text> { } </Text>
                 {
                     this.state.showAllCategories &&
                     <AllCategories />
