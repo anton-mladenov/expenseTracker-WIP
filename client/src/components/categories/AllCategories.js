@@ -5,7 +5,7 @@ import { getAllCategories, createNewCategory } from "../../actions/categoriesAct
 import CategoryDetails from "./CategoryDetails"
 import CategoriesForm from "./CategoriesForm"
 import PureChart from 'react-native-pure-chart';
-import { Button, FAB, IconButton } from 'react-native-paper';
+import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
 
 const pickColor = () => {
     const availableColors = ["#120309", "#2e0f15", "#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
@@ -90,11 +90,14 @@ class AllCategories extends Component {
                         style={{ flex:1,
                             flexDirection:'row',
                             alignItems:'center',
-                            justifyContent:'center' }}
+                            justifyContent:'center',
+                            marginHorizontal: 60,
+                            marginVertical: 5,
+                            marginTop: 35 }}
                     > Add A New Category </Button>
                 }
 
-                {
+                {/* {
                     (this.state.showAddButton && currentUser) &&
                     <FAB
                         style={styles.fab}
@@ -102,7 +105,7 @@ class AllCategories extends Component {
                         icon="add"
                         onPress={this.showAddForm}                        
                     />
-                }
+                } */}
 
                 {
                     this.state.showForm &&
@@ -115,7 +118,8 @@ class AllCategories extends Component {
                         style={{ flex:1,
                             flexDirection:'row',
                             alignItems:'center',
-                            justifyContent:'center' }}
+                            justifyContent:'center',
+                            margin: 20 }}
                     >
                         <PureChart
                             data={categoriesToDisplay}
@@ -130,17 +134,31 @@ class AllCategories extends Component {
                         data={ allCategories }
                         keyExtractor={ (item, index) => item.id.toString() }
                         renderItem={({ item }) =>
-                            <Button
-                                color="black"
-                                mode="text"
+                        <View>
+                            <Card 
                                 onPress={ () => navigate("CategoryDetails", {
                                     categoryId: item.id
-                                })}
-                                style={{paddingTop: 3, marginHorizontal: 60, marginVertical: 5}}
+                                })}    
+                                style={{ flex: 1,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginHorizontal: 80,
+                                    marginVertical: 5, }} 
                             >
-                                {item.name}
-                                {item.id}
-                            </Button>}
+                                <Card.Content 
+                                    style={{ flex: 1,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'center', }} 
+                                >
+                                    <Title 
+                                        style={{ color: "orange" }} 
+                                    > {item.name} </Title>
+                                </Card.Content>
+                            </Card>
+                        </View>
+                        }
                     />
                 }
 
