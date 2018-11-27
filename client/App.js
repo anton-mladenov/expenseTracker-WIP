@@ -20,8 +20,7 @@ import { setJWT, signInSuccess } from "./src/actions/usersActions"
 import { getAllCategories } from "./src/actions/categoriesActions"
 import { getJWT, getStorageFunc, storageKey } from "./src/lib/lib"
 import { connect } from "react-redux"
-import { Button } from "react-native"
-
+import { Button, Image } from "react-native"
 
 const RootStack = createStackNavigator(
     {
@@ -60,6 +59,15 @@ const RootStack = createStackNavigator(
             navigationOptions: () => ({
                 headerLeft:
                     () => <BackButton category={"AllCategories"} />,
+
+                        // headerStyle: {
+                        //   backgroundColor: 'brown',
+                        // },
+                        // headerTintColor: '#fff',
+                        // headerTitleStyle: {
+                        //   fontWeight: 'bold',
+                        // },
+
             })
         },
         SignInForm: {
@@ -91,6 +99,15 @@ const RootStack = createStackNavigator(
             navigationOptions: () => ({
                 headerLeft:
                     () => <BackButton category={"AllExpenses"} />,
+
+                        // headerStyle: {
+                        //   backgroundColor: 'green',
+                        // },
+                        // headerTintColor: '#fff',
+                        // headerTitleStyle: {
+                        //   fontWeight: 'bold',
+                        // },
+
             })
         },
         Expenses: {
@@ -114,14 +131,15 @@ const RootStack = createStackNavigator(
     },
     {
         initialRouteName: "WelcomeScreen",
-        // navigationOptions: {
+        // defaultNavigationOptions: {
         //     headerStyle: {
-        //         backgroundColor: '#f2531e',
+        //       backgroundColor: '#f4511e',
         //     },
+        //     headerTintColor: '#fff',
         //     headerTitleStyle: {
-        //         fontWeight: 'bold',
+        //       fontWeight: 'bold',
         //     },
-        // },
+        //   },
     }
 )
 

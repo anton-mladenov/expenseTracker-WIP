@@ -1,29 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { View, Button, TextInput } from "react-native"
+import { View, TextInput, Image, Button } from "react-native"
 import { withNavigation } from "react-navigation"
 import { getAllCategories } from "../actions/categoriesActions"
 import { getAllExpenses } from "../actions/expensesActions"
-import { Appbar } from 'react-native-paper';
-
-class MyComponent extends React.Component {
-  _goBack = () => console.log('Went back');
-
-  _onSearch = () => console.log('Searching');
-
-  _onMore = () => console.log('Shown more');
-
-  render() {
-    return (
-      <Appbar.Header>
-        <Appbar.BackAction
-          onPress={this._goBack}
-        />
-      </Appbar.Header>
-    );
-  }
-}
-
+import { Appbar, } from 'react-native-paper';
 
 class BackButton extends Component {
 
@@ -36,14 +17,11 @@ class BackButton extends Component {
     }
 
     render() {
-
-        
         return (
             <View>
-                <Appbar.Header
-                style={{backgroundColor: "black"}}>
+                <Appbar.Header style={{ marginRight: 1000, backgroundColor: "green" }} >
                     <Appbar.BackAction
-                    onPress={this._goBack}
+                        onPress={this._goBack}
                     />
                 </Appbar.Header>
             </View>
