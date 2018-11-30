@@ -40,7 +40,7 @@ export default {
                 password
             })
 
-            return { token: createToken(user, secret, "90m") }
+            return { token: createToken(user, secret, "48h") }
         },
 
         signIn: async (parent, { login, password }, { models, secret }) => {
@@ -56,7 +56,7 @@ export default {
                 throw new AuthenticationError("Wrong password, try again.")
             }
 
-            return { token: createToken(user, secret, "90m") }
+            return { token: createToken(user, secret, "48h") }
 
         },
         // deleteUser: combineResolvers(

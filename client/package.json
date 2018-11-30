@@ -39,7 +39,7 @@
         "graphql-tag": "^2.10.0",
         "jest": "23.6.0",
         "metro-react-native-babel-preset": "0.47.0",
-        "nodemon": "^1.18.4",
+        "nodemon": "^1.18.7",
         "prop-types": "^15.6.2",
         "react-native-base64": "^0.0.2",
         "react-native-debugger-open": "^0.3.17",

@@ -23,6 +23,11 @@ class pieChart {
 
 class AllCategories extends Component {
 
+    static navigationOptions = {
+        title: 'AllCategories',
+        /* No more header config here! */
+      };
+
     state = {
         showFlatList: true,
         showDetails: false,
@@ -75,7 +80,9 @@ class AllCategories extends Component {
         const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, pickColor()))
         
         return (
-            <ScrollView>
+            <ScrollView
+            style={styles.background}
+            >
 
                 {
                     !allCategories && <Text> Loading ... </Text>
@@ -84,7 +91,6 @@ class AllCategories extends Component {
                 {
                     (this.state.showAddButton && currentUser) &&
                     <Button
-                        color="purple"
                         mode="contained"
                         onPress={() => this.showAddForm}
                         style={{ flex:1,
@@ -93,7 +99,9 @@ class AllCategories extends Component {
                             justifyContent:'center',
                             marginHorizontal: 60,
                             marginVertical: 5,
-                            marginTop: 35 }}
+                            marginTop: 35,
+                            backgroundColor: styles.buttonBackground.backgroundColor, 
+                            color: styles.buttonTextColor.color }}
                     > Add A New Category </Button>
                 }
 
@@ -144,7 +152,9 @@ class AllCategories extends Component {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     marginHorizontal: 80,
-                                    marginVertical: 5, }} 
+                                    marginVertical: 5,
+                                    backgroundColor: styles.buttonBackground.backgroundColor
+                                 }} 
                             >
                                 <Card.Content 
                                     style={{ flex: 1,
@@ -153,7 +163,7 @@ class AllCategories extends Component {
                                     justifyContent: 'center', }} 
                                 >
                                     <Title 
-                                        style={{ color: "orange" }} 
+                                        style={{ color: styles.buttonTextColor.color }} 
                                     > 
                                         {item.name} 
                                     </Title>
@@ -182,6 +192,15 @@ const styles = StyleSheet.create({
         bottom: 0,
         
     },
+    background: {
+        backgroundColor: "#0B3954"
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
 })
   
 export default connect(mapStateToProps, { getAllCategories, createNewCategory })(AllCategories)

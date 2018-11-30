@@ -20,7 +20,8 @@ import { setJWT, signInSuccess } from "./src/actions/usersActions"
 import { getAllCategories } from "./src/actions/categoriesActions"
 import { getJWT, getStorageFunc, storageKey } from "./src/lib/lib"
 import { connect } from "react-redux"
-import { Button, Image } from "react-native"
+import { Button, Image, View } from "react-native"
+import { Appbar } from "react-native-paper"
 
 const RootStack = createStackNavigator(
     {
@@ -51,7 +52,7 @@ const RootStack = createStackNavigator(
         AllCategories: {
             screen: AllCategories,
             navigationOptions: {
-                headerLeft: null,
+                
             }
         },
         CategoryDetails: {
@@ -131,15 +132,16 @@ const RootStack = createStackNavigator(
     },
     {
         initialRouteName: "WelcomeScreen",
-        // defaultNavigationOptions: {
-        //     headerStyle: {
-        //       backgroundColor: '#f4511e',
-        //     },
-        //     headerTintColor: '#fff',
-        //     headerTitleStyle: {
-        //       fontWeight: 'bold',
-        //     },
-        //   },
+        navigationOptions: {
+            headerStyle: {
+              backgroundColor: '#FF951C',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              color: "white"
+            },
+          },
     }
 )
 
