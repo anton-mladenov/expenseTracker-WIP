@@ -100,8 +100,12 @@ class AllCategories extends Component {
                             marginHorizontal: 60,
                             marginVertical: 5,
                             marginTop: 35,
-                            backgroundColor: styles.buttonBackground.backgroundColor, 
-                            color: styles.buttonTextColor.color }}
+                            backgroundColor: "#FF951C", 
+                            color: styles.buttonTextColor.color,
+                            borderBottomWidth: 0.3,
+                            borderRightWidth: 0.3,
+                            borderColor: "white"
+                        }}
                     > Add A New Category </Button>
                 }
 

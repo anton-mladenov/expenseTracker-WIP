@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { ScrollView, Text } from "react-native"
+import { ScrollView, Text, StyleSheet, View } from "react-native"
 import { connect } from "react-redux"
 import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
 import CategoriesForm from "./CategoriesForm"
@@ -65,10 +65,34 @@ class CategoryDetails extends Component {
         const itemId = navigation.getParam('categoryId', 'NO-ID')
 
         return (
-            <ScrollView>
+            <ScrollView
+                style={styles.background}
+            >
 
-                <Text> { oneCategory.name } </Text>
-                <Text> { oneCategory.amount } </Text>
+                <View
+                    style={{ flex:1,
+                        flexDirection: "column",
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginVertical: "15%",
+                        marginTop: "30%"
+                        }}
+                >
+                    <Text
+                        style={{ 
+                            fontSize: 45,
+                            letterSpacing: 5,
+                            color: styles.buttonTextColor.color
+                        }}
+                    > { oneCategory.name } </Text>
+                    <Text
+                        style={{ 
+                            fontSize: 30,
+                            marginTop: 30,
+                            color: styles.buttonTextColor.color
+                        }}
+                    > Money out: { oneCategory.amount } </Text>
+                </View>
 
                 {
                     this.state.buttonsShow &&
@@ -80,7 +104,9 @@ class CategoryDetails extends Component {
                             alignItems:'center',
                             justifyContent:'center',
                             marginHorizontal: 70,
-                            marginVertical: 5, }}
+                            marginVertical: 5, 
+                            backgroundColor: styles.buttonBackground.backgroundColor
+                        }}
                     >
                     Delete Category
                     </Button>
@@ -96,7 +122,9 @@ class CategoryDetails extends Component {
                             alignItems:'center',
                             justifyContent:'center',
                             marginHorizontal: 70,
-                            marginVertical: 5, }}
+                            marginVertical: 5, 
+                            backgroundColor: styles.buttonBackground.backgroundColor
+                        }}
                     >
                     Edit Category
                     </Button>
@@ -120,7 +148,9 @@ class CategoryDetails extends Component {
                             alignItems:'center',
                             justifyContent:'center',
                             marginHorizontal: 70,
-                            marginVertical: 5, }}
+                            marginVertical: 5, 
+                            backgroundColor: styles.buttonBackground.backgroundColor
+                        }}
                     >
                     Add New Expense
                     </Button>
@@ -145,9 +175,21 @@ class CategoryDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        oneCategory: state.categories
+        oneCategory: state.categories[0]
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954"
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
 
 export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories, createNewExpense })(CategoryDetails)
 
