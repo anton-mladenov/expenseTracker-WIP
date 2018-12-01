@@ -125,7 +125,7 @@ class AllCategories extends Component {
                 }
 
                 {
-                    allCategories.length !== 0 &&
+                    allCategories.length !== 0 && !this.state.showForm &&
                     <View
                         style={{ flex:1,
                             flexDirection:'row',
