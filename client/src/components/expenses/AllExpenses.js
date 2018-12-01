@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, FlatList, View } from "react-native"
+import { ScrollView, Text, FlatList, View, StyleSheet } from "react-native"
 import { connect } from "react-redux"
 import { getAllExpenses } from "../../actions/expensesActions"
 import ExpenseDetails from "./ExpenseDetails";
@@ -34,7 +34,9 @@ class AllExpenses extends Component {
         const { allExpenses, currentUser } = this.props
 
         return (
-            <ScrollView>
+            <ScrollView
+                style={styles.background}
+            >
                 
                 {
                     allExpenses.length > 0 && 
@@ -42,9 +44,10 @@ class AllExpenses extends Component {
                         flexDirection:'row',
                         alignItems:'center',
                         justifyContent:'center',
-                        marginBottom: 10 }} 
+                        marginBottom: 10,
+                        }} 
                     >
-                        <Title> All Expenses </Title>
+                        <Title style={{color: "white"}}> All Expenses </Title>
                     </View>
                 }
 
@@ -54,28 +57,35 @@ class AllExpenses extends Component {
                         data={ allExpenses }
                         keyExtractor={ (item, index) => item.id.toString() }
                         renderItem={ ({ item }) => 
-                        <Button
-                            onPress={ () => this.props.navigation.navigate("ExpenseDetails", {
-                                expenseId: item.id
-                            })}
-                            mode="outlined"
-                            style={{ flex:1,
-                                flexDirection:'row',
-                                alignItems:'center',
-                                justifyContent:'center',
-                                marginHorizontal: 70,
-                                marginVertical: 5, }}
+                        <View>
+                        <Card 
+                            onPress={ () => this.props.navigation.navigate("ExpenseDetails", { expenseId: item.id })}  
+                            style={{ flex: 1,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginHorizontal: 80,
+                                marginVertical: 5,
+                                backgroundColor: styles.buttonBackground.backgroundColor
+                            }} 
                         >
-                        {item.name}
-                        </Button>
+                            <Card.Content 
+                                style={{ flex: 1,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center', }} 
+                            >
+                                <Title 
+                                    style={{ color: styles.buttonTextColor.color }} 
+                                > 
+                                    {item.name} 
+                                </Title>
+                            </Card.Content>
+                        </Card>
+                        </View>
                     }
                     />
                 }
-
-                {/* {
-                    this.state.showExpenseDetails &&
-                    <ExpenseDetails expenseId={ this.state.expenseId } />
-                } */}
 
             </ScrollView>
         )
@@ -89,6 +99,18 @@ const mapStateToProps = (state) => {
         currentUser: state.currentUserReducer !== null,
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954",
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
 
 const wrapNavigation = withNavigation(AllExpenses)
 
