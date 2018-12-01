@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text } from "react-native"
+import { ScrollView, Text, StyleSheet, View } from "react-native"
 import { connect } from "react-redux"
 import { AsyncStorage } from "react-native"
 import { Button, Title } from 'react-native-paper';
@@ -17,44 +17,78 @@ class WelcomeScreen extends Component {
         const { currentUser, signUpSuccess } = this.props
 
         return (
-            <ScrollView>
+            <ScrollView
+                style={styles.background}
+            >
 
-                <Text
-                    style={{ fontWeight: "bold", fontSize: 30, paddingHorizontal: 100, paddingVertical: 20}}
-                > MoneyOut </Text>
-                <Text
-                    style={{ fontWeight: "bold", fontSize: 15, paddingHorizontal: 20, marginBottom: 30 }}
-                > Opens your third eye for money management </Text>
+                <View
+                    style={{ 
+                        flex:1,
+                        flexDirection: "column",
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginVertical: "30%",
+                        }}
+                >
+                    <Text
+                        style={{ 
+                            fontSize: 30,
+                            letterSpacing: 5,
+                            color: styles.buttonTextColor.color
+                        }}
+                    > MoneyOut </Text>
+
+                    <Text
+                        style={{ 
+                            fontSize: 15,
+                            letterSpacing: 5,
+                            lineHeight: 30,
+                            color: styles.buttonTextColor.color,
+                            marginVertical: "10%",
+                            textAlign: 'center',
+                        }}
+                    > Opens your third eye for money management </Text>
+                </View>
 
                 {
                     !currentUser &&
                     <Button
-                        color="purple"
-                        mode="contained"
-                        onPress={ () => this.props.navigation.navigate("SignUp") }
-                        style={{ flex:1,
-                            flexDirection:'row',
-                            alignItems:'center',
-                            justifyContent:'center' }}
-                    >
-                    Sign Up
-                    </Button>
+                    mode="contained"
+                    onPress={ () => this.props.navigation.navigate("SignUp") }
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                    > Sign Up </Button>
                 }
 
                 <Text> </Text>
                 {
                     !currentUser &&
                     <Button
-                        color="green"
-                        mode="contained"
-                        onPress={ () => this.props.navigation.navigate("SignIn") }
-                        style={{ flex:1,
-                            flexDirection:'row',
-                            alignItems:'center',
-                            justifyContent:'center' }}
-                    >
-                    Sign In
-                    </Button>
+                    mode="contained"
+                    onPress={ () => this.props.navigation.navigate("SignIn") }
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                    > Sign In </Button>
                 }
 
             </ScrollView>
@@ -68,5 +102,17 @@ const mapStateToProps = (state) => {
         signUpSuccess: state.signUpReducer.success === true
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954",
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
 
 export default connect(mapStateToProps, {})(WelcomeScreen)
