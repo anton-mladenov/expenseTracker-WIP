@@ -97,37 +97,41 @@ class CategoryDetails extends Component {
                 {
                     this.state.buttonsShow &&
                     <Button
-                        onPress={ () => this.props.deleteOneCategory(itemId) }
-                        mode="contained"
-                        style={{ flex:1,
-                            flexDirection:'row',
-                            alignItems:'center',
-                            justifyContent:'center',
-                            marginHorizontal: 70,
-                            marginVertical: 5, 
-                            backgroundColor: styles.buttonBackground.backgroundColor
-                        }}
-                    >
-                    Delete Category
-                    </Button>
+                    mode="contained"
+                    onPress={ () => this.props.deleteOneCategory(itemId) }
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                    > Delete Category </Button>
                 }
 
                 {
                     this.state.buttonsShow &&
                     <Button
-                        onPress={ this.toggleEdit }
-                        mode="contained"
-                        style={{ flex:1,
-                            flexDirection:'row',
-                            alignItems:'center',
-                            justifyContent:'center',
-                            marginHorizontal: 70,
-                            marginVertical: 5, 
-                            backgroundColor: styles.buttonBackground.backgroundColor
-                        }}
-                    >
-                    Edit Category
-                    </Button>
+                    mode="contained"
+                    onPress={ this.toggleEdit }
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                    > Edit Category </Button>
                 }
 
                 {
@@ -141,19 +145,21 @@ class CategoryDetails extends Component {
                 {
                     this.state.buttonsShow &&
                     <Button
-                        onPress={ this.showAddExpenseForm }
-                        mode="contained"
-                        style={{ flex:1,
-                            flexDirection:'row',
-                            alignItems:'center',
-                            justifyContent:'center',
-                            marginHorizontal: 70,
-                            marginVertical: 5, 
-                            backgroundColor: styles.buttonBackground.backgroundColor
-                        }}
-                    >
-                    Add New Expense
-                    </Button>
+                    mode="contained"
+                    onPress={ this.showAddExpenseForm }
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                    > Add New Category </Button>
                 }
 
                 {
