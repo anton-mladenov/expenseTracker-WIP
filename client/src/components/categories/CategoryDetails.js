@@ -85,13 +85,35 @@ class CategoryDetails extends Component {
                             color: styles.buttonTextColor.color
                         }}
                     > { oneCategory.name } </Text>
-                    <Text
-                        style={{ 
-                            fontSize: 30,
-                            marginTop: 30,
-                            color: styles.buttonTextColor.color
-                        }}
-                    > Money out: { oneCategory.amount } </Text>
+
+                    {
+                        (oneCategory.amount > 0) &&
+                        <Text
+                            style={{ 
+                                fontSize: 30,
+                                marginTop: 30,
+                                color: styles.buttonTextColor.color
+                            }}
+                        > 
+                        Money out: { oneCategory.amount } 
+                        </Text>
+                    }
+
+                    {    
+                        (oneCategory.amount === 0) &&
+                        <Text
+                            style={{ 
+                                fontSize: 20,
+                                marginTop: 30,
+                                color: styles.buttonTextColor.color,
+                                textAlign: "center"
+                            }}
+                        >
+                        Time to add your first expense! 
+                        </Text>
+
+                    }
+                    
                 </View>
 
                 {
@@ -166,8 +188,6 @@ class CategoryDetails extends Component {
                     this.state.showExpenseForm &&
                     <ExpensesForm onSubmit={ this.handleSubmit } />
                 }
-
-                <Text> </Text>
 
                 {
                     this.state.buttonsShow &&

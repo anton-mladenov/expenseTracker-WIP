@@ -39,6 +39,10 @@ class AllExpenses extends Component {
             >
                 
                 {
+                    !allExpenses && <Text> Loading ... </Text>
+                }
+
+                {
                     allExpenses.length > 0 && 
                     <View style={{ flex:1,
                         flexDirection:'row',

@@ -131,15 +131,15 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 				category(id: ${data}) {
 					id
 					name
-					amount
+                    amount
+                    color
 				}
 			}
 			`
         }
     }).then((result) => {
-        let id = parseInt(result.data.data.category.id, 10)
-        result.data.data.category.id = id
-        dispatch(getCategory(result.data.data.category))
+        const intResults = stringToInt(result.data.data.categories)
+        dispatch(getCategory(intResults))
     }).catch((error) => {
         console.log("There was an error when getting one category: " + error)
         return "There was an error when getting one category: " + error
