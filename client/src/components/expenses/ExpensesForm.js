@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, TextInput, StyleSheet } from "react-native"
+import { ScrollView, TextInput, StyleSheet, View } from "react-native"
 import { Button, Title } from 'react-native-paper';
 
 export default class ExpensesForm extends Component {
@@ -16,37 +16,55 @@ export default class ExpensesForm extends Component {
 
         return (
             <ScrollView>
-
-                <TextInput
-                    placeholder="so... what did you buy?"
-                    onChangeText={ (name) => this.setState({ name: name }) }
-                    value={ this.state.name !== undefined ? this.state.name : initialValues.name }
-                    placeholderTextColor="white"
-                />
-
-                <TextInput
-                    placeholder="...and how much does that cost?"
-                    onChangeText={ (amount) => this.setState({ amount: amount }) }
-                    value={ this.state.amount !== undefined ? this.state.amount : initialValues.amount }
-                    placeholderTextColor="white"
-                />
-
-                <Button
-                    mode="contained"
-                    onPress={ this.handleSubmit }
+                
+                <View 
                     style={{ flex:1,
-                        flexDirection:'row',
+                        flexDirection:'column',
                         alignItems:'center',
                         justifyContent:'center',
-                        marginHorizontal: 60,
-                        marginVertical: 5,
-                        backgroundColor: "#FF951C", 
-                        color: styles.buttonTextColor.color,
-                        borderBottomWidth: 0.3,
-                        borderRightWidth: 0.3,
-                        borderColor: "white"
-                    }}
-                > Submit </Button>
+                        marginBottom: 40
+                        }} 
+                >
+                    <TextInput
+                        placeholder="so... what did you buy?"
+                        onChangeText={ (name) => this.setState({ name: name }) }
+                        value={ this.state.name !== undefined ? this.state.name : initialValues.name }
+                        placeholderTextColor="white"
+                        style={{ 
+                            textAlign: "center",
+                            color: "white",
+                        }}
+                    />
+
+                    <TextInput
+                        placeholder="...and how much does that cost?"
+                        onChangeText={ (amount) => this.setState({ amount: amount }) }
+                        value={ this.state.amount !== undefined ? this.state.amount : initialValues.amount }
+                        placeholderTextColor="white"
+                        style={{ 
+                            textAlign: "center",
+                            color: "white",
+                        }}
+                    />
+
+                    <Button
+                        mode="contained"
+                        onPress={ this.handleSubmit }
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center',
+                            marginHorizontal: 60,
+                            marginVertical: 5,
+                            backgroundColor: "#FF951C", 
+                            color: styles.buttonTextColor.color,
+                            borderBottomWidth: 0.3,
+                            borderRightWidth: 0.3,
+                            borderColor: "white"
+                        }}
+                    > Submit </Button>
+                
+                </View>
 
             </ScrollView>
         )
