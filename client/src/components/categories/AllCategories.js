@@ -23,10 +23,10 @@ class pieChart {
 
 class AllCategories extends Component {
 
-    static navigationOptions = {
-        title: 'AllCategories',
-        /* No more header config here! */
-      };
+    // static navigationOptions = {
+    //     title: 'AllCategories',
+    //     /* No more header config here! */
+    //   };
 
     state = {
         showFlatList: true,

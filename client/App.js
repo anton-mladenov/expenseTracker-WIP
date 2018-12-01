@@ -39,9 +39,9 @@ const RootStack = createStackNavigator(
         },
         WelcomeScreen: {
             screen: WelcomeScreen,
-            navigationOptions: {
-                headerLeft: null,
-            }
+            // navigationOptions: {
+            //     headerLeft: null,
+            // }
         },
         Dashboard: {
             screen: Dashboard,
@@ -60,15 +60,6 @@ const RootStack = createStackNavigator(
             navigationOptions: () => ({
                 headerLeft:
                     () => <BackButton category={"AllCategories"} />,
-
-                        // headerStyle: {
-                        //   backgroundColor: 'brown',
-                        // },
-                        // headerTintColor: '#fff',
-                        // headerTitleStyle: {
-                        //   fontWeight: 'bold',
-                        // },
-
             })
         },
         SignInForm: {
@@ -100,15 +91,6 @@ const RootStack = createStackNavigator(
             navigationOptions: () => ({
                 headerLeft:
                     () => <BackButton category={"AllExpenses"} />,
-
-                        // headerStyle: {
-                        //   backgroundColor: 'green',
-                        // },
-                        // headerTintColor: '#fff',
-                        // headerTitleStyle: {
-                        //   fontWeight: 'bold',
-                        // },
-
             })
         },
         Expenses: {
@@ -136,11 +118,11 @@ const RootStack = createStackNavigator(
             headerStyle: {
               backgroundColor: '#FF951C',
             },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              color: "white"
-            },
+            // headerTintColor: '#fff',
+            // headerTitleStyle: {
+            //   fontWeight: 'bold',
+            //   color: "white"
+            // },
           },
     }
 )

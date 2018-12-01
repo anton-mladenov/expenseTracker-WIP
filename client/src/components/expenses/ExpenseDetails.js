@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Button } from "react-native"
+import { ScrollView, View, StyleSheet } from "react-native"
 import { connect } from "react-redux"
 import { getOneExpense, editOneExpense, deleteOneExpense } from "../../actions/expensesActions"
 import ExpensesForm from "./ExpensesForm"
+import { Text, Button, withTheme, ThemeProvider } from "react-native-paper"
 
 class ExpenseDetails extends Component {
 
@@ -42,26 +43,79 @@ class ExpenseDetails extends Component {
         const { oneExpense, category } = this.props
 
         return (
-            <ScrollView>
-
-                <Text> { oneExpense.name } </Text>
-                <Text> { oneExpense.amount } </Text>
-                <Text> Added to Category: { category.name } </Text>
-
-                <Button
-                    title="Edit Expense"
-                    onPress={ this.handleEdit }
-                />
+            <ScrollView
+                style={styles.background}
+            >
                 
-                {
-                    this.state.edit &&
-                    <ExpensesForm onSubmit={ this.handleSubmit } initialValues={ oneExpense } />
-                }
+                <View
+                    style={{ flex:1,
+                        flexDirection: "column",
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginVertical: "35%",
+                        }}
+                >
+                    <Text
+                        style={{ 
+                            fontSize: 45,
+                            letterSpacing: 5,
+                            color: styles.buttonTextColor.color
+                        }}
+                    > { oneExpense.name } </Text>
+                    <Text
+                        style={{ 
+                            fontSize: 15,
+                            fontStyle: "italic",
+                            lineHeight: 30,
+                            color: "#FF951C"
+                        }}
+                    > Added to Category: { category.name } </Text>
+                    <Text
+                        style={{ 
+                            fontSize: 30,
+                            marginTop: 30,
+                            color: styles.buttonTextColor.color
+                        }}
+                    > Money out: { oneExpense.amount } </Text>
+                </View>
+                
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: "column"
+                    }}
+                >
+                    <Button
+                        onPress={ this.handleEdit }
+                        mode="contained"
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center',
+                            marginHorizontal: 60,
+                            marginVertical: 5,
+                            marginTop: 15,
+                            backgroundColor: styles.buttonBackground.backgroundColor }}
+                    > Edit Expense </Button>
+                    
+                    {
+                        this.state.edit &&
+                        <ExpensesForm onSubmit={ this.handleSubmit } initialValues={ oneExpense } />
+                    }
 
-                <Button
-                    title="Delete Expense"
-                    onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
-                />
+                    <Button
+                        onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
+                        mode="contained"
+                        style={{ flex:1,
+                            flexDirection:'row',
+                            alignItems:'center',
+                            justifyContent:'center',
+                            marginHorizontal: 60,
+                            marginVertical: 5,
+                            marginTop: 15,
+                            backgroundColor: styles.buttonBackground.backgroundColor }}
+                    > Delete Expense </Button>
+                </View>
 
             </ScrollView>
         )
@@ -75,5 +129,19 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOneExpense, editOneExpense, deleteOneExpense })(ExpenseDetails)
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954",
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
+
+const thisComponentWithTheme = withTheme(ExpenseDetails)
+
+export default connect(mapStateToProps, { getOneExpense, editOneExpense, deleteOneExpense })(thisComponentWithTheme)
 
