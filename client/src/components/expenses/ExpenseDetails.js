@@ -41,6 +41,7 @@ class ExpenseDetails extends Component {
     render() {
 
         const { oneExpense, category } = this.props
+        oneExpense.amount = oneExpense.amount.toString()
 
         return (
             <ScrollView
