@@ -65,12 +65,12 @@ class WelcomeScreen extends Component {
                         color: styles.buttonTextColor.color,
                         borderBottomWidth: 0.3,
                         borderRightWidth: 0.3,
-                        borderColor: "white"
+                        borderColor: "white",
+                        marginBottom: 30,
                     }}
                     > Sign Up </Button>
                 }
 
-                <Text> </Text>
                 {
                     !currentUser &&
                     <Button
@@ -89,6 +89,26 @@ class WelcomeScreen extends Component {
                         borderColor: "white"
                     }}
                     > Sign In </Button>
+                }
+
+                {
+                    currentUser &&
+                    <Button
+                    mode="contained"
+                    onPress={ () => this.props.navigation.navigate("AllCategories") }
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                    > Go To Your Categories </Button>
                 }
 
             </ScrollView>
