@@ -85,18 +85,23 @@ class ExpenseDetails extends Component {
                         flexDirection: "column"
                     }}
                 >
-                    <Button
-                        onPress={ this.handleEdit }
+
+                        <Button
                         mode="contained"
+                        onPress={ this.handleEdit }
                         style={{ flex:1,
                             flexDirection:'row',
                             alignItems:'center',
                             justifyContent:'center',
                             marginHorizontal: 60,
                             marginVertical: 5,
-                            marginTop: 15,
-                            backgroundColor: styles.buttonBackground.backgroundColor }}
-                    > Edit Expense </Button>
+                            backgroundColor: "#FF951C", 
+                            color: styles.buttonTextColor.color,
+                            borderBottomWidth: 0.3,
+                            borderRightWidth: 0.3,
+                            borderColor: "white"
+                        }}
+                        > Edit Category </Button>
                     
                     {
                         this.state.edit &&
@@ -104,17 +109,21 @@ class ExpenseDetails extends Component {
                     }
 
                     <Button
-                        onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
                         mode="contained"
+                        onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
                         style={{ flex:1,
                             flexDirection:'row',
                             alignItems:'center',
                             justifyContent:'center',
                             marginHorizontal: 60,
                             marginVertical: 5,
-                            marginTop: 15,
-                            backgroundColor: styles.buttonBackground.backgroundColor }}
-                    > Delete Expense </Button>
+                            backgroundColor: "#FF951C", 
+                            color: styles.buttonTextColor.color,
+                            borderBottomWidth: 0.3,
+                            borderRightWidth: 0.3,
+                            borderColor: "white"
+                        }}
+                        > Delete Category </Button>
                 </View>
 
             </ScrollView>
