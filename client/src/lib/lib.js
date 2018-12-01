@@ -71,7 +71,7 @@ export const jwtDecodeToExpDate = (jwt) => {
 
 // convert strings to integers
 export const stringToInt = (data) => {
-    if (typeof data === "object") {
+    if (typeof data === "Object") {
         const newData = data.map((item) => {
             if (item.id && typeof item.id === "string") {
                 const id = parseInt(item.id, 10)
@@ -86,4 +86,14 @@ export const stringToInt = (data) => {
         return newData
     }
     return data
+}
+
+// COLOURS
+
+export const availableColors = ["#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
+
+export const pickColor = () => {
+    const availableColors = ["#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
+    const theChosenOne = Math.floor(Math.random() * availableColors.length)
+    return availableColors[theChosenOne]
 }

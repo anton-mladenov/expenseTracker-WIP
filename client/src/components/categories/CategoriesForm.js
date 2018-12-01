@@ -23,8 +23,8 @@ class CategoriesForm extends Component {
                         flexDirection:'column',
                         alignItems:'center',
                         justifyContent:'center',
-                        marginBottom: 40,
-                        marginTop: "30%",
+                        // marginBottom: 40,
+                        marginTop: 190,
                     }} 
                     >
                     <TextInput
@@ -35,24 +35,24 @@ class CategoriesForm extends Component {
                         style={{ 
                             textAlign: "center",
                             color: "white",
-                            marginBottom: 40,
                         }}
                     />
 
                     <Button
                         mode="contained"
                         onPress={ this.handleSubmit }
-                        style={{ flex:1,
+                        style={{ 
+                            flex:1,
                             flexDirection:'row',
                             alignItems:'center',
                             justifyContent:'center',
                             marginHorizontal: 60,
-                            marginVertical: 5,
+                            marginVertical: 40,
                             backgroundColor: "#FF951C", 
                             color: styles.buttonTextColor.color,
                             borderBottomWidth: 0.3,
                             borderRightWidth: 0.3,
-                            borderColor: "white"
+                            borderColor: "white",
                         }}
                     > Submit </Button>
 

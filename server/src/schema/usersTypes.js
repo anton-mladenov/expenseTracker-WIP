@@ -6,7 +6,6 @@ type User {
     id: ID
     name: String!
     email: String
-    #role: Strin
     categories: [Category]
 }
 

@@ -6,6 +6,7 @@ type Category {
     id: ID
     name: String
     amount: Int
+    color: String
     user: User
     expenses: [Expense]
 }
@@ -16,10 +17,9 @@ extend type Query {
 }
    
 extend type Mutation {
-    createCategory(name: String): Category
+    createCategory(name: String, color: String): Category
     updateCategory(id: ID, name: String): Category
     deleteCategory(id: ID): Boolean
 }
 
 `
-

@@ -39,9 +39,9 @@ const RootStack = createStackNavigator(
         },
         WelcomeScreen: {
             screen: WelcomeScreen,
-            // navigationOptions: {
-            //     headerLeft: null,
-            // }
+            navigationOptions: {
+                headerLeft: null,
+            }
         },
         Dashboard: {
             screen: Dashboard,

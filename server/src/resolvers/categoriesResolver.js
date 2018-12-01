@@ -34,12 +34,15 @@ export default {
 
         createCategory: combineResolvers(
             isAuthenticated,
-            async (parent, { name }, { me, models }, info) => {
+            async (parent, { name, color }, { me, models }, info) => {
+                console.log("name: ", typeof name, name, " & color: ", typeof color, color)
                 return await models.Category
                     .create({
                         name,
+                        color
                     }).then(cat => {
                         cat.addUser(me.id)
+                        console.log( " cat: ", cat)
                         return cat
                     })
             }
@@ -47,12 +50,13 @@ export default {
 
         updateCategory: combineResolvers(
             isAuthenticated,
-            async (parent, { id, name }, { models }) => {
+            async (parent, { id, name, color }, { models }) => {
                 return await models.Category
                     .findById(id)
                     .then((category) => {
                         category.update({
-                            name: name
+                            name: name,
+                            color: color
                         })
                         return category
                     })

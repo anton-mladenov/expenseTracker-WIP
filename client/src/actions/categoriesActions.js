@@ -1,8 +1,9 @@
 import { AsyncStorage } from "react-native"
-import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc, stringToInt } from "../lib/lib"
+import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc, stringToInt, } from "../lib/lib"
 import axios from "axios"
 import { logoutType } from "./usersActions"
 
+const availableColors = ["#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
 
 // CREATE A NEW CATEGORY
 export const CREATE_CATEGORY = "CREATE_CATEGORY"
@@ -20,6 +21,10 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
     const jwt = state.currentUserReducer
     if (jwtDecodeToExpDate(jwt)) return removeStorageFunc(storageKey)
 
+    let usedColors = state.categories.map((category) => category.color)
+
+    let allColors = availableColors.filter( (color) => usedColors.indexOf(color) === -1 )
+
     axios({
         url: baseUrl,
         headers: { "x-token": `${jwt}` },
@@ -27,20 +32,20 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
         data: {
             query: `
             mutation {
-                createCategory(name: "${newCategory}") {
+                createCategory(name: "${newCategory}", color: "${allColors[0]}") {
                     id
                     name
+                    color
                 }
               }
             `
         }
     }).then((result) => {
         const intResults = stringToInt(result.data.data.createCategory)
-        console.log({intResults})
         dispatch(createCategory(intResults))
     }).catch((error) => {
-        console.log("There was an error when creating the new category " + error)
-        return "There was an error when creating the new category " + error
+        console.log("There was an error when creating the new category: " + error)
+        return "There was an error when creating the new category: " + error
     })
 }
 
@@ -76,6 +81,7 @@ export const getAllCategories = () => (dispatch, getState) => {
                         id
                         name
                         amount
+                        color
                         user {
                             id
                             name
@@ -93,7 +99,7 @@ export const getAllCategories = () => (dispatch, getState) => {
         const intResults = stringToInt(result.data.data.categories)
         dispatch(allCategories(intResults))
     }).catch((error) => {
-        console.log("There was an error when getting all categories " + error)
+        console.log("There was an error when getting all categories: " + error)
         return error
     })
 }
@@ -136,8 +142,8 @@ export const getOneCategory = (data) => (dispatch, getState) => {
         result.data.data.category.id = id
         dispatch(getCategory(result.data.data.category))
     }).catch((error) => {
-        console.log("There was an error when getting one category " + error)
-        return "There was an error when getting one category " + error
+        console.log("There was an error when getting one category: " + error)
+        return "There was an error when getting one category: " + error
     })
 }
 
@@ -185,8 +191,8 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
         console.log({intResults})
         dispatch(updateCategory(intResults))
     }).catch((error) => {
-        console.log("There was an error when trying to update a category " + error)
-        return "There was an error when trying to update a category " + error
+        console.log("There was an error when trying to update a category: " + error)
+        return "There was an error when trying to update a category: " + error
     })
 }
 
@@ -224,7 +230,7 @@ export const deleteOneCategory = (data) => (dispatch, getState) => {
         console.log({category})                           // da polzvam li vuobshte DELETE action?
         dispatch(deleteCategory(data))
     }).catch((error) => {
-        console.log("There was an error when trying to delete a category " + error)
-        return "There was an error when trying to delete a category " + error
+        console.log("There was an error when trying to delete a category: " + error)
+        return "There was an error when trying to delete a category: " + error
     })
 }

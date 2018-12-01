@@ -14,6 +14,10 @@ const category = (sequelize, DataTypes) => {
                 isNumeric: true,
             }
         },
+        color: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     })
 
     Category.associate = (models) => {
