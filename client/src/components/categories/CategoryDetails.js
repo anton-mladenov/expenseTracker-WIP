@@ -159,7 +159,7 @@ class CategoryDetails extends Component {
                         borderRightWidth: 0.3,
                         borderColor: "white"
                     }}
-                    > Add New Category </Button>
+                    > Add New Expense </Button>
                 }
 
                 {

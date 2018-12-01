@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { ScrollView, Button, TextInput } from "react-native"
+import { ScrollView, TextInput, StyleSheet } from "react-native"
+import { Button, Title } from 'react-native-paper'
 import { withNavigation } from "react-navigation"
 
 class CategoriesForm extends Component {
@@ -21,17 +22,42 @@ class CategoriesForm extends Component {
                     placeholder="Give A Name To Your New Category."
                     onChangeText={ (name) => this.setState({ name: name }) }
                     value={ this.state.name !== undefined ? this.state.name : initialValues.name }
+                    placeholderTextColor="white"
                 />
 
                 <Button
-                    title="Submit"
+                    mode="contained"
                     onPress={ this.handleSubmit }
-                />
+                    style={{ flex:1,
+                        flexDirection:'row',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginHorizontal: 60,
+                        marginVertical: 5,
+                        backgroundColor: "#FF951C", 
+                        color: styles.buttonTextColor.color,
+                        borderBottomWidth: 0.3,
+                        borderRightWidth: 0.3,
+                        borderColor: "white"
+                    }}
+                > Submit </Button>
 
             </ScrollView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954",
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
 
 const categoriesFormWithNav = withNavigation(CategoriesForm)
 

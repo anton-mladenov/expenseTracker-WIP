@@ -92,7 +92,7 @@ class AllCategories extends Component {
                     (this.state.showAddButton && currentUser) &&
                     <Button
                         mode="contained"
-                        onPress={() => this.showAddForm}
+                        onPress={this.showAddForm}
                         style={{ flex:1,
                             flexDirection:'row',
                             alignItems:'center',
