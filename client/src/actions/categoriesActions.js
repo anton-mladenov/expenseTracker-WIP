@@ -1,9 +1,8 @@
 import { AsyncStorage } from "react-native"
-import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc, stringToInt, } from "../lib/lib"
+import { baseUrl, jwtDecodeToExpDate, storageKey, removeStorageFunc, stringToInt, availableColors } from "../lib/lib"
 import axios from "axios"
 import { logoutType } from "./usersActions"
 
-const availableColors = ["#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
 
 // CREATE A NEW CATEGORY
 export const CREATE_CATEGORY = "CREATE_CATEGORY"

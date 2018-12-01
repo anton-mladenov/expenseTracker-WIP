@@ -7,17 +7,11 @@ import CategoriesForm from "./CategoriesForm"
 import PureChart from 'react-native-pure-chart';
 import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
 
-const pickColor = () => {
-    const availableColors = ["#120309", "#2e0f15", "#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
-    const theChosenOne = Math.floor(Math.random() * availableColors.length)
-    return availableColors[theChosenOne]
-}
-
 class pieChart {
-    constructor(value, label) {
+    constructor(value, label, color) {
         this.value = value
         this.label = label
-        this.color = pickColor()
+        this.color = color
     }
 }
 
@@ -77,7 +71,7 @@ class AllCategories extends Component {
         // // estimating total expense for all categories
         // const totalCategoryAmount = allCategories.map((cat) => cat.amount).reduce((acc, cur) => { return acc + cur }, 0)
 
-        const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, pickColor()))
+        const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, cat.color))
         
         return (
             <ScrollView
@@ -125,13 +119,15 @@ class AllCategories extends Component {
                 }
 
                 {
-                    allCategories.length !== 0 && !this.state.showForm &&
+                    allCategories.length > 1 && !this.state.showForm &&
                     <View
-                        style={{ flex:1,
-                            flexDirection:'row',
-                            alignItems:'center',
-                            justifyContent:'center',
-                            margin: 20 }}
+                        style={{ 
+                            flex: 1,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: 20 
+                        }}
                     >
                         <PureChart
                             data={categoriesToDisplay}
