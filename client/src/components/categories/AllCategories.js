@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { ScrollView, Text, FlatList, StyleSheet, View } from "react-native"
 import { connect } from "react-redux"
 import { getAllCategories, createNewCategory } from "../../actions/categoriesActions"
-import CategoryDetails from "./CategoryDetails"
-import CategoriesForm from "./CategoriesForm"
+import CategoryForm from "./CategoriesForm"
 import PureChart from 'react-native-pure-chart';
-import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
+import { Button, FAB, Card, Title } from 'react-native-paper';
 
 class pieChart {
     constructor(value, label, color) {
@@ -36,15 +35,6 @@ class AllCategories extends Component {
         currentUser && this.props.getAllCategories()
     }
 
-    showCategoryDetails = (id) => {
-        const idInt = parseInt(id, 10)
-        return this.setState({
-            categoryId: idInt,
-            showDetails: !this.state.showDetails,
-            showFlatList: !this.state.showFlatList,
-        })
-    }
-
     showAddForm = () => {
         this.setState({
             showForm: !this.state.showForm,
@@ -52,14 +42,14 @@ class AllCategories extends Component {
             showFlatList: !this.state.showFlatList
         })
     }
-
+    
     handleSubmit = (data) => {
-        this.props.createNewCategory(data.name)
         this.setState({
             showForm: !this.state.showForm,
             showAddButton: !this.state.showAddButton,
             showFlatList: !this.state.showFlatList
         })
+        this.props.createNewCategory(data.name)
     }
 
     render() {
@@ -67,9 +57,6 @@ class AllCategories extends Component {
         const { allCategories, currentUser } = this.props
         const { navigate } = this.props.navigation
         const id = this.state.categoryId
-
-        // // estimating total expense for all categories
-        // const totalCategoryAmount = allCategories.map((cat) => cat.amount).reduce((acc, cur) => { return acc + cur }, 0)
 
         const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, cat.color))
         
@@ -115,7 +102,7 @@ class AllCategories extends Component {
 
                 {
                     this.state.showForm &&
-                    <CategoriesForm onSubmit={ this.handleSubmit } />
+                    <CategoryForm onSubmit={ this.handleSubmit } />
                 }
 
                 {

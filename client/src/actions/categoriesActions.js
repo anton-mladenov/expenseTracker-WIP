@@ -35,13 +35,16 @@ export const createNewCategory = (newCategory) => (dispatch, getState) => {
                     id
                     name
                     color
+                    amount
                 }
               }
             `
         }
     }).then((result) => {
-        const intResults = stringToInt(result.data.data.createCategory)
-        dispatch(createCategory(intResults))
+        let resultIntoArray = []
+        resultIntoArray.push(result.data.data.createCategory)
+        const intResults = stringToInt(resultIntoArray)
+        dispatch(createCategory(intResults[0]))
     }).catch((error) => {
         console.log("There was an error when creating the new category: " + error)
         return "There was an error when creating the new category: " + error
@@ -81,10 +84,6 @@ export const getAllCategories = () => (dispatch, getState) => {
                         name
                         amount
                         color
-                        user {
-                            id
-                            name
-                        }
                         expenses {
                             id
                             name
@@ -174,10 +173,7 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
                 updateCategory(id: ${id}, name: "${name}"){
                     id
                     name
-                    user {
-                        id
-                        name
-                    }
+                    color
                     expenses {
                         name
                     }

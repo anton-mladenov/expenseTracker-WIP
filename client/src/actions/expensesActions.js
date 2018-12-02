@@ -36,10 +36,7 @@ export const getOneExpense = (data) => (dispatch, getState) => {
                     category {
                         name
                         amount
-                    }
-                    user {
-                        id
-                        name
+                        color
                     }
                 }
             }
@@ -87,10 +84,7 @@ export const getAllExpenses = (data) => (dispatch, getState) => {
                     category {
                         name
                         amount
-                    }
-                    user {
-                        id
-                        name
+                        color
                     }
                 }
             }
@@ -181,10 +175,7 @@ export const editOneExpense = (data) => (dispatch, getState) => {
                         id
                         name
                         amount
-                    }
-                    user{
-                        id
-                        name
+                        color
                     }
                 }
               }

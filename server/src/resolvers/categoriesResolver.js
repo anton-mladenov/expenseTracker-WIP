@@ -35,14 +35,12 @@ export default {
         createCategory: combineResolvers(
             isAuthenticated,
             async (parent, { name, color }, { me, models }, info) => {
-                console.log("name: ", typeof name, name, " & color: ", typeof color, color)
                 return await models.Category
                     .create({
                         name,
                         color
                     }).then(cat => {
                         cat.addUser(me.id)
-                        console.log( " cat: ", cat)
                         return cat
                     })
             }

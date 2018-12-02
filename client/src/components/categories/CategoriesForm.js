@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { ScrollView, TextInput, StyleSheet, View } from "react-native"
-import { Button, Title } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 import { withNavigation } from "react-navigation"
+import { connect } from "react-redux"
+import { createNewCategory, getAllCategories } from "../../actions/categoriesActions"
+
 
 class CategoriesForm extends Component {
 
@@ -16,14 +19,15 @@ class CategoriesForm extends Component {
         const initialValues = this.props.initialValues || {}
 
         return (
-            <ScrollView>
+            <ScrollView
+                style={styles.background}
+            >
                 
                 <View 
                     style={{ flex:1,
                         flexDirection:'column',
                         alignItems:'center',
                         justifyContent:'center',
-                        // marginBottom: 40,
                         marginTop: 190,
                     }} 
                     >
@@ -77,4 +81,4 @@ const styles = StyleSheet.create({
 
 const categoriesFormWithNav = withNavigation(CategoriesForm)
 
-export default categoriesFormWithNav
+export default connect(null, { createNewCategory, getAllCategories })(categoriesFormWithNav)
