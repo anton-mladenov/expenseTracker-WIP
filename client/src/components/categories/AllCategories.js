@@ -34,11 +34,11 @@ class AllCategories extends Component {
         const { currentUser, navigation } = this.props
         !currentUser && navigation.navigate("WelcomeScreen")
         currentUser && this.props.getAllCategories()
-        // addAndroidBackListener(this.goBack)
+        addAndroidBackListener(this.goBack)
     }
 
     componentWillUnmount() {
-        // removeAndroidBackListener(this.goBack)
+        removeAndroidBackListener(this.goBack)
     }
 
     goBack = async () => {

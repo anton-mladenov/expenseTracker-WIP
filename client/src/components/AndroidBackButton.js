@@ -1,28 +1,29 @@
 import { BackHandler, Alert } from "react-native"
 
 const addAndroidBackListener = (callback) => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-        callback()
-        return true
-    })
+    BackHandler.addEventListener("hardwareBackPress", callback)
 }
 
 const removeAndroidBackListener = (callback) => {
-    BackHandler.removeEventListener('hardwareBackPress', () => {
-        callback()
-    })
+    BackHandler.removeEventListener('hardwareBackPress', callback)
 }
 
 const exitAlert = () => {
-    BackHandler.exitApp()
     // Alert.alert(
-    //     "Confirm Exit",
-    //     "Do you want to quit the app?"
-    //     [
-    //         { text: "Cancel", onPress: () => null },
-    //         { text: "OK", onPress: () => BackHandler.exitApp() }
-    //     ]
-    // )
+    //     'Exit App',
+    //     'Exiting the application?', [{
+    //         text: 'Cancel',
+    //         onPress: () => console.log('Cancel Pressed'),
+    //         style: 'cancel'
+    //     }, {
+    //         text: 'OK',
+    //         onPress: () => BackHandler.exitApp()
+    //     }, ], {
+    //         cancelable: false
+    //     }
+    //  )
+    //  return true;
+    BackHandler.exitApp()
 }
 
 export { addAndroidBackListener, removeAndroidBackListener, exitAlert }

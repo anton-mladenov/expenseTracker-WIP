@@ -4,11 +4,25 @@ import { Button } from 'react-native-paper'
 import { withNavigation } from "react-navigation"
 import { connect } from "react-redux"
 import { createNewCategory, getAllCategories } from "../../actions/categoriesActions"
+import { addAndroidBackListener, removeAndroidBackListener } from "../AndroidBackButton"
 
 
 class CategoriesForm extends Component {
 
     state = {}
+
+    componentDidMount() {
+        addAndroidBackListener(this.goBack)
+    }
+
+    componentWillUnmount() {
+        removeAndroidBackListener(this.goBack)
+    }
+
+    goBack = async () => {
+        console.log(" DOES IT WORK? ")
+        await this.props.navigation.push("AllCategories")
+    }
 
     handleSubmit = () => {
         this.props.onSubmit(this.state)

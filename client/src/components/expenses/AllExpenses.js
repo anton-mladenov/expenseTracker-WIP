@@ -5,6 +5,7 @@ import { getAllExpenses } from "../../actions/expensesActions"
 import ExpenseDetails from "./ExpenseDetails";
 import { withNavigation } from "react-navigation"
 import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
+import { addAndroidBackListener, removeAndroidBackListener } from "../AndroidBackButton"
 
 class AllExpenses extends Component {
 
@@ -18,6 +19,15 @@ class AllExpenses extends Component {
     componentDidMount() {
         const { categoryId } = this.props
         this.props.getAllExpenses(categoryId)
+        addAndroidBackListener(this.goBack)
+    }
+
+    componentWillUnmount() {
+        removeAndroidBackListener(this.goBack)
+    }
+
+    goBack = async () => {
+        await this.props.navigation.goBack()
     }
 
     showExpenseDetails = (id) => {

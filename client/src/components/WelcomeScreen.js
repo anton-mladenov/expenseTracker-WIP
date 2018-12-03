@@ -101,7 +101,7 @@ class WelcomeScreen extends Component {
                     currentUser &&
                     <Button
                     mode="contained"
-                    onPress={ () => this.props.navigation.navigate("AllCategories") }
+                    onPress={ () => this.props.navigation.push("AllCategories") }
                     style={{ flex:1,
                         flexDirection:'row',
                         alignItems:'center',

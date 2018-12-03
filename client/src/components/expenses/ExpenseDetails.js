@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { getOneExpense, editOneExpense, deleteOneExpense } from "../../actions/expensesActions"
 import ExpensesForm from "./ExpensesForm"
 import { Text, Button, withTheme, ThemeProvider } from "react-native-paper"
+import { addAndroidBackListener, removeAndroidBackListener } from "../AndroidBackButton"
 
 class ExpenseDetails extends Component {
 
@@ -19,6 +20,15 @@ class ExpenseDetails extends Component {
             categoryId: this.props.category.id
         }
         this.props.getOneExpense(data)
+        addAndroidBackListener(this.goBack)
+    }
+
+    componentWillUnmount() {
+        removeAndroidBackListener(this.goBack)
+    }
+
+    goBack = async () => {
+        await this.props.navigation.goBack()
     }
 
     handleEdit = () => {

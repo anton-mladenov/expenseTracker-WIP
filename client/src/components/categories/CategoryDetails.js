@@ -23,11 +23,11 @@ class CategoryDetails extends Component {
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.getOneCategory(itemId)
-        // addAndroidBackListener(this.goBack)
+        addAndroidBackListener(this.goBack)
     }
 
     componentWillUnmount() {
-        // removeAndroidBackListener(this.goBack)
+        removeAndroidBackListener(this.goBack)
     }
 
     goBack = async () => {
