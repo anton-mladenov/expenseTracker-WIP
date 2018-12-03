@@ -137,8 +137,10 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 			`
         }
     }).then((result) => {
-        const intResults = stringToInt(result.data.data.categories)
-        dispatch(getCategory(intResults))
+        let resultIntoArray = []
+        resultIntoArray.push(result.data.data.category)
+        const intResults = stringToInt(resultIntoArray)
+        dispatch(getCategory(intResults[0]))        
     }).catch((error) => {
         console.log("There was an error when getting one category: " + error)
         return "There was an error when getting one category: " + error
