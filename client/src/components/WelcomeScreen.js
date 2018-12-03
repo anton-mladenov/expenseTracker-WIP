@@ -3,6 +3,7 @@ import { ScrollView, Text, StyleSheet, View } from "react-native"
 import { connect } from "react-redux"
 import { AsyncStorage } from "react-native"
 import { Button, Title } from 'react-native-paper';
+import { addAndroidBackListener, removeAndroidBackListener, exitAlert } from "./AndroidBackButton"
 
 
 class WelcomeScreen extends Component {
@@ -10,6 +11,11 @@ class WelcomeScreen extends Component {
     componentDidUpdate() {
         const { currentUser, navigation } = this.props
         currentUser && navigation.navigate("AllCategories")
+        // addAndroidBackListener(exitAlert)
+    }
+
+    componentWillUnmount() {
+        // removeAndroidBackListener(exitAlert)
     }
 
     render() {

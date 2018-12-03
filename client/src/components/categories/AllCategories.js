@@ -5,6 +5,7 @@ import { getAllCategories, createNewCategory } from "../../actions/categoriesAct
 import CategoryForm from "./CategoriesForm"
 import PureChart from 'react-native-pure-chart';
 import { Button, FAB, Card, Title } from 'react-native-paper';
+import { addAndroidBackListener, removeAndroidBackListener } from "../AndroidBackButton"
 
 class pieChart {
     constructor(value, label, color) {
@@ -33,6 +34,15 @@ class AllCategories extends Component {
         const { currentUser, navigation } = this.props
         !currentUser && navigation.navigate("WelcomeScreen")
         currentUser && this.props.getAllCategories()
+        // addAndroidBackListener(this.goBack)
+    }
+
+    componentWillUnmount() {
+        // removeAndroidBackListener(this.goBack)
+    }
+
+    goBack = async () => {
+        await this.props.navigation.push("WelcomeScreen")
     }
 
     showAddForm = () => {

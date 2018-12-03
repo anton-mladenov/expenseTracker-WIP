@@ -8,6 +8,7 @@ import Expenses from "../expenses/Expenses"
 import { createNewExpense } from "../../actions/expensesActions"
 import AllExpenses from "../expenses/AllExpenses"
 import { Button, FAB, Card, Title, Divider } from 'react-native-paper';
+import { addAndroidBackListener, removeAndroidBackListener } from "../AndroidBackButton"
 
 
 class CategoryDetails extends Component {
@@ -22,6 +23,15 @@ class CategoryDetails extends Component {
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.getOneCategory(itemId)
+        // addAndroidBackListener(this.goBack)
+    }
+
+    componentWillUnmount() {
+        // removeAndroidBackListener(this.goBack)
+    }
+
+    goBack = async () => {
+        await this.props.navigation.goBack()
     }
 
     toggleEdit = () => {
