@@ -132,6 +132,11 @@ export const getOneCategory = (data) => (dispatch, getState) => {
 					name
                     amount
                     color
+                    expenses {
+                        id
+                        name
+                        amount
+                    }
 				}
 			}
 			`
@@ -177,7 +182,9 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
                     name
                     color
                     expenses {
+                        id
                         name
+                        amount
                     }
                 }
               }

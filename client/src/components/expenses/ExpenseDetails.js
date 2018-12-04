@@ -37,6 +37,16 @@ class ExpenseDetails extends Component {
         })
     }
 
+    handleDelete = () => {
+        const { oneExpense, category } = this.props
+        this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id })
+        this.props.navigation.navigate("CategoryDetails", {
+            categoryId: category.id
+        })
+        // this.props.navigation.navigate("AllExpenses")
+        // this.props.navigation.goBack()
+    }
+
     handleSubmit = (data) => {
         const expenseId = this.props.navigation.getParam("expenseId")
         const newData = {
@@ -51,7 +61,6 @@ class ExpenseDetails extends Component {
     render() {
 
         const { oneExpense, category } = this.props
-        oneExpense.amount = oneExpense.amount.toString()
 
         return (
             <ScrollView
@@ -64,30 +73,49 @@ class ExpenseDetails extends Component {
                         alignItems:'center',
                         justifyContent:'center',
                         marginVertical: "35%",
-                        }}
+                    }}
                 >
-                    <Text
-                        style={{ 
-                            fontSize: 45,
-                            letterSpacing: 5,
-                            color: styles.buttonTextColor.color
-                        }}
-                    > { oneExpense.name } </Text>
-                    <Text
+
+                    {
+                        oneExpense.name && 
+                        <Text
+                            style={{ 
+                                fontSize: 45,
+                                letterSpacing: 5,
+                                color: styles.buttonTextColor.color
+                            }}
+                        > { oneExpense.name } </Text>
+                    }
+                    
+                    {
+                        category.name &&
+                        <Text
                         style={{ 
                             fontSize: 15,
                             fontStyle: "italic",
                             lineHeight: 30,
                             color: "#FF951C"
                         }}
-                    > Added to Category: { category.name } </Text>
-                    <Text
-                        style={{ 
-                            fontSize: 30,
-                            marginTop: 30,
-                            color: styles.buttonTextColor.color
-                        }}
-                    > Money out: { oneExpense.amount } </Text>
+                        > Added to Category: { category.name } </Text>
+                    }
+
+                    {
+                        (oneExpense.amount > 0) &&
+                        <Text
+                            style={{ 
+                                fontSize: 30,
+                                marginTop: 30,
+                                color: styles.buttonTextColor.color
+                            }}
+                        > 
+                        Money out: { oneExpense.amount } 
+                        </Text>
+                    }
+
+                    {    
+                        !oneExpense.amount && <Text></Text>
+                    }
+
                 </View>
                 
                 <View
@@ -121,7 +149,7 @@ class ExpenseDetails extends Component {
 
                     <Button
                         mode="contained"
-                        onPress={ () => this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id }) }
+                        onPress={ this.handleDelete }
                         style={{ flex:1,
                             flexDirection:'row',
                             alignItems:'center',

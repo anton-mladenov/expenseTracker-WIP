@@ -32,7 +32,7 @@ export const getOneExpense = (data) => (dispatch, getState) => {
                 expense(id: ${data.id}, categoryId: ${data.categoryId}){
                     id
                     name
-                        amount
+                    amount
                     category {
                         name
                         amount
@@ -43,9 +43,13 @@ export const getOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        let amount = result.data.data.expense.amount.toString()
-        result.data.data.expense.amount = amount
-        dispatch(getExpense(result.data.data.expense))
+        console.log(" one expense: ", result.data.data.expense.amount)
+        let resultIntoArray = []
+        resultIntoArray.push(result.data.data.expense)
+        const intResults = stringToInt(resultIntoArray)
+        console.log(" int results: ", intResults)
+        dispatch(getExpense(intResults[0]))   
+        // dispatch(getExpense(result.data.data.expense))
     }).catch((error) => {
         console.log("There was an error when getting one expense " + error)
         return "There was an error when getting one expense " + error
@@ -111,7 +115,7 @@ const createExpense = (data) => ({
 })
 
 export const createNewExpense = (data) => (dispatch, getState) => {
-
+    console.log({data})
     const state = getState()
     if (!state.currentUserReducer) return logout()
 
@@ -227,9 +231,8 @@ export const deleteOneExpense = (data) => (dispatch, getState) => {
             `
         }
     })
-    .then((result) => {
-        console.log({result})                            // da polzvam li vuobshte DELETE action?
-        dispatch(deleteExpense(data))
+    .then((_) => {
+        dispatch(deleteExpense(data.id))
     }).catch((error) => {
         console.log("There was an error when trying to delete an expense " + error)
         return "There was an error when trying to delete an expense " + error

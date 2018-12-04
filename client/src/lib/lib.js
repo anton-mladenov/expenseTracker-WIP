@@ -71,6 +71,7 @@ export const jwtDecodeToExpDate = (jwt) => {
 
 // convert strings to integers
 export const stringToInt = (data) => {
+    console.log({data})
     if (typeof data === "Object" || typeof data === "object" || typeof data === "Array") {
         const newData = data.map((item) => {
             if (item.id && typeof item.id === "string") {
