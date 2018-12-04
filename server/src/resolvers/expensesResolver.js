@@ -46,6 +46,7 @@ export default {
                             .create({
                                 name,
                                 amount,
+                                categoryId
                             })
                             .then(async (expense) => {
                                 category.addExpenses(expense)

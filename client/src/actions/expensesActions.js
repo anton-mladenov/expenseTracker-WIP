@@ -129,14 +129,20 @@ export const createNewExpense = (data) => (dispatch, getState) => {
                     id
                     name
                     amount
+                    category {
+                        name
+                        amount
+                        color
+                    }
                 }
               }
             `
         }
     }).then((result) => {
-        const intResults = stringToInt(result.data.data.createExpense)
-        console.log({intResults})
-        dispatch(createExpense(intResults))
+        let resultIntoArray = []
+        resultIntoArray.push(result.data.data.createExpense)
+        const intResults = stringToInt(resultIntoArray)
+        dispatch(createExpense(intResults[0]))        
     }).catch((error) => {
         console.log("There was an error when creating the new expense " + error)
         return "There was an error when creating the new expense " + error

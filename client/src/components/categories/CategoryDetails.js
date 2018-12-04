@@ -20,9 +20,9 @@ class CategoryDetails extends Component {
     }
 
     componentDidMount() {
-        const { navigation } = this.props
+        const { navigation, oneCategory } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
-        this.props.getOneCategory(itemId)
+        this.props.getOneCategory(oneCategory.id)
         addAndroidBackListener(this.goBack)
     }
 
@@ -72,7 +72,8 @@ class CategoryDetails extends Component {
     render() {
 
         const { oneCategory, navigation } = this.props
-        const itemId = navigation.getParam('categoryId', 'NO-ID')
+        // const itemId = navigation.getParam('categoryId', 'NO-ID')
+        const itemId = oneCategory.id
 
         return (
             <ScrollView
@@ -121,7 +122,6 @@ class CategoryDetails extends Component {
                         >
                         Time to add your first expense! 
                         </Text>
-
                     }
                     
                 </View>
