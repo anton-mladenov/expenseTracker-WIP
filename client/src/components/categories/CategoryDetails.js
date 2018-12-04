@@ -53,6 +53,13 @@ class CategoryDetails extends Component {
         })
     }
 
+    handleDelete = () => {
+        const { navigation } = this.props
+        const itemId = navigation.getParam('categoryId', 'NO-ID')
+        this.props.deleteOneCategory(itemId)
+        this.props.navigation.navigate("AllCategories")
+    }
+
     handleSubmit = (data) => {
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
@@ -129,7 +136,7 @@ class CategoryDetails extends Component {
                     this.state.buttonsShow &&
                     <Button
                     mode="contained"
-                    onPress={ () => this.props.deleteOneCategory(itemId) }
+                    onPress={ this.handleDelete }
                     style={{ flex:1,
                         flexDirection:'row',
                         alignItems:'center',

@@ -43,8 +43,6 @@ class ExpenseDetails extends Component {
         this.props.navigation.navigate("CategoryDetails", {
             categoryId: category.id
         })
-        // this.props.navigation.navigate("AllExpenses")
-        // this.props.navigation.goBack()
     }
 
     handleSubmit = (data) => {
