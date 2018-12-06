@@ -8,6 +8,10 @@ import { Appbar, } from 'react-native-paper';
 
 class BackButton extends Component {
 
+    componentDidMount() {
+        console.log(" ___________ FROM INSIDE THE BUTTON! :_________________________")
+    }
+
     _goBack = () => {
         const { category, categoryId } = this.props
         const catId = parseInt(categoryId, 10)

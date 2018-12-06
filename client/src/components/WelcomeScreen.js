@@ -11,7 +11,7 @@ class WelcomeScreen extends Component {
     componentDidUpdate() {
         const { currentUser, navigation } = this.props
         currentUser && navigation.navigate("AllCategories")
-        // addAndroidBackListener(exitAlert)
+        addAndroidBackListener(exitAlert)
     }
 
     componentWillUnmount() {

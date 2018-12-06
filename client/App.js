@@ -76,9 +76,10 @@ const RootStack = createStackNavigator(
         },
         CategoryForm: {
             screen: CategoryForm,
-            navigationOptions: {
-                headerLeft: null,
-            }
+            navigationOptions: () => ({
+                headerLeft:
+                    () => console.log(" WHHHHHHHHAAAAAATTTT???? ______________________________"),
+            })
         },
         AllExpenses: {
             screen: AllExpenses,

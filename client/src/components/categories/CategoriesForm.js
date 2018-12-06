@@ -93,6 +93,6 @@ const styles = StyleSheet.create({
     }
 })
 
-const categoriesFormWithNav = withNavigation(CategoriesForm)
+const categoriesFormWithNav = withNavigation(CategoriesForm) 
 
 export default connect(null, { createNewCategory, getAllCategories })(categoriesFormWithNav)
