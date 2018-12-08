@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Button } from "react-native"
+import { ScrollView, StyleSheet } from "react-native"
 import { connect } from "react-redux"
 import SignInForm from "./SignInForm"
 import { newSignIn } from "../../actions/usersActions"
-import Dashboard from "../Dashboard"
+import { Title } from 'react-native-paper'
 
 class SignIn extends Component {
 
@@ -17,11 +17,15 @@ class SignIn extends Component {
         const { currentUser } = this.props
 
         return (
-            <ScrollView>
+            <ScrollView style={styles.background}>
 
                 {
                     !currentUser &&
-                    <Text> Sign in to your account first. </Text>
+                    <Title 
+                        style={{ color: styles.buttonTextColor.color, textAlign: "center", marginTop: 70 }} 
+                    > 
+                    Sign in to your account first.
+                    </Title>
                 }
 
                 {
@@ -39,5 +43,17 @@ const mapStateToProps = (state) => {
         currentUser: state.currentUserReducer !== null,
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954",
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
 
 export default connect(mapStateToProps, { newSignIn })(SignIn)

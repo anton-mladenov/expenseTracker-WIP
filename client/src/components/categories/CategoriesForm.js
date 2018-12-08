@@ -20,7 +20,6 @@ class CategoriesForm extends Component {
     }
 
     goBack = async () => {
-        console.log(" DOES IT WORK? ")
         await this.props.navigation.push("AllCategories")
     }
 
