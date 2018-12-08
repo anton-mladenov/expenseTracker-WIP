@@ -22,9 +22,9 @@ class SignIn extends Component {
                 {
                     !currentUser &&
                     <Title 
-                        style={{ color: styles.buttonTextColor.color, textAlign: "center", marginTop: 70 }} 
+                        style={{ color: styles.buttonTextColor.color, textAlign: "center", marginTop: 70, marginBottom: 30 }} 
                     > 
-                    Sign in to your account first.
+                    Sign In To Your Account
                     </Title>
                 }
 

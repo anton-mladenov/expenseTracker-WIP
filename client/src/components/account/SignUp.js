@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Button } from "react-native"
+import { ScrollView, Button, StyleSheet } from "react-native"
 import { connect } from "react-redux"
 import SignUpForm from "./SignUpForm"
 import { newSignUp } from "../../actions/usersActions"
-import Dashboard from "../Dashboard"
+import { Title } from 'react-native-paper'
 
 class SignUp extends Component {
 
@@ -20,10 +20,14 @@ class SignUp extends Component {
         const { signUpSuccess } = this.props
 
         return (
-            <ScrollView>
+            <ScrollView style={styles.background}>
                 {
                     !signUpSuccess &&
-                    <Text> Create Your Account </Text>
+                    <Title 
+                        style={{ color: styles.buttonTextColor.color, textAlign: "center", marginTop: 70, marginBottom: 30 }}
+                    > 
+                    Create A New Account
+                    </Title>
                 }
 
                 {
@@ -33,7 +37,11 @@ class SignUp extends Component {
 
                 {
                     signUpSuccess &&
-                    <Text> Awesome! You have an account now. You now can log in. </Text>
+                    <Text
+                    style={{ color: styles.buttonTextColor.color, textAlign: "center", marginTop: 70, marginBottom: 30 }}
+                    > 
+                    Awesome! You have an account now. You now can log in. 
+                    </Text>
                 }
 
                 {
@@ -54,5 +62,17 @@ const mapStateToProps = (state) => {
         signUpSuccess: state.signUpReducer.success === true
     }
 }
+
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: "#0B3954",
+    },
+    buttonBackground: {
+        backgroundColor: "#00D0E5"
+    },
+    buttonTextColor: {
+        color: "white"
+    }
+})
 
 export default connect(mapStateToProps, { newSignUp })(SignUp)
