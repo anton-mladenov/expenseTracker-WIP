@@ -40,7 +40,7 @@ class ExpenseDetails extends Component {
     handleDelete = () => {
         const { oneExpense, category } = this.props
         this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id })
-        this.props.navigation.navigate("CategoryDetails", {
+        this.props.navigation.push("CategoryDetails", {
             categoryId: category.id
         })
     }

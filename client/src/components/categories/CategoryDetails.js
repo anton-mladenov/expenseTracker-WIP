@@ -20,7 +20,6 @@ class CategoryDetails extends Component {
     }
 
     componentDidMount() {
-        console.log("TESTING DEEBA!")
         addAndroidBackListener(this.goBack)
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
@@ -32,7 +31,6 @@ class CategoryDetails extends Component {
     }
 
     goBack = async () => {
-        await console.log(" DOES IT WORK? ", this.props)
         await this.props.navigation.push("AllCategories")
     }
 
@@ -59,7 +57,7 @@ class CategoryDetails extends Component {
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.deleteOneCategory(itemId)
-        this.props.navigation.navigate("AllCategories")
+        this.props.navigation.push("AllCategories")
     }
 
     handleSubmit = (data) => {
