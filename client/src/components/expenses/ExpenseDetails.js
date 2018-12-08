@@ -28,7 +28,7 @@ class ExpenseDetails extends Component {
     }
 
     goBack = async () => {
-        await this.props.navigation.goBack()
+        await this.props.navigation.push("CategoryDetails")
     }
 
     handleEdit = () => {

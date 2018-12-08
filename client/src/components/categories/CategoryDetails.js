@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { ScrollView, Text, StyleSheet, View } from "react-native"
+import { ScrollView, Text, StyleSheet, View, BackHandler } from "react-native"
 import { connect } from "react-redux"
 import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
 import CategoriesForm from "./CategoriesForm"
@@ -20,10 +20,11 @@ class CategoryDetails extends Component {
     }
 
     componentDidMount() {
+        console.log("TESTING DEEBA!")
+        addAndroidBackListener(this.goBack)
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.getOneCategory(itemId)
-        addAndroidBackListener(this.goBack)
     }
 
     componentWillUnmount() {
@@ -31,7 +32,8 @@ class CategoryDetails extends Component {
     }
 
     goBack = async () => {
-        await this.props.navigation.goBack()
+        await console.log(" DOES IT WORK? ", this.props)
+        await this.props.navigation.push("AllCategories")
     }
 
     toggleEdit = () => {

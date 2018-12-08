@@ -2,12 +2,14 @@ import { BackHandler, Alert } from "react-native"
 
 const addAndroidBackListener = (callback) => {
     BackHandler.addEventListener("hardwareBackPress", () => {
+        console.log(" __ Android BackHandler Listener  ADDED")
         return callback()
     })
 }
 
 const removeAndroidBackListener = (callback) => {
     BackHandler.removeEventListener('hardwareBackPress', () => {
+        console.log(" __ Android BackHandler Listener  REMOVED")
         return callback()
     })
 }

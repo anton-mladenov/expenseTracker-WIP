@@ -43,11 +43,9 @@ export const getOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        console.log(" one expense: ", result.data.data.expense.amount)
         let resultIntoArray = []
         resultIntoArray.push(result.data.data.expense)
         const intResults = stringToInt(resultIntoArray)
-        console.log(" int results: ", intResults)
         dispatch(getExpense(intResults[0]))   
         // dispatch(getExpense(result.data.data.expense))
     }).catch((error) => {
@@ -96,7 +94,6 @@ export const getAllExpenses = (data) => (dispatch, getState) => {
         }
     }).then((result) => {
         const intResults = stringToInt(result.data.data.allExpenses)
-        console.log({intResults})
         dispatch(getExpenses(intResults))
     }).catch((error) => {
         console.log("There was an error when getting all expenses " + error)
@@ -115,7 +112,7 @@ const createExpense = (data) => ({
 })
 
 export const createNewExpense = (data) => (dispatch, getState) => {
-    console.log({data})
+
     const state = getState()
     if (!state.currentUserReducer) return logout()
 
@@ -193,7 +190,6 @@ export const editOneExpense = (data) => (dispatch, getState) => {
         }
     }).then((result) => {
         const intResults = stringToInt(result.data.data.updateExpense)
-        console.log({intResults})
         dispatch(editExpense(intResults))
     }).catch((error) => {
         console.log("There was an error when editing the new expense " + error)

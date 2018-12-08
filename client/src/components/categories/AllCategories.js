@@ -34,7 +34,7 @@ class AllCategories extends Component {
         const { currentUser, navigation } = this.props
         !currentUser && navigation.navigate("WelcomeScreen")
         currentUser && this.props.getAllCategories()
-        addAndroidBackListener(this.goBack)
+        addAndroidBackListener(this.goBack) 
     }
 
     componentWillUnmount() {
@@ -42,6 +42,7 @@ class AllCategories extends Component {
     }
 
     goBack = async () => {
+        console.log(" HAHAH from AllCategories! ") 
         await this.props.navigation.push("WelcomeScreen")
     }
 

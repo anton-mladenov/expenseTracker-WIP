@@ -4,7 +4,7 @@ import { logout, logoutType } from "../actions/usersActions"
 
 
 // the default URL of the server
-export const baseUrl = "http://192.168.1.71:4000/graphql"
+export const baseUrl = "http://192.168.1.67:4000/graphql"
 // export const baseUrl = "http://192.168.10.163:4000/graphql"
 
 
@@ -71,7 +71,6 @@ export const jwtDecodeToExpDate = (jwt) => {
 
 // convert strings to integers
 export const stringToInt = (data) => {
-    console.log({data})
     if (typeof data === "Object" || typeof data === "object" || typeof data === "Array") {
         const newData = data.map((item) => {
             if (item.id && typeof item.id === "string") {
