@@ -68,8 +68,11 @@ class AllCategories extends Component {
         const { allCategories, currentUser } = this.props
         const { navigate } = this.props.navigation
         const id = this.state.categoryId
-
-        const categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, cat.color))
+        let categoriesToDisplay;
+        
+        if (allCategories.length > 1) {
+            categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, cat.color))
+        }
         
         return (
             <ScrollView

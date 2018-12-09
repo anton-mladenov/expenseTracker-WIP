@@ -162,7 +162,7 @@ const updateCategory = (data) => ({
     payload: data
 })
 
-export const updateOneCategory = (id, name) => (dispatch, getState) => {
+export const updateOneCategory = (id, name, color) => (dispatch, getState) => {
 
     const state = getState()
     if (!state.currentUserReducer) return removeStorageFunc(storageKey)
@@ -177,7 +177,7 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
         data: {
             query: `
             mutation {
-                updateCategory(id: ${id}, name: "${name}"){
+                updateCategory(id: ${id}, name: "${name}", color: "${color}"){
                     id
                     name
                     color
@@ -191,9 +191,10 @@ export const updateOneCategory = (id, name) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        const intResults = stringToInt(result.data.data.updateCategory)
-        console.log({intResults})
-        dispatch(updateCategory(intResults))
+        let resultIntoArray = []
+        resultIntoArray.push(result.data.data.updateCategory)
+        const intResults = stringToInt(resultIntoArray)
+        dispatch(updateCategory(intResults[0]))   
     }).catch((error) => {
         console.log("There was an error when trying to update a category: " + error)
         return "There was an error when trying to update a category: " + error

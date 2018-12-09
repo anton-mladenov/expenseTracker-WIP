@@ -10,7 +10,7 @@ class BackButton extends Component {
 
     _goBack = () => {
         const { category, categoryId, categories } = this.props
-        const catId = parseInt(categoryId, 10)
+        const catId = parseInt(categoryId.id, 10)
         category === "AllCategories" ? this.props.getAllCategories() : console.log("looking for expenses, not categories")
         category === "AllExpenses" ? this.props.getAllExpenses(catId) : console.log("looking for categories, not expenses")
         if (categories.length > 1) {
@@ -35,7 +35,7 @@ class BackButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        categoryId: state.categories[0].id,
+        categoryId: state.categories[0],
         categories: state.categories
     }
 }

@@ -33,17 +33,18 @@ class CategoryDetails extends Component {
     goBack = async () => {
         await this.props.navigation.push("AllCategories")
     }
-
+    
     toggleEdit = () => {
         this.setState({
             toggleEdit: !this.state.toggleEdit
         })
     }
-
+    
     editCategory = (data) => {
-        const { navigation } = this.props
+        const { navigation, oneCategory } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
-        this.props.updateOneCategory(itemId, data.name)
+        this.props.updateOneCategory(itemId, data.name, oneCategory.color)
+        this.props.navigation.push("AllCategories")
     }
 
     showAddExpenseForm = () => {
@@ -95,16 +96,21 @@ class CategoryDetails extends Component {
                         marginTop: "30%"
                         }}
                 >
-                    <Text
-                        style={{ 
-                            fontSize: 45,
-                            letterSpacing: 5,
-                            color: styles.buttonTextColor.color
-                        }}
-                    > { oneCategory.name } </Text>
+                    {
+                        oneCategory && 
+                        <Text
+                            style={{ 
+                                fontSize: 45,
+                                letterSpacing: 5,
+                                color: styles.buttonTextColor.color
+                            }}
+                        > 
+                        { oneCategory.name } 
+                        </Text>
+                    }
 
                     {
-                        (oneCategory.amount > 0) &&
+                        oneCategory &&
                         <Text
                             style={{ 
                                 fontSize: 30,
@@ -117,7 +123,7 @@ class CategoryDetails extends Component {
                     }
 
                     {    
-                        (oneCategory.amount === 0) &&
+                        (oneCategory && oneCategory.amount === 0) &&
                         <Text
                             style={{ 
                                 fontSize: 20,
