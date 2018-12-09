@@ -41,7 +41,7 @@ class CategoriesForm extends Component {
                         flexDirection:'column',
                         alignItems:'center',
                         justifyContent:'center',
-                        marginTop: 190,
+                        marginTop: 50,
                     }} 
                     >
                     <TextInput

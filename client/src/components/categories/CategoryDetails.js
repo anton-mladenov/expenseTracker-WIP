@@ -44,7 +44,6 @@ class CategoryDetails extends Component {
         const { navigation, oneCategory } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.updateOneCategory(itemId, data.name, oneCategory.color)
-        this.props.navigation.push("AllCategories")
     }
 
     showAddExpenseForm = () => {
