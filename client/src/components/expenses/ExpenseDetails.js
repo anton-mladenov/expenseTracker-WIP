@@ -40,9 +40,7 @@ class ExpenseDetails extends Component {
     handleDelete = () => {
         const { oneExpense, category } = this.props
         this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id })
-        this.props.navigation.push("CategoryDetails", {
-            categoryId: category.id
-        })
+        this.props.navigation.push("AllCategories")
     }
 
     handleSubmit = (data) => {
@@ -138,7 +136,7 @@ class ExpenseDetails extends Component {
                             borderRightWidth: 0.3,
                             borderColor: "white"
                         }}
-                        > Edit Category </Button>
+                        > Edit Expense </Button>
                     
                     {
                         this.state.edit &&
@@ -160,7 +158,7 @@ class ExpenseDetails extends Component {
                             borderRightWidth: 0.3,
                             borderColor: "white"
                         }}
-                        > Delete Category </Button>
+                        > Delete Expense </Button>
                 </View>
 
             </ScrollView>

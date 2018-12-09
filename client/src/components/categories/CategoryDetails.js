@@ -1,7 +1,8 @@
 import React, { Component } from "react"
-import { ScrollView, Text, StyleSheet, View, BackHandler } from "react-native"
+import { ScrollView, Text, StyleSheet, View, BackHandler, FlatList } from "react-native"
 import { connect } from "react-redux"
 import { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories } from "../../actions/categoriesActions"
+import { getAllExpenses } from "../../actions/expensesActions"
 import CategoriesForm from "./CategoriesForm"
 import ExpensesForm from "../expenses/ExpensesForm"
 import Expenses from "../expenses/Expenses"
@@ -24,6 +25,7 @@ class CategoryDetails extends Component {
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.getOneCategory(itemId)
+        this.props.getAllExpenses(itemId)
     }
 
     componentWillUnmount() {
@@ -61,6 +63,10 @@ class CategoryDetails extends Component {
     }
 
     handleSubmit = (data) => {
+        this.setState({
+            buttonsShow: !this.state.buttonsShow,
+            showExpenseForm: !this.state.showExpenseForm
+        })
         const { navigation } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         const { name, amount } = data
@@ -70,10 +76,6 @@ class CategoryDetails extends Component {
             categoryId: itemId
         }
         this.props.createNewExpense(fullData)
-        this.setState({
-            buttonsShow: !this.state.buttonsShow,
-            showExpenseForm: !this.state.showExpenseForm
-        })
     }
 
     render() {
@@ -212,7 +214,38 @@ class CategoryDetails extends Component {
 
                 {
                     this.state.buttonsShow &&
-                    <AllExpenses categoryId={ itemId } />
+                    <FlatList
+                    data={ this.props.allExpenses }
+                    keyExtractor={ (item, index) => item.id.toString() }
+                    renderItem={ ({ item }) => 
+                    <View>
+                    <Card 
+                        onPress={ () => this.props.navigation.push("ExpenseDetails", { expenseId: item.id })}  
+                        style={{ flex: 1,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginHorizontal: 80,
+                            marginVertical: 5,
+                            backgroundColor: styles.buttonBackground.backgroundColor
+                        }} 
+                    >
+                        <Card.Content 
+                            style={{ flex: 1,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center', }} 
+                        >
+                            <Title 
+                                style={{ color: styles.buttonTextColor.color }} 
+                            > 
+                                {item.name} 
+                            </Title>
+                        </Card.Content>
+                    </Card>
+                    </View>
+                }
+                />
                 }
 
             </ScrollView>
@@ -222,7 +255,8 @@ class CategoryDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        oneCategory: state.categories[0]
+        oneCategory: state.categories[0],
+        allExpenses: state.expensesReducer
     }
 }
 
@@ -238,7 +272,7 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories, createNewExpense })(CategoryDetails)
+export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories, createNewExpense, getAllExpenses })(CategoryDetails)
 
 
 

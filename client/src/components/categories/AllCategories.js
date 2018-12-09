@@ -145,7 +145,7 @@ class AllCategories extends Component {
                         renderItem={({ item }) =>
                         <View>
                             <Card 
-                                onPress={ () => navigate("CategoryDetails", {
+                                onPress={ () => this.props.navigation.push("CategoryDetails", {
                                     categoryId: item.id
                                 })}    
                                 style={{ flex: 1,
