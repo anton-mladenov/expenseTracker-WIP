@@ -22,7 +22,7 @@ export default (state = initialState, { type, payload }) => {
             return [state.find((category) => category.id === payload.id)]
 
         case UPDATE_A_CATEGORY:
-            return payload
+            return [payload]
 
         // case DELETE_A_CATEGORY:
         //     console.log({ payload }, { state })

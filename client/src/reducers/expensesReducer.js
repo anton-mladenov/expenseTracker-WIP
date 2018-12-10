@@ -16,7 +16,7 @@ export default (state = initialValue, { type, payload }) => {
             return [payload]
 
         case EDIT_ONE_EXPENSE:
-            return payload
+            return [payload]
 
         // case DELETE_ONE_EXPENSE:
         //     console.log(" delete reducer - payload: ", payload)

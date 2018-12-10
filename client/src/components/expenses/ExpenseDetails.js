@@ -42,21 +42,25 @@ class ExpenseDetails extends Component {
         this.props.deleteOneExpense({ id: oneExpense.id, categoryId: category.id })
         this.props.navigation.push("AllCategories")
     }
-
+    
     handleSubmit = (data) => {
         const expenseId = this.props.navigation.getParam("expenseId")
+        const categoryId = this.props.navigation.getParam("categoryId")
         const newData = {
             name: data.name,
             amount: data.amount,
             expenseId: expenseId,
             categoryId: this.props.category.id
         }
+        console.log({newData})
         this.props.editOneExpense(newData)
     }
 
     render() {
 
         const { oneExpense, category } = this.props
+        let stringy = this.props.oneExpense.amount.toString()
+        oneExpense.amount = stringy
 
         return (
             <ScrollView
@@ -73,7 +77,7 @@ class ExpenseDetails extends Component {
                 >
 
                     {
-                        oneExpense.name && 
+                        oneExpense && 
                         <Text
                             style={{ 
                                 fontSize: 45,
@@ -84,7 +88,7 @@ class ExpenseDetails extends Component {
                     }
                     
                     {
-                        category.name &&
+                        category &&
                         <Text
                         style={{ 
                             fontSize: 15,
@@ -96,7 +100,7 @@ class ExpenseDetails extends Component {
                     }
 
                     {
-                        (oneExpense.amount > 0) &&
+                        (oneExpense && oneExpense.amount > 0) &&
                         <Text
                             style={{ 
                                 fontSize: 30,
@@ -109,7 +113,7 @@ class ExpenseDetails extends Component {
                     }
 
                     {    
-                        !oneExpense.amount && <Text></Text>
+                        (oneExpense && oneExpense.amount === null) && <Text> ? </Text>
                     }
 
                 </View>

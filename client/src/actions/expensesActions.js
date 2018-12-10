@@ -176,6 +176,7 @@ export const editOneExpense = (data) => (dispatch, getState) => {
             query: `
             mutation {
                 updateExpense(id: ${data.expenseId}, categoryId: ${data.categoryId}, name: "${data.name}", amount: ${data.amount}) {
+                    id
                     name
                     amount
                     category {
@@ -189,8 +190,10 @@ export const editOneExpense = (data) => (dispatch, getState) => {
             `
         }
     }).then((result) => {
-        const intResults = stringToInt(result.data.data.updateExpense)
-        dispatch(editExpense(intResults))
+        let resultIntoArray = []
+        resultIntoArray.push(result.data.data.updateExpense)
+        const intResults = stringToInt(resultIntoArray)
+        dispatch(editExpense(intResults[0]))    
     }).catch((error) => {
         console.log("There was an error when editing the new expense " + error)
         return "There was an error when editing the new expense " + error

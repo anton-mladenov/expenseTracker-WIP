@@ -46,6 +46,7 @@ class CategoryDetails extends Component {
         const { navigation, oneCategory } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.updateOneCategory(itemId, data.name, oneCategory.color)
+        this.props.navigation.push("AllCategories")
     }
 
     showAddExpenseForm = () => {
@@ -220,7 +221,7 @@ class CategoryDetails extends Component {
                     renderItem={ ({ item }) => 
                     <View>
                     <Card 
-                        onPress={ () => this.props.navigation.push("ExpenseDetails", { expenseId: item.id })}  
+                        onPress={ () => this.props.navigation.push("ExpenseDetails", { expenseId: item.id, categoryId: oneCategory.id })}  
                         style={{ flex: 1,
                             flexDirection: 'row',
                             alignItems: 'center',
