@@ -221,11 +221,7 @@ class CategoryDetails extends Component {
                     renderItem={ ({ item }) => 
                     <View>
                     <Card 
-<<<<<<< HEAD
                         onPress={ () => this.props.navigation.push("ExpenseDetails", { expenseId: item.id, categoryId: oneCategory.id })}  
-=======
-                        onPress={ () => this.props.navigation.navigate("ExpenseDetails", { expenseId: item.id })}  
->>>>>>> 96ee7ccee1273e5bf1cacd3ab3326bbf4323f71e
                         style={{ flex: 1,
                             flexDirection: 'row',
                             alignItems: 'center',
