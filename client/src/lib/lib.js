@@ -93,6 +93,7 @@ export const stringToInt = (data) => {
 // COLOURS
 
 export const availableColors = ["#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
+export const availableColors = ["#ED6A5A", "#FFCAD4", "#F4F1BB", "#95B2B8", "#27FB6B"]
 
 export const pickColor = () => {
     const theChosenOne = Math.floor(Math.random() * availableColors.length)

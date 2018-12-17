@@ -71,6 +71,7 @@ class AllCategories extends Component {
         let categoriesToDisplay;
         
         if (allCategories.length > 1) {
+        if (allCategories.length >= 2) {
             categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, cat.color))
         }
         
@@ -121,6 +122,7 @@ class AllCategories extends Component {
 
                 {
                     allCategories.length > 1 && !this.state.showForm &&
+                    allCategories.length >= 2 && !this.state.showForm && allCategories[0].amount !== 0 && allCategories[1].amount !== 0 &&
                     <View
                         style={{ 
                             flex: 1,
