@@ -41,6 +41,7 @@ export default {
             })
 
             return { token: createToken(user, secret, "60h") }
+            return { token: createToken(user, secret, "365d") }
         },
 
         signIn: async (parent, { login, password }, { models, secret }) => {
@@ -57,6 +58,7 @@ export default {
             }
 
             return { token: createToken(user, secret, "60h") }
+            return { token: createToken(user, secret, "365d") }
 
         },
         // deleteUser: combineResolvers(

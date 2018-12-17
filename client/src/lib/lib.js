@@ -10,6 +10,7 @@ export const baseUrl = "http://192.168.1.67:4000/graphql"
 
 // storageKey
 export const storageKey = "mobileDeviceSuperSecretStorageKeyDamn"
+export const storageKey = "mobileDeviceSuperSecretStorageKey"
 
 export const setStorageFunc = async (key, item) => {
     try {
@@ -64,6 +65,7 @@ export const jwtDecodeToExpDate = (jwt) => {
     const replacedPayload = payload.replace('-', '+').replace('_', '/')
     const payloadString = base64.decode(replacedPayload)
     const payloadStrParsed = JSON.parse(payloadString)
+    const payloadStrParsed = JSON.parse(JSON.stringify(payloadString))
     const trueOrFalse = payloadStrParsed.exp < (Date.now() / 1000) ? true : false
     return trueOrFalse // this function returns TRUE if token has expired and FALSE it if is still valid
 }

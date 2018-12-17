@@ -135,6 +135,10 @@ class App extends Component {
         getStorageFunc(storageKey).then(obj => {
             this.props.setJWT(obj)
         })
+        await getStorageFunc(storageKey)
+            .then(obj => {
+                this.props.setJWT(obj)
+            })
     }
 
     render() {
