@@ -28,7 +28,10 @@ class ExpenseDetails extends Component {
     }
 
     goBack = async () => {
-        await this.props.navigation.push("CategoryDetails")
+        const { category } = this.props
+        await this.props.navigation.push("CategoryDetails", {
+            categoryId: category.id
+        })
     }
 
     handleEdit = () => {

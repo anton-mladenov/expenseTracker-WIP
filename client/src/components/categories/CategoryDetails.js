@@ -22,10 +22,10 @@ class CategoryDetails extends Component {
 
     componentDidMount() {
         addAndroidBackListener(this.goBack)
-        const { navigation } = this.props
+        const { navigation, oneCategory } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
         this.props.getOneCategory(itemId)
-        this.props.getAllExpenses(itemId)
+        this.props.getAllExpenses(itemId) 
     }
 
     componentWillUnmount() {

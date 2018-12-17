@@ -9,7 +9,6 @@ export const baseUrl = "http://192.168.1.67:4000/graphql"
 
 
 // storageKey
-export const storageKey = "mobileDeviceSuperSecretStorageKeyDamn"
 export const storageKey = "mobileDeviceSuperSecretStorageKey"
 
 export const setStorageFunc = async (key, item) => {
@@ -64,7 +63,6 @@ export const jwtDecodeToExpDate = (jwt) => {
     const [_, payload] = jwt.split(".")
     const replacedPayload = payload.replace('-', '+').replace('_', '/')
     const payloadString = base64.decode(replacedPayload)
-    const payloadStrParsed = JSON.parse(payloadString)
     const payloadStrParsed = JSON.parse(JSON.stringify(payloadString))
     const trueOrFalse = payloadStrParsed.exp < (Date.now() / 1000) ? true : false
     return trueOrFalse // this function returns TRUE if token has expired and FALSE it if is still valid
@@ -92,7 +90,6 @@ export const stringToInt = (data) => {
 
 // COLOURS
 
-export const availableColors = ["#8a405f", "#95b2b8", "#307351", "#ed6a5a", "#f4f1bb", "#573280", "#cecfc7", "#B2967D"]
 export const availableColors = ["#ED6A5A", "#FFCAD4", "#F4F1BB", "#95B2B8", "#27FB6B"]
 
 export const pickColor = () => {

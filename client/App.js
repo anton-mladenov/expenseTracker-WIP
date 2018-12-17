@@ -132,9 +132,6 @@ class App extends Component {
 
     // this code here gets the token from AsyncStorage if there's one and helps the user to log in faster
     componentDidMount = async () => { 
-        getStorageFunc(storageKey).then(obj => {
-            this.props.setJWT(obj)
-        })
         await getStorageFunc(storageKey)
             .then(obj => {
                 this.props.setJWT(obj)

@@ -40,7 +40,6 @@ export default {
                 password
             })
 
-            return { token: createToken(user, secret, "60h") }
             return { token: createToken(user, secret, "365d") }
         },
 
@@ -57,7 +56,6 @@ export default {
                 throw new AuthenticationError("Wrong password, try again.")
             }
 
-            return { token: createToken(user, secret, "60h") }
             return { token: createToken(user, secret, "365d") }
 
         },
