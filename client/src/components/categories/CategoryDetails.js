@@ -81,8 +81,9 @@ class CategoryDetails extends Component {
 
     render() {
 
-        const { oneCategory, navigation } = this.props
+        const { oneCategory, navigation, allExpenses } = this.props
         const itemId = navigation.getParam('categoryId', 'NO-ID')
+        const expenseTotal = allExpenses.reduce((acc, item) => {return acc + item.amount}, 0)
 
         return (
             <ScrollView
@@ -111,7 +112,7 @@ class CategoryDetails extends Component {
                     }
 
                     {
-                        oneCategory &&
+                        oneCategory && 
                         <Text
                             style={{ 
                                 fontSize: 30,
@@ -120,12 +121,12 @@ class CategoryDetails extends Component {
                                 color: styles.buttonTextColor.color,
                             }}
                             > 
-                        Money out: { oneCategory.amount } 
+                        Money out: { expenseTotal } 
                         </Text>
                     }
 
                     {    
-                        (oneCategory && oneCategory.amount === 0) &&
+                        (oneCategory && oneCategory.amount === 0 && allExpenses.length === 0) &&
                         <Text
                         style={{ 
                             fontSize: 20,
@@ -205,7 +206,8 @@ class CategoryDetails extends Component {
                         color: styles.buttonTextColor.color,
                         borderBottomWidth: 0.3,
                         borderRightWidth: 0.3,
-                        borderColor: "white"
+                        borderColor: "white",
+                        marginBottom: 30
                     }}
                     > Add New Expense </Button>
                 }

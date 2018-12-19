@@ -62,8 +62,8 @@ class ExpenseDetails extends Component {
     render() {
 
         const { oneExpense, category } = this.props
-        let stringy = this.props.oneExpense.amount.toString()
-        oneExpense.amount = stringy
+        // let stringy = this.props.oneExpense.amount.toString()
+        // oneExpense.amount = stringy
 
         return (
             <ScrollView
@@ -103,7 +103,7 @@ class ExpenseDetails extends Component {
                     }
 
                     {
-                        (oneExpense && oneExpense.amount > 0) &&
+                        oneExpense &&
                         <Text
                             style={{ 
                                 fontSize: 30,
@@ -111,12 +111,8 @@ class ExpenseDetails extends Component {
                                 color: styles.buttonTextColor.color
                             }}
                         > 
-                        Money out: { oneExpense.amount } 
+                        Money out: { oneExpense.amount !== 0 ? oneExpense.amount : 0 } 
                         </Text>
-                    }
-
-                    {    
-                        (oneExpense && oneExpense.amount === null) && <Text> ? </Text>
                     }
 
                 </View>
