@@ -23,8 +23,8 @@ export default class ExpensesForm extends Component {
                         alignItems:'center',
                         justifyContent:'center',
                         marginBottom: 40
-                        }} 
-                >
+                    }} 
+                    >
                     <TextInput
                         placeholder="so... what did you buy?"
                         onChangeText={ (name) => this.setState({ name: name }) }
@@ -33,6 +33,8 @@ export default class ExpensesForm extends Component {
                         style={{ 
                             textAlign: "center",
                             color: "white",
+                            marginBottom: 30,
+                            marginTop: 15
                         }}
                     />
 
@@ -44,6 +46,8 @@ export default class ExpensesForm extends Component {
                         style={{ 
                             textAlign: "center",
                             color: "white",
+                            marginTop: 15,
+                            marginBottom: 30,
                         }}
                     />
 
