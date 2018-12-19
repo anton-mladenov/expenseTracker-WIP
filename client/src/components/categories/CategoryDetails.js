@@ -94,8 +94,6 @@ class CategoryDetails extends Component {
                         flexDirection: "column",
                         alignItems:'center',
                         justifyContent:'center',
-                        marginVertical: "15%",
-                        marginTop: "30%"
                         }}
                 >
                     {
@@ -104,6 +102,7 @@ class CategoryDetails extends Component {
                             style={{ 
                                 fontSize: 45,
                                 letterSpacing: 5,
+                                marginTop: 80,
                                 color: styles.buttonTextColor.color
                             }}
                         > 
@@ -117,9 +116,10 @@ class CategoryDetails extends Component {
                             style={{ 
                                 fontSize: 30,
                                 marginTop: 30,
-                                color: styles.buttonTextColor.color
+                                marginBottom: 30,
+                                color: styles.buttonTextColor.color,
                             }}
-                        > 
+                            > 
                         Money out: { oneCategory.amount } 
                         </Text>
                     }
@@ -127,11 +127,13 @@ class CategoryDetails extends Component {
                     {    
                         (oneCategory && oneCategory.amount === 0) &&
                         <Text
-                            style={{ 
-                                fontSize: 20,
-                                marginTop: 30,
-                                color: styles.buttonTextColor.color,
-                                textAlign: "center"
+                        style={{ 
+                            fontSize: 20,
+                            marginTop: 30,
+                            marginBottom: 50,
+                            color: styles.buttonTextColor.color,
+                            textAlign: "center",
+                            marginVertical: 30,
                             }}
                         >
                         Time to add your first expense! 
@@ -155,7 +157,7 @@ class CategoryDetails extends Component {
                         color: styles.buttonTextColor.color,
                         borderBottomWidth: 0.3,
                         borderRightWidth: 0.3,
-                        borderColor: "white"
+                        borderColor: "white",
                     }}
                     > Delete Category </Button>
                 }
