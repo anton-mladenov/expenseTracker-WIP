@@ -274,8 +274,3 @@ const styles = StyleSheet.create({
 })
 
 export default connect(mapStateToProps, { getOneCategory, deleteOneCategory, updateOneCategory, getAllCategories, createNewExpense, getAllExpenses })(CategoryDetails)
-
-
-
-
-

@@ -23,6 +23,7 @@ export default class SignInForm extends Component {
                     style={{ 
                         textAlign: "center",
                         color: "white",
+                        lineHeight: 45
                     }}
                 />
 
@@ -34,6 +35,7 @@ export default class SignInForm extends Component {
                     style={{ 
                         textAlign: "center",
                         color: "white",
+                        lineHeight: 45
                     }}
                 />
 
