@@ -75,7 +75,6 @@ class ExpenseDetails extends Component {
                         flexDirection: "column",
                         alignItems:'center',
                         justifyContent:'center',
-                        marginVertical: "35%",
                     }}
                 >
 
@@ -85,6 +84,8 @@ class ExpenseDetails extends Component {
                             style={{ 
                                 fontSize: 45,
                                 letterSpacing: 5,
+                                marginTop: 80,
+                                marginBottom: 20,
                                 color: styles.buttonTextColor.color
                             }}
                         > { oneExpense.name } </Text>
@@ -108,6 +109,7 @@ class ExpenseDetails extends Component {
                             style={{ 
                                 fontSize: 30,
                                 marginTop: 30,
+                                marginBottom: 30,
                                 color: styles.buttonTextColor.color
                             }}
                         > 
