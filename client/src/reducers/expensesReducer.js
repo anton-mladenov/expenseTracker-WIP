@@ -18,11 +18,8 @@ export default (state = initialValue, { type, payload }) => {
         case EDIT_ONE_EXPENSE:
             return [payload]
 
-        // case DELETE_ONE_EXPENSE:
-        //     console.log(" delete reducer - payload: ", payload)
-        //     console.log(" delete reducer - state: ", state)
-        //     // return state
-        //     return [].push(state.filter(expense => console.log("expense.id: ", typeof expense.id, expense.id, "payload: ", typeof payload, payload)))
+        case DELETE_ONE_EXPENSE:
+            return state.filter(expense => expense.id !== payload)
 
         default:
             return state

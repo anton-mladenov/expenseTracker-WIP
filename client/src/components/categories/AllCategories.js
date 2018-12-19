@@ -73,6 +73,12 @@ class AllCategories extends Component {
         if (allCategories.length >= 2) {
             categoriesToDisplay = allCategories.map((cat) => new pieChart(cat.amount, cat.name, cat.color))
         }
+
+        allCategories.map(cat => { // put this down in mapStateToProps
+            if (cat.expenses === []) {
+                cat.amount = 0
+            }
+        })
         
         return (
             <ScrollView
