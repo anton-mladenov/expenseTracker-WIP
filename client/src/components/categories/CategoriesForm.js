@@ -16,7 +16,6 @@ class CategoriesForm extends Component {
     componentDidMount() {
         addAndroidBackListener(this.goBack)
         const oneCategory = this.props.initialValues
-        console.log("oneCategory: ", oneCategory)
         if (oneCategory !== undefined) {
             this.setState({
                 name: oneCategory.name
@@ -56,7 +55,7 @@ class CategoriesForm extends Component {
                         justifyContent:'center',
                         marginTop: 50,
                     }}>
-                    
+
                     <TextInput
                         placeholder="Give A Name To Your New Category."
                         onChangeText={ this.handleNameChange }

@@ -11,7 +11,6 @@ export default class ExpensesForm extends Component {
 
     componentDidMount() {
         const oneExpense = this.props.initialValues
-        console.log("oneCategory: ", oneExpense)
         if (oneExpense !== undefined) {
             this.setState({
                 name: oneExpense.name,
