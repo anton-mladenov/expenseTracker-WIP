@@ -10,11 +10,14 @@ export default class ExpensesForm extends Component {
     }
 
     componentDidMount() {
-        const { name, amount } = this.props.initialValues
-        this.setState({
-            name,
-            amount: amount.toString()
-        })
+        const oneExpense = this.props.initialValues
+        console.log("oneCategory: ", oneExpense)
+        if (oneExpense !== undefined) {
+            this.setState({
+                name: oneExpense.name,
+                amount: oneExpense.amount.toString()
+            })
+        }
     }
 
     handleNameChange = (name) => {

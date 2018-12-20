@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, TextInput, StyleSheet, View } from "react-native"
+import { ScrollView, TextInput, StyleSheet, View, FormLabel } from "react-native"
 import { Button } from 'react-native-paper'
 import { withNavigation } from "react-navigation"
 import { connect } from "react-redux"
@@ -55,8 +55,8 @@ class CategoriesForm extends Component {
                         alignItems:'center',
                         justifyContent:'center',
                         marginTop: 50,
-                    }} 
-                    >
+                    }}>
+                    
                     <TextInput
                         placeholder="Give A Name To Your New Category."
                         onChangeText={ this.handleNameChange }
