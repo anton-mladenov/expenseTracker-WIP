@@ -152,7 +152,6 @@ class AllCategories extends Component {
                         <View>
                             <Card 
                                 onPress={ () => {
-                                    console.log(item.id)
                                     this.props.navigation.push("CategoryDetails", {
                                     categoryId: item.id
                                     })

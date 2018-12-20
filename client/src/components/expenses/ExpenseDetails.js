@@ -51,11 +51,11 @@ class ExpenseDetails extends Component {
         const categoryId = this.props.navigation.getParam("categoryId")
         const newData = {
             name: data.name,
-            amount: data.amount,
+            amount: parseInt(data.amount),
             expenseId: expenseId,
             categoryId: this.props.category.id
         }
-        console.log({newData})
+        console.log("newData: ", newData)
         this.props.editOneExpense(newData)
     }
 

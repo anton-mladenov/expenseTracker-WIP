@@ -4,7 +4,31 @@ import { Button, Title } from 'react-native-paper';
 
 export default class ExpensesForm extends Component {
 
-    state = {}
+    state = {
+        name: "",
+        amount: ""
+    }
+
+    componentDidMount() {
+        const { name, amount } = this.props.initialValues
+        console.log("initialValues: ", name, amount)
+        this.setState({
+            name,
+            amount: amount.toString()
+        })
+        console.log("state: ", this.state)
+    }
+
+    handleNameChange = (name) => {
+        this.setState({ 
+            name
+        });
+    }
+    handleAmountChange = (amount) => {
+        this.setState({ 
+            amount
+        });
+    }
 
     handleSubmit = () => {
         return this.props.onSubmit(this.state)
@@ -12,7 +36,12 @@ export default class ExpensesForm extends Component {
 
     render() {
 
-        const initialValues = this.props.initialValues || {}
+        // const initialValues = this.props.initialValues || {}
+        // if (initialValues.amount !== undefined) {
+        //     const amountString = initialValues.amount.toString()
+        //     initialValues.amount = amountString
+        // }
+        // console.log("initialValues: ", initialValues)
 
         return (
             <ScrollView>
@@ -27,8 +56,8 @@ export default class ExpensesForm extends Component {
                     >
                     <TextInput
                         placeholder="so... what did you buy?"
-                        onChangeText={ (name) => this.setState({ name: name }) }
-                        value={ this.state.name !== undefined ? this.state.name : initialValues.name }
+                        onChangeText={ this.handleNameChange }
+                        value={ this.state.name }
                         placeholderTextColor="white"
                         style={{ 
                             textAlign: "center",
@@ -40,8 +69,8 @@ export default class ExpensesForm extends Component {
 
                     <TextInput
                         placeholder="...and how much does that cost?"
-                        onChangeText={ (amount) => this.setState({ amount: amount }) }
-                        value={ this.state.amount !== undefined ? this.state.amount : initialValues.amount }
+                        onChangeText={ this.handleAmountChange }
+                        value={ this.state.amount }
                         placeholderTextColor="white"
                         style={{ 
                             textAlign: "center",

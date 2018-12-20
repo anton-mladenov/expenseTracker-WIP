@@ -73,7 +73,7 @@ class CategoryDetails extends Component {
         const { name, amount } = data
         const fullData = {
             name,
-            amount,
+            amount: parseInt(data.amount),
             categoryId: itemId
         }
         this.props.createNewExpense(fullData)
