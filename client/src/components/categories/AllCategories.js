@@ -110,16 +110,6 @@ class AllCategories extends Component {
                     > Add A New Category </Button>
                 }
 
-                {/* {
-                    (this.state.showAddButton && currentUser) &&
-                    <FAB
-                        style={styles.fab}
-                        small={false}
-                        icon="add"
-                        onPress={this.showAddForm}                        
-                    />
-                } */}
-
                 {
                     this.state.showForm &&
                     <CategoryForm onSubmit={ this.handleSubmit } />

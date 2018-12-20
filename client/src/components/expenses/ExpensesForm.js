@@ -11,12 +11,10 @@ export default class ExpensesForm extends Component {
 
     componentDidMount() {
         const { name, amount } = this.props.initialValues
-        console.log("initialValues: ", name, amount)
         this.setState({
             name,
             amount: amount.toString()
         })
-        console.log("state: ", this.state)
     }
 
     handleNameChange = (name) => {
@@ -24,6 +22,7 @@ export default class ExpensesForm extends Component {
             name
         });
     }
+
     handleAmountChange = (amount) => {
         this.setState({ 
             amount
@@ -35,13 +34,6 @@ export default class ExpensesForm extends Component {
     }
 
     render() {
-
-        // const initialValues = this.props.initialValues || {}
-        // if (initialValues.amount !== undefined) {
-        //     const amountString = initialValues.amount.toString()
-        //     initialValues.amount = amountString
-        // }
-        // console.log("initialValues: ", initialValues)
 
         return (
             <ScrollView>

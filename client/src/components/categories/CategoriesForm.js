@@ -9,10 +9,19 @@ import { addAndroidBackListener, removeAndroidBackListener } from "../AndroidBac
 
 class CategoriesForm extends Component {
 
-    state = {}
+    state = {
+        name: "",
+    }
 
     componentDidMount() {
         addAndroidBackListener(this.goBack)
+        const oneCategory = this.props.initialValues
+        console.log("oneCategory: ", oneCategory)
+        if (oneCategory !== undefined) {
+            this.setState({
+                name: oneCategory.name
+            })
+        }
     }
 
     componentWillUnmount() {
@@ -23,13 +32,17 @@ class CategoriesForm extends Component {
         await this.props.navigation.push("AllCategories")
     }
 
+    handleNameChange = (name) => {
+        this.setState({ 
+            name
+        });
+    }
+
     handleSubmit = () => {
         this.props.onSubmit(this.state)
     }
 
     render() {
-
-        const initialValues = this.props.initialValues || {}
 
         return (
             <ScrollView
@@ -46,8 +59,8 @@ class CategoriesForm extends Component {
                     >
                     <TextInput
                         placeholder="Give A Name To Your New Category."
-                        onChangeText={ (name) => this.setState({ name: name }) }
-                        value={ this.state.name !== undefined ? this.state.name : initialValues.name }
+                        onChangeText={ this.handleNameChange }
+                        value={ this.state.name }
                         placeholderTextColor="white"
                         style={{ 
                             textAlign: "center",
